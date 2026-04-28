@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Europe '26">
+<meta name="theme-color" content="#1a1410" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0d0a08" media="(prefers-color-scheme: dark)">
+<title>Europe 2026 — Itinerary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --bg: #f5efe6;
+    --bg-card: #fbf6ed;
+    --bg-elevated: #ffffff;
+    --ink: #1a1410;
+    --ink-soft: #5b4d3f;
+    --ink-faint: #8a7a68;
+    --rule: #e0d4c0;
+    --accent: #8b2820;
+    --accent-soft: #c44d3f;
+    --gold: #b8893d;
+    --safe: #5b7a3a;
+    --safe-soft: rgba(91, 122, 58, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d0a08;
+      --bg-card: #1a1612;
+      --bg-elevated: #232019;
+      --ink: #f5efe6;
+      --ink-soft: #c5b8a4;
+      --ink-faint: #8a7a68;
+      --rule: #2e2922;
+      --accent: #d4604f;
+      --accent-soft: #c44d3f;
+      --gold: #d4a560;
+      --safe: #8aa863;
+      --safe-soft: rgba(138, 168, 99, 0.18);
+    }
+  }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Manrope', -apple-system, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    background-image:
+      radial-gradient(at 20% 0%, rgba(184,137,61,0.08) 0%, transparent 50%),
+      radial-gradient(at 80% 100%, rgba(139,40,32,0.06) 0%, transparent 50%);
+    min-height: 100vh;
+  }
+
+  .container { max-width: 640px; margin: 0 auto; padding: 24px 20px 80px; }
+
+  .status-banner {
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .status-banner::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle at top right, var(--gold) 0%, transparent 70%);
+    opacity: 0.25;
+  }
+  .status-banner .status-label {
+    font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); font-weight: 700; margin-bottom: 4px;
+  }
+  .status-banner .status-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500; line-height: 1.15; margin-bottom: 4px;
+  }
+  .status-banner .status-main em { font-style: italic; color: var(--gold); }
+  .status-banner .status-sub {
+    font-size: 12px; color: rgba(245, 239, 230, 0.7); line-height: 1.4;
+  }
+  .progress-track {
+    height: 3px; background: rgba(245, 239, 230, 0.15);
+    border-radius: 2px; margin-top: 12px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-soft), var(--gold));
+    border-radius: 2px; transition: width 0.4s ease;
+  }
+
+  .masthead { text-align: center; padding: 12px 0 32px; border-bottom: 1px solid var(--rule); margin-bottom: 28px; }
+  .masthead::before {
+    content: '✻'; color: var(--gold); font-size: 16px;
+    display: block; margin-bottom: 12px; letter-spacing: 0.3em;
+  }
+  .eyebrow {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px; font-weight: 500; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--ink-faint); margin-bottom: 8px;
+  }
+  .masthead h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px; font-weight: 500; line-height: 1; letter-spacing: -0.01em;
+    color: var(--ink); margin-bottom: 6px;
+  }
+  .masthead h1 em { font-style: italic; color: var(--accent); font-weight: 400; }
+  .dates {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 17px; color: var(--ink-soft); margin-top: 12px;
+  }
+  .meta-strip {
+    display: flex; justify-content: center; gap: 22px;
+    margin-top: 18px; font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--ink-faint); font-weight: 500;
+  }
+  .meta-strip span { display: flex; align-items: baseline; gap: 4px; }
+  .meta-strip strong { color: var(--ink); font-size: 14px; font-weight: 600; letter-spacing: 0; }
+
+  .tools-bar {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 10px; margin-bottom: 22px;
+  }
+  .tool-card {
+    background: var(--bg-card); border: 1px solid var(--rule);
+    border-radius: 6px; padding: 14px; cursor: pointer;
+    transition: transform 0.15s, border-color 0.15s;
+    display: flex; flex-direction: column; gap: 4px;
+    user-select: none;
+  }
+  .tool-card:active { transform: scale(0.98); border-color: var(--gold); }
+  .tool-card .tool-label {
+    font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600;
+  }
+  .tool-card .tool-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; color: var(--ink); font-weight: 500;
+  }
+
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+    z-index: 100; display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--bg-elevated); border-radius: 12px; padding: 24px;
+    width: 100%; max-width: 360px; border: 1px solid var(--rule);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500; margin-bottom: 16px; color: var(--ink);
+  }
+  .modal-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .modal-row label {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600; min-width: 36px;
+  }
+  .modal-row input {
+    flex: 1; background: var(--bg-card); border: 1px solid var(--rule);
+    border-radius: 4px; padding: 10px 12px;
+    font-family: 'Manrope', sans-serif; font-size: 16px;
+    color: var(--ink); -webkit-appearance: none;
+  }
+  .modal-row input:focus { outline: none; border-color: var(--gold); }
+  .modal-rate {
+    font-size: 11px; color: var(--ink-faint);
+    text-align: center; margin-top: 6px; font-style: italic;
+  }
+  .modal-close {
+    width: 100%; background: var(--ink); color: var(--bg);
+    border: none; border-radius: 4px; padding: 12px;
+    font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; margin-top: 14px; cursor: pointer;
+  }
+
+  .quicknav {
+    background: var(--bg-card); border: 1px solid var(--rule);
+    border-radius: 6px; padding: 16px 18px; margin-bottom: 20px;
+  }
+  .quicknav-label {
+    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--ink-faint); margin-bottom: 10px; font-weight: 600;
+  }
+  .quicknav-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6px 14px;
+  }
+  .quicknav a {
+    display: flex; justify-content: space-between; align-items: baseline;
+    color: var(--ink); text-decoration: none; font-size: 13px;
+    padding: 4px 0; border-bottom: 1px dotted transparent;
+  }
+  .quicknav a:active { border-bottom-color: var(--accent); }
+  .quicknav a span:first-child { font-weight: 500; }
+  .quicknav a span:last-child {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; color: var(--ink-faint); font-size: 12px;
+  }
+
+  .leg {
+    background: var(--bg-card); border: 1px solid var(--rule);
+    border-radius: 6px; margin-bottom: 14px; overflow: hidden;
+    position: relative; transition: border-color 0.2s;
+  }
+  .leg.flagged { border-left: 3px solid var(--gold); }
+  .leg.confirmed { border-left: 3px solid var(--safe); }
+  .leg.current { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(139, 40, 32, 0.15); }
+
+  .leg-summary {
+    list-style: none; cursor: pointer; padding: 18px 20px;
+    display: flex; align-items: center; gap: 14px; user-select: none;
+  }
+  .leg-summary::-webkit-details-marker { display: none; }
+
+  .leg-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; font-weight: 500; color: var(--accent);
+    line-height: 1; min-width: 28px; font-style: italic;
+  }
+  .leg-content { flex: 1; min-width: 0; }
+  .leg-place {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500; line-height: 1.15; color: var(--ink);
+    margin-bottom: 2px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .check-mark, .now-mark {
+    font-family: 'Manrope', sans-serif;
+    font-size: 11px; padding: 2px 7px; border-radius: 10px;
+    font-weight: 600; letter-spacing: 0.05em;
+  }
+  .check-mark { color: var(--safe); background: var(--safe-soft); }
+  .now-mark {
+    color: var(--bg); background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+  .leg-when { font-size: 12px; color: var(--ink-faint); letter-spacing: 0.05em; }
+  .leg-when strong { color: var(--ink-soft); font-weight: 600; }
+  .leg-nights { text-align: right; flex-shrink: 0; }
+  .leg-nights strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; font-weight: 500; color: var(--ink); display: block; line-height: 1;
+  }
+  .leg-nights span {
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint);
+  }
+  .leg-chevron {
+    color: var(--ink-faint); font-size: 12px;
+    transition: transform 0.2s; margin-left: 4px;
+  }
+  details[open] .leg-chevron { transform: rotate(180deg); }
+
+  .leg-body {
+    padding: 16px 20px 20px; border-top: 1px solid var(--rule);
+    margin: 0 20px; animation: fadeIn 0.2s ease-out;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .leg-body section { margin-bottom: 14px; }
+  .leg-body section:last-child { margin-bottom: 0; }
+  .section-label {
+    font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600; margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+  .section-text { font-size: 14px; color: var(--ink-soft); line-height: 1.55; }
+  .section-text ul { list-style: none; }
+  .section-text li {
+    padding-left: 14px; position: relative; margin-bottom: 4px;
+  }
+  .section-text li::before {
+    content: '·'; position: absolute; left: 4px;
+    color: var(--gold); font-weight: 700;
+  }
+  .section-text strong { color: var(--ink); font-weight: 600; }
+
+  .alert {
+    background: rgba(196, 77, 63, 0.08);
+    border-left: 2px solid var(--accent-soft);
+    padding: 10px 12px; margin-top: 10px;
+    font-size: 13px; color: var(--ink-soft); border-radius: 0 2px 2px 0;
+  }
+  .alert strong { color: var(--accent); }
+
+  .booking-card {
+    background: var(--safe-soft);
+    border: 1px solid rgba(91, 122, 58, 0.3);
+    border-radius: 6px; padding: 14px; margin-top: 10px;
+    font-size: 13px; color: var(--ink-soft);
+  }
+  .booking-card .booking-label {
+    font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--safe); font-weight: 700; margin-bottom: 6px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .platform-pill {
+    background: var(--bg-elevated); color: var(--ink);
+    padding: 3px 8px; border-radius: 4px;
+    font-size: 10px; letter-spacing: 0.05em; text-transform: none;
+    border: 1px solid var(--rule); font-weight: 600;
+  }
+  .booking-card strong { color: var(--ink); }
+  .booking-card .booking-row {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 4px 0; font-size: 12px;
+    border-bottom: 1px dotted rgba(91, 122, 58, 0.15);
+  }
+  .booking-card .booking-row:last-of-type { border-bottom: none; }
+  .booking-card .booking-row span:first-child {
+    color: var(--ink-faint); font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap;
+  }
+  .booking-card .booking-row span:last-child {
+    text-align: right; color: var(--ink); font-weight: 500;
+  }
+
+  .booking-actions {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 6px; margin-top: 10px;
+  }
+  .action-btn {
+    background: var(--bg-elevated); border: 1px solid var(--rule);
+    color: var(--ink); padding: 10px;
+    border-radius: 4px; font-size: 11px;
+    font-family: 'Manrope', sans-serif; font-weight: 600;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    cursor: pointer; text-align: center; text-decoration: none;
+    display: flex; align-items: center; justify-content: center;
+    gap: 5px; transition: all 0.15s; min-height: 38px;
+  }
+  .action-btn:active {
+    transform: scale(0.97); border-color: var(--accent);
+  }
+  .action-btn.primary {
+    background: var(--ink); color: var(--bg);
+    border-color: var(--ink); grid-column: span 2;
+  }
+  .action-btn .icon { font-size: 13px; }
+
+  .essentials {
+    background: rgba(184, 137, 61, 0.06);
+    border: 1px solid rgba(184, 137, 61, 0.25);
+    border-radius: 6px; padding: 12px 14px; margin-top: 10px;
+  }
+  .essentials .booking-label {
+    color: var(--gold); font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 8px;
+  }
+  .essential-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 5px 0; font-size: 13px; color: var(--ink-soft);
+    cursor: pointer; user-select: none; line-height: 1.4;
+  }
+  .essential-item input[type="checkbox"] {
+    appearance: none; -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--ink-faint); border-radius: 3px;
+    margin-top: 1px; flex-shrink: 0; cursor: pointer;
+    position: relative; transition: all 0.15s;
+    background: var(--bg-elevated);
+  }
+  .essential-item input[type="checkbox"]:checked {
+    background: var(--safe); border-color: var(--safe);
+  }
+  .essential-item input[type="checkbox"]:checked::after {
+    content: '✓'; position: absolute; top: -2px; left: 3px;
+    color: white; font-size: 13px; font-weight: 700;
+  }
+  .essential-item input[type="checkbox"]:checked + span {
+    text-decoration: line-through; color: var(--ink-faint);
+  }
+
+  /* Flight card — uses status banner styling */
+  .flight-card {
+    background: linear-gradient(135deg, #1f2937 0%, #0f172a 100%);
+    color: #f5efe6;
+    border-radius: 6px; padding: 16px;
+    margin-top: 10px; position: relative; overflow: hidden;
+  }
+  .flight-card::before {
+    content: '✈';
+    position: absolute; top: 12px; right: 16px;
+    font-size: 32px; opacity: 0.15; transform: rotate(45deg);
+  }
+  .flight-card .booking-label {
+    color: var(--gold); font-size: 9px; letter-spacing: 0.25em;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 10px;
+  }
+  .flight-leg {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(245, 239, 230, 0.1);
+  }
+  .flight-leg:last-of-type { border-bottom: none; }
+  .flight-route {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 600; margin-bottom: 4px;
+  }
+  .flight-route .arrow { color: var(--gold); }
+  .flight-meta {
+    font-size: 11px; color: rgba(245, 239, 230, 0.7);
+    line-height: 1.5;
+  }
+  .flight-meta .flight-num { color: var(--gold); font-weight: 600; }
+
+  .country-divider {
+    text-align: center; margin: 32px 0 22px; position: relative;
+  }
+  .country-divider::before {
+    content: ''; position: absolute; top: 50%; left: 0; right: 0;
+    height: 1px; background: var(--rule);
+  }
+  .country-divider span {
+    background: var(--bg); padding: 0 18px; position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 18px;
+    color: var(--ink-faint); letter-spacing: 0.08em;
+  }
+
+  .flags-block {
+    background: var(--ink); color: var(--bg);
+    border-radius: 6px; padding: 22px 22px 18px;
+    margin: 24px 0 28px; position: relative; overflow: hidden;
+  }
+  .flags-block::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle at top right, var(--gold) 0%, transparent 70%);
+    opacity: 0.3;
+  }
+  .flags-block .eyebrow { color: var(--gold); margin-bottom: 6px; }
+  .flags-block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 500; margin-bottom: 14px; line-height: 1.2;
+  }
+  .flag-item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(245, 239, 230, 0.1);
+    font-size: 13px; line-height: 1.5;
+  }
+  .flag-item:last-child { border-bottom: none; }
+  .flag-item strong {
+    display: block; color: var(--gold);
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 3px; font-weight: 600;
+  }
+
+  footer {
+    text-align: center; margin-top: 36px; padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; color: var(--ink-faint); font-size: 14px;
+  }
+  footer .ornament {
+    color: var(--gold); letter-spacing: 0.5em;
+    font-size: 12px; margin-bottom: 10px;
+  }
+
+  .save-hint {
+    background: var(--bg-card); border: 1px dashed var(--gold);
+    border-radius: 6px; padding: 12px 16px; margin-bottom: 22px;
+    font-size: 12px; color: var(--ink-soft);
+    text-align: center; line-height: 1.5;
+  }
+  .save-hint strong { color: var(--accent); }
+
+  .toast {
+    position: fixed; bottom: calc(env(safe-area-inset-bottom) + 30px);
+    left: 50%; transform: translateX(-50%) translateY(100px);
+    background: var(--ink); color: var(--bg);
+    padding: 10px 18px; border-radius: 100px;
+    font-size: 13px; font-weight: 500;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    z-index: 200; transition: transform 0.3s ease;
+    pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ===== TRIP MAP ===== */
+  .trip-map-wrapper {
+    background: var(--bg-card);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .trip-map-label {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .trip-map-legend {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--ink-faint);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  #tripMap {
+    height: 360px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--bg);
+  }
+  /* Custom Leaflet pin styling */
+  .leg-pin {
+    background: var(--accent);
+    color: var(--bg);
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 600;
+    font-size: 14px;
+    border: 2px solid var(--bg);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  }
+  .leg-pin.confirmed { background: var(--safe); }
+  .leg-pin.start { background: var(--gold); }
+  .leg-pin.end { background: var(--ink); }
+  .leaflet-popup-content-wrapper {
+    background: var(--bg-elevated);
+    color: var(--ink);
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .leaflet-popup-content {
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    margin: 10px 14px;
+    line-height: 1.4;
+  }
+  .leaflet-popup-content strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 500;
+    display: block;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .leaflet-popup-content em {
+    font-style: italic;
+    color: var(--ink-faint);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  .leaflet-popup-content a {
+    display: inline-block;
+    margin-top: 6px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .leaflet-popup-tip { background: var(--bg-elevated); }
+  .leaflet-container { font-family: 'Manrope', sans-serif; }
+  /* Dark mode tile filter */
+  @media (prefers-color-scheme: dark) {
+    .leaflet-tile { filter: invert(0.92) hue-rotate(180deg) brightness(0.95) contrast(0.85); }
+  }
+
+  @media (min-width: 480px) {
+    .masthead h1 { font-size: 46px; }
+    .leg-place { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="status-banner" id="statusBanner">
+    <div class="status-label" id="statusLabel">LOADING</div>
+    <div class="status-main" id="statusMain">—</div>
+    <div class="status-sub" id="statusSub">—</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+
+  <header class="masthead">
+    <div class="eyebrow">An Italian & French Holiday</div>
+    <h1>Europe <em>2026</em></h1>
+    <div class="dates">5 September — 11 October</div>
+    <div class="meta-strip">
+      <span><strong>36</strong> nights</span>
+      <span><strong>10</strong> stops</span>
+      <span><strong>6</strong> booked</span>
+    </div>
+  </header>
+
+  <div class="tools-bar">
+    <div class="tool-card" onclick="openCurrency()">
+      <span class="tool-label">Currency</span>
+      <span class="tool-value">AUD ⇄ EUR</span>
+    </div>
+    <div class="tool-card" onclick="document.getElementById('booked-summary').scrollIntoView({behavior:'smooth'})">
+      <span class="tool-label">Spend tally</span>
+      <span class="tool-value">$25,780</span>
+    </div>
+  </div>
+
+  <div class="save-hint">
+    Tap the <strong>share icon</strong>, then <strong>"Add to Home Screen"</strong> to keep this offline-ready.
+  </div>
+
+  <nav class="quicknav">
+    <div class="quicknav-label">Jump to</div>
+    <div class="quicknav-grid">
+      <a href="#flights"><span>✈ Flights ✓</span><span>SQ DWKH96</span></a>
+      <a href="#leg-1"><span>Paris ✓</span><span>5 Sep</span></a>
+      <a href="#leg-2"><span>Provence</span><span>9 Sep</span></a>
+      <a href="#leg-3"><span>Nice</span><span>13 Sep</span></a>
+      <a href="#leg-4"><span>Rome ✓</span><span>17 Sep</span></a>
+      <a href="#leg-5"><span>Praiano ✓</span><span>22 Sep</span></a>
+      <a href="#leg-6"><span>Montepulciano ✓</span><span>27 Sep</span></a>
+      <a href="#leg-7"><span>Florence ✓</span><span>2 Oct</span></a>
+      <a href="#leg-8"><span>Venice ✓</span><span>5 Oct</span></a>
+      <a href="#leg-9"><span>Lake Como</span><span>8 Oct</span></a>
+      <a href="#leg-10"><span>Milan</span><span>10 Oct</span></a>
+    </div>
+  </nav>
+
+  <!-- FLIGHTS BLOCK -->
+  <details class="leg confirmed" id="flights" open>
+    <summary class="leg-summary">
+      <span class="leg-num">✈</span>
+      <div class="leg-content">
+        <div class="leg-place">Singapore Airlines <span class="check-mark">BOOKED</span></div>
+        <div class="leg-when"><strong>DWKH96</strong> · 3 passengers · $8,807.90 AUD</div>
+      </div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <div class="flight-card">
+        <div class="booking-label">✈ OUTBOUND · SAT 5 SEP</div>
+        <div class="flight-leg">
+          <div class="flight-route">MEL <span class="arrow">→</span> SIN</div>
+          <div class="flight-meta"><span class="flight-num">SQ 248</span> · 05:55 → 11:45 · A350-900 · T2</div>
+        </div>
+        <div class="flight-leg">
+          <div class="flight-route">SIN <span class="arrow">→</span> CDG</div>
+          <div class="flight-meta"><span class="flight-num">SQ 338</span> · 13:35 → 21:15 · A350-900 · T3</div>
+        </div>
+      </div>
+
+      <div class="flight-card" style="margin-top: 12px;">
+        <div class="booking-label">✈ RETURN · SUN 11 OCT</div>
+        <div class="flight-leg">
+          <div class="flight-route">MXP <span class="arrow">→</span> SIN</div>
+          <div class="flight-meta"><span class="flight-num">SQ 377</span> · 13:15 → 12 Oct 07:40 · A350-900 · T1</div>
+        </div>
+        <div class="flight-leg">
+          <div class="flight-route">SIN <span class="arrow">→</span> MEL</div>
+          <div class="flight-meta"><span class="flight-num">SQ 217</span> · 11:10 → 21:35 (Mon) · A350-900 · T3</div>
+        </div>
+      </div>
+
+      <div class="booking-card" style="margin-top: 12px;">
+        <div class="booking-label">
+          <span>Booking details</span>
+          <span class="platform-pill">Singapore Airlines</span>
+        </div>
+        <div class="booking-row"><span>Reference</span><span>DWKH96</span></div>
+        <div class="booking-row"><span>Passengers</span><span>Wayne, Kelly, Lauren</span></div>
+        <div class="booking-row"><span>Baggage</span><span>30kg each leg</span></div>
+        <div class="booking-row"><span>Class</span><span>Economy Standard</span></div>
+        <div class="booking-row"><span>Seats out</span><span>48K · 48J · 48H</span></div>
+        <div class="booking-row"><span>Seats SIN-CDG</span><span>48A · 48B · 48C</span></div>
+        <div class="booking-row"><span>Seats MXP-SIN</span><span>54C · 54B · 54A</span></div>
+        <div class="booking-row"><span>Seats SIN-MEL</span><span>62C · 62B · 62A</span></div>
+        <div class="booking-row"><span>KrisFlyer</span><span>~15,430 miles ea.</span></div>
+        <div class="booking-row"><span>Total</span><span>$8,807.90 AUD</span></div>
+        <div class="booking-actions">
+          <a class="action-btn primary" data-app="https://www.singaporeair.com/saa/managebooking?bookingReference=DWKH96" data-web="https://www.singaporeair.com/en_UK/manage-booking/" data-app-host="singaporeair.com">
+            <span class="icon">↗</span> Manage booking
+          </a>
+          <button class="action-btn" onclick="copyText('DWKH96', 'Reference copied')">
+            <span class="icon">⎘</span> Copy ref
+          </button>
+          <a class="action-btn" data-app="comgooglemaps://?q=Melbourne+Airport+T2" data-web="https://www.google.com/maps/search/?api=1&query=Melbourne+Airport+Terminal+2">
+            <span class="icon">📍</span> MEL T2
+          </a>
+        </div>
+      </div>
+      <div class="alert">
+        <strong>Departure airport confirmed:</strong> Milan Malpensa (MXP) Terminal 1 on Sun 11 Oct. ~50min by Malpensa Express train from city centre — leave hotel by 09:30.
+      </div>
+    </div>
+  </details>
+
+  <div class="trip-map-wrapper">
+    <div class="trip-map-label">
+      <span>The route</span>
+      <span class="trip-map-legend">36 nights · 10 stops</span>
+    </div>
+    <div id="tripMap"></div>
+  </div>
+
+  <div class="country-divider"><span>France</span></div>
+
+  <details class="leg confirmed" id="leg-1" data-checkin="2026-09-05" data-checkout="2026-09-09">
+    <summary class="leg-summary">
+      <span class="leg-num">I</span>
+      <div class="leg-content">
+        <div class="leg-place">Paris <span class="check-mark">BOOKED</span></div>
+        <div class="leg-when"><strong>Sat 5 Sep</strong> → Wed 9 Sep · Latin Quarter</div>
+      </div>
+      <div class="leg-nights"><strong>4</strong><span>nights</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <div class="booking-card">
+        <div class="booking-label">
+          <span>✓ Confirmed</span>
+          <span class="platform-pill">Airbnb</span>
+        </div>
+        <div style="font-weight:600;color:var(--ink);margin-bottom:6px;">Lavie Maison A/C & Jacuzzi</div>
+        <div style="font-size:12px;color:var(--ink-faint);margin-bottom:8px;">Hosted by Jacques · Entire home/apt · 6 guests max · Pets allowed</div>
+        <div class="booking-row"><span>Check-in</span><span>Sat 5 Sep · after 14:00</span></div>
+        <div class="booking-row"><span>Check-out</span><span>Wed 9 Sep · by 10:00</span></div>
+        <div class="booking-row"><span>Address</span><span>6 Rue Cochin, 75005</span></div>
+        <div class="booking-row"><span>Conf #</span><span>HMSHYC4ZRP</span></div>
+        <div class="booking-row"><span>Per night</span><span>$798.09 × 4</span></div>
+        <div class="booking-row"><span>Total</span><span>$3,226.46 AUD</span></div>
+        <div class="booking-row"><span>Paid</span><span>$1,613.23 (27 Apr)</span></div>
+        <div class="booking-row"><span>Charge 29 Jun</span><span>$1,613.23</span></div>
+        <div class="booking-row"><span>Self check-in</span><span>Key safe</span></div>
+        <div class="booking-actions">
+          <a class="action-btn primary" data-app="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMSHYC4ZRP" data-web="https://www.airbnb.com.au/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMSHYC4ZRP" data-app-host="airbnb.com">
+            <span class="icon">↗</span> Open in Airbnb
+          </a>
+          <a class="action-btn" href="tel:+33745896669">
+            <span class="icon">☎</span> Call Jacques
+          </a>
+          <a class="action-btn" data-app="comgooglemaps://?q=6+Rue+Cochin,+75005+Paris&center=48.8502166,2.3527647" data-web="https://www.google.com/maps/search/?api=1&query=6+Rue+Cochin+75005+Paris">
+            <span class="icon">📍</span> Google Maps
+          </a>
+          <button class="action-btn" onclick="copyText('HMSHYC4ZRP', 'Confirmation copied')">
+            <span class="icon">⎘</span> Copy conf #
+          </button>
+          <button class="action-btn" onclick="copyText('6 Rue Cochin, 75005 Paris, France', 'Address copied')">
+            <span class="icon">⎘</span> Copy address
+          </button>
+        </div>
+      </div>
+      <section>
+        <div class="section-label">Arrival</div>
+        <div class="section-text">Land Paris CDG (T1) at <strong>21:15</strong>. Sat night recovery — full days Sun, Mon, Tue.</div>
+      </section>
+      <div class="essentials">
+        <div class="booking-label">✦ Pre-arrival essentials</div>
+        <label class="essential-item"><input type="checkbox" data-key="paris-1"><span>Passports + check 6mo+ validity from 11 Oct</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="paris-2"><span>Travel insurance documents</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="paris-3"><span>EU power adapter (Type C/E)</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="paris-4"><span>eSIM / travel SIM activated</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="paris-5"><span>CDG → city plan: RER B or Uber</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="paris-6"><span>Online check-in for SQ 248 (24h before)</span></label>
+      </div>
+      <section>
+        <div class="section-label">Highlights</div>
+        <div class="section-text"><ul>
+          <li><strong>Sun 6 Sep</strong> — Eiffel Tower, Seine wander</li>
+          <li><strong>Mon 7 Sep</strong> — Louvre (book AM slot)</li>
+          <li><strong>Tue 8 Sep</strong> — Versailles day trip (closed Mon)</li>
+        </ul></div>
+      </section>
+      <section>
+        <div class="section-label">Onward</div>
+        <div class="section-text">Wed morning TGV from Gare de Lyon → Avignon TGV (~2h40).</div>
+      </section>
+    </div>
+  </details>
+
+  <details class="leg" id="leg-2" data-checkin="2026-09-09" data-checkout="2026-09-13">
+    <summary class="leg-summary">
+      <span class="leg-num">II</span>
+      <div class="leg-content">
+        <div class="leg-place">Provence</div>
+        <div class="leg-when"><strong>Wed 9 Sep</strong> → Sun 13 Sep · Aix or village</div>
+      </div>
+      <div class="leg-nights"><strong>4</strong><span>nights</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <section>
+        <div class="section-label">Base</div>
+        <div class="section-text">Aix-en-Provence for energy and food, or a village (Saint-Rémy, Lourmarin) for slow days. Rental car if village base.</div>
+      </section>
+      <div class="essentials">
+        <div class="booking-label">✦ Essentials</div>
+        <label class="essential-item"><input type="checkbox" data-key="prov-1"><span>Driver's licence + Int'l Driving Permit</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="prov-2"><span>Rental car booked (Avignon TGV pickup)</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="prov-3"><span>TGV ticket Paris → Avignon</span></label>
+      </div>
+      <section>
+        <div class="section-label">Days</div>
+        <div class="section-text"><ul>
+          <li>Vineyard tasting — Côtes de Provence</li>
+          <li>Markets (Aix Sat, Saint-Rémy Wed)</li>
+          <li>Pont du Gard or Les Baux-de-Provence</li>
+          <li>Long lunches, lavender fields (post-bloom)</li>
+        </ul></div>
+      </section>
+      <section>
+        <div class="section-label">Onward</div>
+        <div class="section-text">Drop car at Avignon TGV. Direct TGV → Nice Ville (~3h30).</div>
+      </section>
+    </div>
+  </details>
+
+  <details class="leg" id="leg-3" data-checkin="2026-09-13" data-checkout="2026-09-17">
+    <summary class="leg-summary">
+      <span class="leg-num">III</span>
+      <div class="leg-content">
+        <div class="leg-place">Nice</div>
+        <div class="leg-when"><strong>Sun 13 Sep</strong> → Thu 17 Sep · Côte d'Azur</div>
+      </div>
+      <div class="leg-nights"><strong>4</strong><span>nights</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <section>
+        <div class="section-label">Days</div>
+        <div class="section-text"><ul>
+          <li>Old town, Cours Saleya market, socca</li>
+          <li>Èze + Monaco coastal day</li>
+          <li>Villefranche-sur-Mer</li>
+          <li>Antibes — Picasso Museum, ramparts</li>
+        </ul></div>
+      </section>
+      <section>
+        <div class="section-label">Onward</div>
+        <div class="section-text">Thu morning flight Nice (NCE) → Rome (FCO), ~1h45. Leonardo Express to Termini.</div>
+      </section>
+    </div>
+  </details>
+
+  <div class="country-divider"><span>Italia</span></div>
+
+  <details class="leg confirmed" id="leg-4" data-checkin="2026-09-17" data-checkout="2026-09-22">
+    <summary class="leg-summary">
+      <span class="leg-num">IV</span>
+      <div class="leg-content">
+        <div class="leg-place">Rome <span class="check-mark">BOOKED</span></div>
+        <div class="leg-when"><strong>Thu 17 Sep</strong> → Tue 22 Sep</div>
+      </div>
+      <div class="leg-nights"><strong>5</strong><span>nights</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <div class="booking-card">
+        <div class="booking-label">
+          <span>✓ Confirmed</span>
+          <span class="platform-pill">Airbnb</span>
+        </div>
+        <div style="font-weight:600;color:var(--ink);margin-bottom:6px;">Corso37 — Apartment in the Heart of Rome</div>
+        <div style="font-size:12px;color:var(--ink-faint);margin-bottom:8px;">Hosted by Maurizio</div>
+        <div class="booking-row"><span>Conf #</span><span>HMSMX48WCK</span></div>
+        <div class="booking-row"><span>Total</span><span>$3,034.07 AUD</span></div>
+        <div class="booking-row"><span>Paid</span><span>$1,634.92</span></div>
+        <div class="booking-row"><span>Pending</span><span>$1,399.15</span></div>
+        <div class="booking-actions">
+          <a class="action-btn primary" data-app="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMSMX48WCK" data-web="https://www.airbnb.com.au/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMSMX48WCK" data-app-host="airbnb.com">
+            <span class="icon">↗</span> Open in Airbnb
+          </a>
+          <button class="action-btn" onclick="copyText('HMSMX48WCK', 'Confirmation copied')">
+            <span class="icon">⎘</span> Copy conf #
+          </button>
+          <a class="action-btn" data-app="comgooglemaps://?q=Corso+Vittorio+Emanuele+II+37+Rome" data-web="https://www.google.com/maps/search/?api=1&query=Corso+Vittorio+Emanuele+II+37+Rome">
+            <span class="icon">📍</span> Google Maps
+          </a>
+        </div>
+      </div>
+      <section>
+        <div class="section-label">Highlights</div>
+        <div class="section-text"><ul>
+          <li><strong>Fri 18 Sep</strong> — Vatican Museums (08:00 slot, NOT Wed)</li>
+          <li><strong>Sat 19 Sep</strong> — Colosseum + Forum + Palatine</li>
+          <li><strong>Sun 20 Sep</strong> — Borghese Gallery (timed entry)</li>
+          <li><strong>Mon 21 Sep</strong> — Ostia Antica or Trastevere day</li>
+          <li>Evenings: Trastevere, Testaccio</li>
+        </ul></div>
+      </section>
+      <div class="alert">
+        <strong>Why we leave on the 22nd:</strong> World Children's Day brings huge pilgrim crowds to the Vatican from 25–27 Sep. We're out before it starts.
+      </div>
+      <section>
+        <div class="section-label">Onward</div>
+        <div class="section-text">Tue Frecciarossa Termini → Naples Centrale (~1h10), pre-booked private transfer to Praiano (~1h15).</div>
+      </section>
+    </div>
+  </details>
+
+  <details class="leg confirmed" id="leg-5" data-checkin="2026-09-22" data-checkout="2026-09-27">
+    <summary class="leg-summary">
+      <span class="leg-num">V</span>
+      <div class="leg-content">
+        <div class="leg-place">Praiano <span class="check-mark">BOOKED</span></div>
+        <div class="leg-when"><strong>Tue 22 Sep</strong> → Sun 27 Sep · Amalfi Coast</div>
+      </div>
+      <div class="leg-nights"><strong>5</strong><span>nights</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <div class="booking-card">
+        <div class="booking-label">
+          <span>✓ Confirmed</span>
+          <span class="platform-pill">Booking.com</span>
+        </div>
+        <div style="font-weight:600;color:var(--ink);margin-bottom:6px;">Villa Il Frantoio and Lilmar</div>
+        <div style="font-size:12px;color:var(--ink-faint);margin-bottom:8px;">Two-Bedroom House with Terrace and Sea View</div>
+        <div class="booking-row"><span>Check-in</span><span>Tue 22 Sep · 14:00–20:00</span></div>
+        <div class="booking-row"><span>Check-out</span><span>Sun 27 Sep · by 11:00</span></div>
+        <div class="booking-row"><span>Address</span><span>Via F. Russo 36</span></div>
+        <div class="booking-row"><span>Conf #</span><span>6291401679 · PIN 9801</span></div>
+        <div class="booking-row"><span>Total</span><span>€2,694 + €45 tax</span></div>
+        <div class="booking-actions">
+          <a class="action-btn primary" data-app="https://secure.booking.com/help.html?bn=6291401679" data-web="https://secure.booking.com/myreservations.html" data-app-host="booking.com">
+            <span class="icon">↗</span> Open on Booking.com
+          </a>
+          <a class="action-btn" href="tel:+390892594146">
+            <span class="icon">☎</span> Call host
+          </a>
+          <a class="action-btn" data-app="comgooglemaps://?q=Via+F.+Russo+36+Praiano" data-web="https://www.google.com/maps/search/?api=1&query=Via+F.+Russo+36+Praiano">
+            <span class="icon">📍</span> Google Maps
+          </a>
+          <button class="action-btn" onclick="copyText('6291401679', 'Confirmation copied')">
+            <span class="icon">⎘</span> Copy conf #
+          </button>
+          <button class="action-btn" onclick="copyText('Via F. Russo 36, 84010 Praiano SA, Italy', 'Address copied')">
+            <span class="icon">⎘</span> Copy address
+          </button>
+        </div>
+      </div>
+      <section>
+        <div class="section-label">Day Trips</div>
+        <div class="section-text"><ul>
+          <li><strong>Wed 23 Sep</strong> — Capri (book ferry ahead)</li>
+          <li><strong>Thu 24 Sep</strong> — Pompeii or Herculaneum</li>
+          <li><strong>Fri 25 Sep</strong> — Ravello + Villa Cimbrone</li>
+          <li><strong>Sat 26 Sep</strong> — Positano / Amalfi town</li>
+        </ul></div>
+      </section>
+      <section>
+        <div class="section-label">Onward</div>
+        <div class="section-text">Sun: long travel day. Driver Praiano → Naples, train to Florence (~3h), pick up rental car at Firenze SMN, drive ~1h30 to Montepulciano.</div>
+      </section>
+    </div>
+  </details>
+
+  <details class="leg confirmed" id="leg-6" data-checkin="2026-09-27" data-checkout="2026-10-02">
+    <summary class="leg-summary">
+      <span class="leg-num">VI</span>
+      <div class="leg-content">
+        <div class="leg-place">Montepulciano <span class="check-mark">BOOKED</span></div>
+        <div class="leg-when"><strong>Sun 27 Sep</strong> → Fri 2 Oct · Val d'Orcia</div>
+      </div>
+      <div class="leg-nights"><strong>5</strong><span>nights</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <div class="booking-card">
+        <div class="booking-label">
+          <span>✓ Confirmed</span>
+          <span class="platform-pill">Airbnb</span>
+        </div>
+        <div style="font-weight:600;color:var(--ink);margin-bottom:6px;">Vicolo delle Mura, casa antica con vista</div>
+        <div style="font-size:12px;color:var(--ink-faint);margin-bottom:8px;">Hosted by Betty &amp; Silvia · Entire home</div>
+        <div class="booking-row"><span>Check-in</span><span>Sun 27 Sep · after 11:00</span></div>
+        <div class="booking-row"><span>Check-out</span><span>Fri 2 Oct · by 11:00</span></div>
+        <div class="booking-row"><span>Address</span><span>Vicolo delle Mura 1</span></div>
+        <div class="booking-row"><span>Conf #</span><span>HMFQDRDPB4</span></div>
+        <div class="booking-row"><span>Total</span><span>$2,046.33 AUD</span></div>
+        <div class="booking-actions">
+          <a class="action-btn primary" data-app="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMFQDRDPB4" data-web="https://www.airbnb.com.au/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMFQDRDPB4" data-app-host="airbnb.com">
+            <span class="icon">↗</span> Open in Airbnb
+          </a>
+          <a class="action-btn" href="tel:+393358428554">
+            <span class="icon">☎</span> Call host
+          </a>
+          <a class="action-btn" data-app="comgooglemaps://?q=Vicolo+delle+Mura+1+Montepulciano" data-web="https://www.google.com/maps/search/?api=1&query=Vicolo+delle+Mura+1+Montepulciano">
+            <span class="icon">📍</span> Google Maps
+          </a>
+          <button class="action-btn" onclick="copyText('HMFQDRDPB4', 'Confirmation copied')">
+            <span class="icon">⎘</span> Copy conf #
+          </button>
+          <button class="action-btn" onclick="copyText('Vicolo delle Mura 1, 53045 Montepulciano SI, Italy', 'Address copied')">
+            <span class="icon">⎘</span> Copy address
+          </button>
+        </div>
+      </div>
+      <div class="essentials">
+        <div class="booking-label">✦ Tuscany car essentials</div>
+        <label class="essential-item"><input type="checkbox" data-key="tusc-1"><span>Park OUTSIDE walls — ZTL fines €100+ per camera</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="tusc-2"><span>Cash for parking lots (Porta al Prato / Sant'Agnese)</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="tusc-3"><span>Have car papers + insurance handy</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="tusc-4"><span>Book Brunello tasting (Montalcino) ahead</span></label>
+      </div>
+      <section>
+        <div class="section-label">Day Trips (with car)</div>
+        <div class="section-text"><ul>
+          <li>Pienza (~15 min) — pecorino capital, Renaissance "ideal city"</li>
+          <li>San Quirico d'Orcia (~25 min) — Horti Leonini gardens</li>
+          <li>Bagno Vignoni (~25 min) — hot springs</li>
+          <li>Montalcino (~45 min) — Brunello tasting</li>
+        </ul></div>
+      </section>
+      <section>
+        <div class="section-label">Onward</div>
+        <div class="section-text">Fri drive ~1h45 to Florence. <strong>Drop car at Firenze SMN station</strong> — do not enter ZTL.</div>
+      </section>
+    </div>
+  </details>
+
+  <details class="leg confirmed" id="leg-7" data-checkin="2026-10-02" data-checkout="2026-10-05">
+    <summary class="leg-summary">
+      <span class="leg-num">VII</span>
+      <div class="leg-content">
+        <div class="leg-place">Florence <span class="check-mark">BOOKED</span></div>
+        <div class="leg-when"><strong>Fri 2 Oct</strong> → Mon 5 Oct</div>
+      </div>
+      <div class="leg-nights"><strong>3</strong><span>nights</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <div class="booking-card">
+        <div class="booking-label">
+          <span>✓ Confirmed</span>
+          <span class="platform-pill">Stayz/Vrbo</span>
+        </div>
+        <div style="font-weight:600;color:var(--ink);margin-bottom:6px;">Florence Apartment (#1550770)</div>
+        <div style="font-size:12px;color:var(--ink-faint);margin-bottom:8px;">Hosted by alessandro giuliattini · 2 adults + 1 child</div>
+        <div class="booking-row"><span>Check-in</span><span>Fri 2 Oct · after 14:00</span></div>
+        <div class="booking-row"><span>Check-out</span><span>Mon 5 Oct · by 10:00</span></div>
+        <div class="booking-row"><span>Conf #</span><span>HA-FY2RV8</span></div>
+        <div class="booking-row"><span>Total</span><span>€1,342.40 (~$2,229 AUD)</span></div>
+        <div class="booking-actions">
+          <a class="action-btn primary" data-app="https://www.stayz.com.au/trips/9095277337974" data-web="https://www.stayz.com.au/trips/9095277337974" data-app-host="stayz.com.au">
+            <span class="icon">↗</span> Open booking on Stayz
+          </a>
+          <a class="action-btn" data-app="https://www.vrbo.com/1550770" data-web="https://www.vrbo.com/1550770" data-app-host="vrbo.com">
+            <span class="icon">🏠</span> View listing
+          </a>
+          <a class="action-btn" data-app="comgooglemaps://?q=Florence+Centro+Storico,+Italy" data-web="https://www.google.com/maps/search/?api=1&query=Florence+Centro+Storico,+Italy">
+            <span class="icon">📍</span> Google Maps
+          </a>
+          <button class="action-btn" onclick="copyText('HA-FY2RV8', 'Confirmation copied')">
+            <span class="icon">⎘</span> Copy conf #
+          </button>
+        </div>
+      </div>
+      <div class="alert">
+        <strong>Address comes closer to check-in.</strong> Stayz hosts release the exact street address a few days before arrival. Maps button currently points to Florence centro storico — I'll update it the moment the address arrives.
+      </div>
+      <section>
+        <div class="section-label">Highlights</div>
+        <div class="section-text"><ul>
+          <li><strong>Sat 3 Oct</strong> — Uffizi (AM) + Accademia (PM)</li>
+          <li><strong>Sun 4 Oct</strong> — Duomo climb, Oltrarno wander</li>
+          <li>Boboli Gardens, Ponte Vecchio at dusk</li>
+        </ul></div>
+      </section>
+      <div class="alert">
+        <strong>Sun 4 Oct = St Francis Day</strong> (national holiday). Some shops closed. Book Uffizi/Accademia for Sat.
+      </div>
+      <section>
+        <div class="section-label">Onward</div>
+        <div class="section-text">Mon Frecciarossa Firenze SMN → Venezia Santa Lucia (~2h05). Walk/water-taxi to Dorsoduro.</div>
+      </section>
+    </div>
+  </details>
+
+  <details class="leg confirmed" id="leg-8" data-checkin="2026-10-05" data-checkout="2026-10-08">
+    <summary class="leg-summary">
+      <span class="leg-num">VIII</span>
+      <div class="leg-content">
+        <div class="leg-place">Venice <span class="check-mark">BOOKED</span></div>
+        <div class="leg-when"><strong>Mon 5 Oct</strong> → Thu 8 Oct · Dorsoduro</div>
+      </div>
+      <div class="leg-nights"><strong>3</strong><span>nights</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <div class="booking-card">
+        <div class="booking-label">
+          <span>✓ Confirmed</span>
+          <span class="platform-pill">Stayz/Vrbo</span>
+        </div>
+        <div style="font-weight:600;color:var(--ink);margin-bottom:6px;">San Vio Palace Luxury Apartments</div>
+        <div style="font-size:12px;color:var(--ink-faint);margin-bottom:8px;">Dorsoduro · 3 adults · Max 5 guests</div>
+        <div class="booking-row"><span>Check-in</span><span>Mon 5 Oct · after 15:00</span></div>
+        <div class="booking-row"><span>Check-out</span><span>Thu 8 Oct · by 11:00</span></div>
+        <div class="booking-row"><span>Address</span><span>739 Dorsoduro, 30123</span></div>
+        <div class="booking-row"><span>Conf #</span><span>73431742248029</span></div>
+        <div class="booking-row"><span>Total</span><span>$1,961.97 AUD</span></div>
+        <div class="booking-actions">
+          <a class="action-btn primary" data-app="https://www.stayz.com.au/trips/73431742248029" data-web="https://www.stayz.com.au/trips/73431742248029" data-app-host="stayz.com.au">
+            <span class="icon">↗</span> Open booking on Stayz
+          </a>
+          <a class="action-btn" data-app="https://www.stayz.com.au/pdp/lo/95772996" data-web="https://www.stayz.com.au/pdp/lo/95772996" data-app-host="stayz.com.au">
+            <span class="icon">🏠</span> View listing
+          </a>
+          <a class="action-btn" data-app="comgooglemaps://?q=San+Vio+Palace+Luxury+Apartments,+739+Dorsoduro,+Venice+30123" data-web="https://www.google.com/maps/search/?api=1&query=San+Vio+Palace+Luxury+Apartments+739+Dorsoduro+Venice+30123+Italy">
+            <span class="icon">📍</span> Google Maps
+          </a>
+          <button class="action-btn" onclick="copyText('73431742248029', 'Confirmation copied')">
+            <span class="icon">⎘</span> Copy conf #
+          </button>
+          <button class="action-btn" onclick="copyText('739 Dorsoduro, Venice, VE 30123, Italy', 'Address copied')">
+            <span class="icon">⎘</span> Copy address
+          </button>
+        </div>
+          <button class="action-btn" onclick="copyText('73431742248029', 'Confirmation copied')">
+            <span class="icon">⎘</span> Copy conf #
+          </button>
+          <button class="action-btn" onclick="copyText('739 Dorsoduro, 30123 Venice, Italy', 'Address copied')">
+            <span class="icon">⎘</span> Copy address
+          </button>
+        </div>
+      </div>
+      <section>
+        <div class="section-label">Days</div>
+        <div class="section-text"><ul>
+          <li>St Mark's Basilica + Doge's Palace</li>
+          <li>Murano + Burano (vaporetto day pass)</li>
+          <li><strong>Biennale</strong> at Giardini + Arsenale (optional)</li>
+          <li>Cicchetti crawl, Cannaregio at golden hour</li>
+        </ul></div>
+      </section>
+      <section>
+        <div class="section-label">Onward</div>
+        <div class="section-text">Thu Frecciarossa Venezia S.L. → Milano Centrale (~2h25), connect regional train to Varenna-Esino (~1h).</div>
+      </section>
+    </div>
+  </details>
+
+  <details class="leg" id="leg-9" data-checkin="2026-10-08" data-checkout="2026-10-10">
+    <summary class="leg-summary">
+      <span class="leg-num">IX</span>
+      <div class="leg-content">
+        <div class="leg-place">Lake Como</div>
+        <div class="leg-when"><strong>Thu 8 Oct</strong> → Sat 10 Oct · Varenna</div>
+      </div>
+      <div class="leg-nights"><strong>2</strong><span>nights</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <section>
+        <div class="section-label">Days</div>
+        <div class="section-text"><ul>
+          <li>Bellagio ferry hop</li>
+          <li>Villa Monastero, Villa Carlotta</li>
+          <li>Lakeside walks, sunset spritz</li>
+        </ul></div>
+      </section>
+      <section>
+        <div class="section-label">Onward</div>
+        <div class="section-text">Sat regional train Varenna-Esino → Milano Centrale (~1h).</div>
+      </section>
+    </div>
+  </details>
+
+  <details class="leg flagged" id="leg-10" data-checkin="2026-10-10" data-checkout="2026-10-11">
+    <summary class="leg-summary">
+      <span class="leg-num">X</span>
+      <div class="leg-content">
+        <div class="leg-place">Milan</div>
+        <div class="leg-when"><strong>Sat 10 Oct</strong> → Sun 11 Oct</div>
+      </div>
+      <div class="leg-nights"><strong>1</strong><span>night</span></div>
+      <span class="leg-chevron">▾</span>
+    </summary>
+    <div class="leg-body">
+      <div class="essentials">
+        <div class="booking-label">✦ Departure essentials</div>
+        <label class="essential-item"><input type="checkbox" data-key="dep-1"><span>Online check-in for SQ 377 (24h before)</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="dep-2"><span>Malpensa Express ticket — leave hotel by 09:30</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="dep-3"><span>Last Supper ticket if booked</span></label>
+        <label class="essential-item"><input type="checkbox" data-key="dep-4"><span>Use last EUR cash / convert</span></label>
+      </div>
+      <section>
+        <div class="section-label">Half Day</div>
+        <div class="section-text"><ul>
+          <li><strong>The Last Supper</strong> (PM slot — book 3+ months out)</li>
+          <li>Duomo + rooftop</li>
+          <li>Galleria Vittorio Emanuele II</li>
+          <li>Aperitivo in Brera or Navigli</li>
+        </ul></div>
+      </section>
+      <div class="alert">
+        <strong>Sun 11 Oct · SQ 377 from MXP at 13:15.</strong> Malpensa Express ~50min from Milano Centrale or Cadorna. Be at airport by 11:00.
+      </div>
+    </div>
+  </details>
+
+  <div class="flags-block" id="booked-summary">
+    <div class="eyebrow">Spend so far · $25,780 AUD</div>
+    <h2>What's booked</h2>
+    <div class="flag-item">
+      <strong>Flights · Singapore Airlines</strong>
+      DWKH96 · MEL ↔ Europe via SIN · $8,807.90 AUD (3 pax)
+    </div>
+    <div class="flag-item">
+      <strong>Paris · Airbnb</strong>
+      Lavie Maison · $3,226 AUD ($1,613 paid, $1,613 due 29 Jun)
+    </div>
+    <div class="flag-item">
+      <strong>Rome · Airbnb</strong>
+      Corso37 · $3,034 AUD ($1,635 paid, $1,399 pending)
+    </div>
+    <div class="flag-item">
+      <strong>Praiano · Booking.com</strong>
+      Villa Il Frantoio · €2,694 (~$4,475 AUD) · breakfast inc.
+    </div>
+    <div class="flag-item">
+      <strong>Montepulciano · Airbnb</strong>
+      Vicolo delle Mura · $2,046 AUD
+    </div>
+    <div class="flag-item">
+      <strong>Florence · Stayz</strong>
+      Property #1550770 · €1,342 (~$2,229 AUD)
+    </div>
+    <div class="flag-item">
+      <strong>Venice · Stayz</strong>
+      San Vio Palace · $1,962 AUD
+    </div>
+    <div class="flag-item">
+      <strong>Outstanding</strong>
+      Provence · Nice · Lake Como · Milan
+    </div>
+  </div>
+
+  <footer>
+    <div class="ornament">✻ ✻ ✻</div>
+    Buon viaggio.
+  </footer>
+
+</div>
+
+<div class="modal-backdrop" id="currencyModal" onclick="if(event.target===this)closeCurrency()">
+  <div class="modal">
+    <h3>Currency</h3>
+    <div class="modal-row">
+      <label>AUD</label>
+      <input type="number" id="audInput" inputmode="decimal" placeholder="0" oninput="convertFromAUD()">
+    </div>
+    <div class="modal-row">
+      <label>EUR</label>
+      <input type="number" id="eurInput" inputmode="decimal" placeholder="0" oninput="convertFromEUR()">
+    </div>
+    <div class="modal-rate">1 AUD ≈ 0.602 EUR</div>
+    <button class="modal-close" onclick="closeCurrency()">Close</button>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+// ===== iOS APP DEEP-LINK STRATEGY =====
+// On iOS, the only reliable way to open a native app from Safari is with a regular https link
+// to the app's domain (Universal Links). When the app is installed and supports Universal Links
+// for that path, iOS opens the app automatically. Otherwise the same link opens in Safari.
+//
+// For Google Maps we use the comgooglemaps:// scheme but always pre-set the href so the link
+// works as a normal tap-and-go (not a JS handler that can be blocked by popup-blockers / PWAs).
+
+document.querySelectorAll('a[data-app]').forEach(link => {
+  const appUrl = link.getAttribute('data-app');
+  const webUrl = link.getAttribute('data-web');
+
+  if (appUrl.startsWith('comgooglemaps://')) {
+    // Google Maps: try app scheme on tap, fall back to web URL after a brief delay
+    link.setAttribute('href', webUrl);
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener');
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const start = Date.now();
+      const timeout = setTimeout(() => {
+        // App didn't open — go to website
+        window.location.href = webUrl;
+      }, 800);
+      // If we lose visibility, the app opened — cancel the fallback
+      const onHide = () => {
+        if (Date.now() - start < 1500) clearTimeout(timeout);
+        document.removeEventListener('visibilitychange', onHide);
+      };
+      document.addEventListener('visibilitychange', onHide);
+      // Trigger the app
+      window.location.href = appUrl;
+    });
+  } else {
+    // For Airbnb / Booking.com / Stayz / Singapore Airlines:
+    // Use the web URL directly. iOS Universal Links will route to the app if installed,
+    // otherwise Safari opens the page. This is the Apple-recommended approach.
+    link.setAttribute('href', webUrl);
+    link.setAttribute('target', '_blank');
+    link.setAttribute('rel', 'noopener');
+  }
+});
+
+// ===== CHECKLIST PERSISTENCE =====
+document.querySelectorAll('.essential-item input[type="checkbox"]').forEach(cb => {
+  const key = 'check_' + cb.dataset.key;
+  if (localStorage.getItem(key) === '1') cb.checked = true;
+  cb.addEventListener('change', () => {
+    localStorage.setItem(key, cb.checked ? '1' : '0');
+  });
+});
+
+// ===== COPY ACTION =====
+function copyText(text, msg) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(() => showToast(msg || 'Copied'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); showToast(msg || 'Copied'); } catch(e) {}
+    document.body.removeChild(ta);
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+// ===== CURRENCY =====
+const RATE_AUD_TO_EUR = 0.602;
+function openCurrency() {
+  document.getElementById('currencyModal').classList.add('open');
+  setTimeout(() => document.getElementById('audInput').focus(), 50);
+}
+function closeCurrency() {
+  document.getElementById('currencyModal').classList.remove('open');
+}
+function convertFromAUD() {
+  const aud = parseFloat(document.getElementById('audInput').value) || 0;
+  document.getElementById('eurInput').value = aud ? (aud * RATE_AUD_TO_EUR).toFixed(2) : '';
+}
+function convertFromEUR() {
+  const eur = parseFloat(document.getElementById('eurInput').value) || 0;
+  document.getElementById('audInput').value = eur ? (eur / RATE_AUD_TO_EUR).toFixed(2) : '';
+}
+
+// ===== STATUS BANNER =====
+const TRIP_START = new Date('2026-09-05T00:00:00');
+const TRIP_END = new Date('2026-10-11T23:59:59');
+const TOTAL_NIGHTS = 36;
+
+function todayLocal() { const d = new Date(); d.setHours(0,0,0,0); return d; }
+function diffDays(a, b) { return Math.round((b - a) / 86400000); }
+
+function findCurrentLeg(today) {
+  const legs = document.querySelectorAll('.leg[data-checkin]');
+  for (const leg of legs) {
+    const ci = new Date(leg.dataset.checkin + 'T00:00:00');
+    const co = new Date(leg.dataset.checkout + 'T00:00:00');
+    if (today >= ci && today < co) return leg;
+  }
+  return null;
+}
+
+function findNextLeg(today) {
+  const legs = document.querySelectorAll('.leg[data-checkin]');
+  for (const leg of legs) {
+    const ci = new Date(leg.dataset.checkin + 'T00:00:00');
+    if (ci > today) return leg;
+  }
+  return null;
+}
+
+function formatDateShort(d) {
+  return d.toLocaleDateString('en-AU', { weekday: 'short', day: 'numeric', month: 'short' });
+}
+
+function updateStatusBanner() {
+  const today = todayLocal();
+  const labelEl = document.getElementById('statusLabel');
+  const mainEl = document.getElementById('statusMain');
+  const subEl = document.getElementById('statusSub');
+  const progressEl = document.getElementById('progressFill');
+
+  if (today < TRIP_START) {
+    const days = diffDays(today, TRIP_START);
+    labelEl.textContent = 'COUNTDOWN';
+    mainEl.innerHTML = `<em>${days}</em> day${days===1?'':'s'} until takeoff`;
+    subEl.textContent = `Trip begins ${formatDateShort(TRIP_START)} · ${TOTAL_NIGHTS} nights ahead`;
+    progressEl.style.width = '0%';
+    return;
+  }
+
+  if (today > TRIP_END) {
+    labelEl.textContent = 'HOMECOMING';
+    mainEl.innerHTML = `<em>The trip is complete.</em>`;
+    subEl.textContent = `36 nights, 10 stops, 2 countries. ✻`;
+    progressEl.style.width = '100%';
+    return;
+  }
+
+  const dayNum = diffDays(TRIP_START, today) + 1;
+  const pct = Math.round((dayNum / TOTAL_NIGHTS) * 100);
+  const currentLeg = findCurrentLeg(today);
+
+  labelEl.textContent = `DAY ${dayNum} OF ${TOTAL_NIGHTS}`;
+
+  if (currentLeg) {
+    const place = currentLeg.querySelector('.leg-place').firstChild.textContent.trim();
+    const co = new Date(currentLeg.dataset.checkout + 'T00:00:00');
+    const nightsLeft = diffDays(today, co);
+
+    mainEl.innerHTML = `In <em>${place}</em>`;
+    subEl.textContent = `${nightsLeft} night${nightsLeft===1?'':'s'} remaining here · check out ${formatDateShort(co)}`;
+
+    document.querySelectorAll('.leg').forEach(l => l.classList.remove('current'));
+    currentLeg.classList.add('current');
+
+    const placeEl = currentLeg.querySelector('.leg-place');
+    if (!placeEl.querySelector('.now-mark')) {
+      const nowBadge = document.createElement('span');
+      nowBadge.className = 'now-mark';
+      nowBadge.textContent = 'NOW';
+      placeEl.appendChild(nowBadge);
+    }
+    if (!currentLeg.open) currentLeg.open = true;
+  } else {
+    const next = findNextLeg(today);
+    if (next) {
+      const place = next.querySelector('.leg-place').firstChild.textContent.trim();
+      const ci = new Date(next.dataset.checkin + 'T00:00:00');
+      mainEl.innerHTML = `Travel day → <em>${place}</em>`;
+      subEl.textContent = `Check in ${formatDateShort(ci)}`;
+    }
+  }
+
+  progressEl.style.width = pct + '%';
+}
+
+updateStatusBanner();
+setInterval(updateStatusBanner, 3600000);
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeCurrency();
+});
+
+// ===== TRIP MAP =====
+const TRIP_STOPS = [
+  { num: 'I',    name: 'Paris',         lat: 48.8566, lon: 2.3522,  legId: 'leg-1',  dates: '5–9 Sep',   confirmed: true,  type: 'start' },
+  { num: 'II',   name: 'Provence',      lat: 43.5297, lon: 5.4474,  legId: 'leg-2',  dates: '9–13 Sep',  confirmed: false },
+  { num: 'III',  name: 'Nice',          lat: 43.7102, lon: 7.2620,  legId: 'leg-3',  dates: '13–17 Sep', confirmed: false },
+  { num: 'IV',   name: 'Rome',          lat: 41.8967, lon: 12.4822, legId: 'leg-4',  dates: '17–22 Sep', confirmed: true },
+  { num: 'V',    name: 'Praiano',       lat: 40.6109, lon: 14.5375, legId: 'leg-5',  dates: '22–27 Sep', confirmed: true },
+  { num: 'VI',   name: 'Montepulciano', lat: 43.0937, lon: 11.7821, legId: 'leg-6',  dates: '27 Sep–2 Oct', confirmed: true },
+  { num: 'VII',  name: 'Florence',      lat: 43.7696, lon: 11.2558, legId: 'leg-7',  dates: '2–5 Oct',   confirmed: true },
+  { num: 'VIII', name: 'Venice',        lat: 45.4340, lon: 12.3380, legId: 'leg-8',  dates: '5–8 Oct',   confirmed: true },
+  { num: 'IX',   name: 'Lake Como',     lat: 46.0107, lon: 9.2848,  legId: 'leg-9',  dates: '8–10 Oct',  confirmed: false },
+  { num: 'X',    name: 'Milan',         lat: 45.4642, lon: 9.1900,  legId: 'leg-10', dates: '10–11 Oct', confirmed: false, type: 'end' },
+];
+
+if (typeof L !== 'undefined') {
+  const map = L.map('tripMap', {
+    scrollWheelZoom: false,
+    zoomControl: true,
+    attributionControl: true,
+  });
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap',
+    maxZoom: 18,
+  }).addTo(map);
+
+  // Add route line
+  const routeCoords = TRIP_STOPS.map(s => [s.lat, s.lon]);
+  L.polyline(routeCoords, {
+    color: '#8b2820',
+    weight: 2.5,
+    opacity: 0.55,
+    dashArray: '6, 6',
+  }).addTo(map);
+
+  // Add markers
+  TRIP_STOPS.forEach(stop => {
+    const cls = stop.type === 'start' ? 'start' : stop.type === 'end' ? 'end' : (stop.confirmed ? 'confirmed' : '');
+    const icon = L.divIcon({
+      className: '',
+      html: `<div class="leg-pin ${cls}">${stop.num}</div>`,
+      iconSize: [28, 28],
+      iconAnchor: [14, 14],
+      popupAnchor: [0, -14],
+    });
+    const marker = L.marker([stop.lat, stop.lon], { icon }).addTo(map);
+    const tickIfConfirmed = stop.confirmed ? ' ✓' : '';
+    marker.bindPopup(`
+      <strong>${stop.name}${tickIfConfirmed}</strong>
+      <em>${stop.dates}</em><br>
+      <a href="#${stop.legId}" onclick="document.getElementById('${stop.legId}').open=true; setTimeout(()=>document.getElementById('${stop.legId}').scrollIntoView({behavior:'smooth',block:'start'}),100);">View details →</a>
+    `);
+  });
+
+  // Fit bounds to show whole trip with padding
+  map.fitBounds(routeCoords, { padding: [30, 30] });
+}
+</script>
+</body>
+</html>
