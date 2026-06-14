@@ -437,6 +437,10 @@ const STOPS = [
     sky:'linear-gradient(180deg,#06436e 0%,#1378a0 38%,#46b0c0 66%,#f4d89a 100%)',
     accent:'#2f9fc0',
     booking:{ name:'Villa Il Frantoio · sea view', plat:'Booking.com', ref:'6291401679 · PIN 9801', addr:'Via F. Russo 36', phone:'+390892594146', cost:'€2,694 (~$4,475 AUD)', pay:'Breakfast included', note:'2-bed sea-view villa' },
+    bookings:[
+      { name:'Da Adolfo lunch · Positano', plat:'Prenota Web', when:'Sat 26 Sep · 13:00', cost:'€30pp hold (refunded)', addr:'Via Laurito 40, Positano', phone:'+39089875022',
+        note:'3 guests (2 adults + 1 child) · 1 coeliac noted. FREE ferry shuttle from Positano main dock every 30 min 10:00–13:00, returns 16:00–18:00. No outside wine. Table held 15 min.', url:'https://daadolfo.com' },
+    ],
     days:[
       ['Tue 22','Arrive Praiano, settle into the villa, sunset over the sea'],
       ['Wed 23','Positano day — beach, boutiques, Spiaggia Grande'],
@@ -462,7 +466,7 @@ const STOPS = [
       ['Mon 28','Bagno Vignoni hot springs (~25 min)'],
       ['Tue 29','Pienza (pecorino) & Montalcino (Brunello)'],
       ['Wed 30','Pienza + San Quirico d\'Orcia, e-bike Val d\'Orcia'],
-      ['Thu 1','Cooking class (Kelly\'s pick) + cellar tasting'],
+      ['Thu 1','Vino Nobile cellar tasting in Montepulciano'],
       ['Fri 2','Drive to Florence, drop car at SMN'],
     ],
     dining:[
@@ -477,9 +481,13 @@ const STOPS = [
     sky:'linear-gradient(180deg,#2e2440 0%,#6e4a5a 40%,#c98a6a 70%,#f0d090 100%)',
     accent:'#d99a6a',
     booking:{ name:'Apartment by Alessandro', plat:'Stayz', ref:'HA-FY2RV8 · #1550770', addr:'Central Florence', phone:'', cost:'€1,342 (~$2,229 AUD)', pay:'', note:'' },
+    bookings:[
+      { name:'MaMa Florence · Gluten-Free Cooking Class', plat:'MaMa Florence', when:'Sat 3 Oct · 10:00 AM', cost:'€507 paid in full (~$842 AUD)', addr:'Viale Francesco Petrarca 12, Firenze', phone:'+39055221138',
+        note:'Reservation #38873 · 3 adults · dedicated GF class. Doors open 5 min before — latecomers not admitted. Bring confirmation on the day. Emergencies +39 333 242 2763 (WhatsApp).', url:'https://www.mamaflorence.com/gluten-free-cooking-class-florence' },
+    ],
     days:[
       ['Fri 2','Arrive Florence, Ponte Vecchio at golden hour'],
-      ['Sat 3','Uffizi & Accademia (book ahead — St Francis Day Sun)'],
+      ['Sat 3','MaMa Florence GF cooking class 10:00; Uffizi/Accademia after (book ahead)'],
       ['Sun 4','Duomo climb, Oltrarno, Boboli Gardens'],
       ['Mon 5','Morning train to Venice'],
     ],
@@ -842,6 +850,25 @@ function openSheet(i){
         <a class="mini-btn" href="https://www.google.com/travel/hotels/Milan%20Centrale" target="_blank" rel="noopener">🏨 Compare hotels</a>
       </div>
     </div>`;
+  }
+
+  // Booked activities (tours, lunches, classes)
+  if (s.bookings && s.bookings.length){
+    html += `<div class="sec-label">Booked activities</div>`;
+    s.bookings.forEach(bk => {
+      html += `<div class="card booked">
+        <div class="card-top"><div class="card-title">${bk.name}</div><span class="pill green">${bk.plat}</span></div>
+        ${bk.when?`<div class="kv"><span class="k">When</span><span class="v">${bk.when}</span></div>`:''}
+        ${bk.addr?`<div class="kv"><span class="k">Where</span><span class="v">${bk.addr}</span></div>`:''}
+        ${bk.cost?`<div class="kv"><span class="k">Cost</span><span class="v">${bk.cost}</span></div>`:''}
+        ${bk.note?`<div class="kv"><span class="k">Note</span><span class="v">${bk.note}</span></div>`:''}
+        <div class="btn-row">
+          ${bk.url?`<a class="mini-btn solid" href="${bk.url}" target="_blank" rel="noopener">↗ View details</a>`:''}
+          ${bk.phone?`<a class="mini-btn" href="tel:${bk.phone}">☎ Call</a>`:''}
+          ${bk.addr?`<a class="mini-btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(bk.addr)}" target="_blank" rel="noopener">📍 Map</a>`:''}
+        </div>
+      </div>`;
+    });
   }
 
   // Day by day
