@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-18T10:38:27.795562Z",
+    "lastUpdated": "2026-06-18T13:44:47.973314Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it."
   },
   "flights": {
@@ -760,7 +760,7 @@
       "to": "Praiano",
       "date": "Mon 22 Sep",
       "mode": "Train + transfer",
-      "detail": "BOOKED Rome→Naples · Frecciarossa FR 9405 · Roma Termini 11:35 → Napoli Centrale 12:48 · Carriage 2, seats 5A/6A/6B · PNR FWW495 · then private transfer to Praiano",
+      "detail": "BOOKED Rome→Naples · Frecciarossa FR 9405 · Roma Termini 11:35 → Napoli Centrale 12:48 · Carriage 2, seats 5A/6A/6B · PNR FWW495 · then private transfer to Praiano · Naples→Praiano private transfer BOOKED: Sorrento Limo (Mercedes V-Class, booking 28930, €498 round-trip incl 2h Pompeii stop, dep Napoli Centrale 13:15)",
       "book": "Trenitalia",
       "status": "booked"
     },
@@ -768,19 +768,19 @@
       "from": "Praiano",
       "to": "Montepulciano",
       "date": "Sun 27 Sep",
-      "mode": "Transfer + car",
-      "detail": "Praiano → Naples transfer, then BOOKED Naples→Florence · Italo 9932 · Napoli Centrale 11:20 → Firenze SMN 14:17 · Carriage 2, seats 17/18/21 · PNR JDYH6M · then rental car to Montepulciano",
+      "mode": "Transfer + train + car",
+      "detail": "Praiano→Naples return transfer (Sorrento Limo booking 28930, dep 08:30) · then Italo 9932 Napoli Centrale 11:20 → Firenze SMN 14:17 (PNR JDYH6M) · then SIXT hire car from Florence SMN 14:30 (Mercedes CLA electric, booking 9735523439) → Montepulciano (~1h20)",
       "book": "Mixed",
-      "status": "todo"
+      "status": "booked"
     },
     {
       "from": "Montepulciano",
       "to": "Florence",
       "date": "Fri 2 Oct",
       "mode": "Drive",
-      "detail": "Drive ~1h45 to Florence, drop hire car at SMN (mind the ZTL)",
+      "detail": "Drive Montepulciano → Florence in SIXT hire car (booking 9735523439); drop at Florence SMN Fri 2 Oct 14:00 (avoid ZTL). Drive ~1h45 to Florence, drop hire car at SMN (mind the ZTL)",
       "book": "Self-drive",
-      "status": "todo"
+      "status": "booked"
     },
     {
       "from": "Florence",
