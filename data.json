@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-17T12:04:01.787202Z",
+    "lastUpdated": "2026-06-18T10:38:27.795562Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it."
   },
   "flights": {
@@ -164,7 +164,7 @@
         ],
         [
           "Sat 12",
-          "Pont du Gard or Aix-en-Provence day trip"
+          "Self-drive: Pont du Gard, Uzès, Châteauneuf-du-Pape, Orange — concert at the Théâtre Antique that night"
         ],
         [
           "Sun 13",
@@ -187,6 +187,18 @@
           "a",
           "Ask for GF; grilled & vegetable dishes work well"
         ]
+      ],
+      "bookings": [
+        {
+          "name": "Candlelight: Tribute to ABBA · Théâtre Antique d'Orange",
+          "plat": "Booked",
+          "when": "Sat 12 Sep · 21:30",
+          "cost": "€94.50 (~$157 AUD)",
+          "addr": "Théâtre Antique d'Orange, Rue Madeleine Roch, 84100 Orange",
+          "phone": "",
+          "note": "\"Candlelight Plein Air: Tribute to ABBA and More\" · 3× Zone B · Order #115606611 · arrive ≥45min early, no late entry. End of the self-drive day-trip loop (Pont du Gard → Uzès → Châteauneuf-du-Pape → Orange) from Saint-Rémy in the hire car.",
+          "url": "https://maps.app.goo.gl/D4hYBnL3gMhhbvRp8"
+        }
       ]
     },
     {
@@ -721,7 +733,7 @@
       "to": "Saint-Rémy",
       "date": "Wed 9 Sep",
       "mode": "TGV + transfer",
-      "detail": "BOOKED · TGV INOUI 6101 · Paris Gare de Lyon 06:38 → Avignon TGV 09:17 · Carriage 3, seats 367/368/369 (1st class) · PNR TVQUHJ · A$401.39 · then car/transfer to Saint-Rémy · Avignon TGV → Saint-Rémy: private sedan transfer arranged (Alpilles Luberon Provence Transport, €55, Christophe +33 614 81 34 85) — provisional, awaiting confirmation",
+      "detail": "BOOKED · TGV INOUI 6101 · Paris Gare de Lyon 06:38 → Avignon TGV 09:17 · Carriage 3, seats 367/368/369 (1st class) · PNR TVQUHJ · A$401.39 · then car/transfer to Saint-Rémy · Avignon TGV → Saint-Rémy: private sedan transfer arranged (Alpilles Luberon Provence Transport, €55, Christophe +33 614 81 34 85) — provisional, awaiting confirmation · Provence hire car: Europcar Jeep Avenger (automatic), pickup Avignon TGV Fri 11 Sep 9:30, return Sun 13 Sep 8:30, resv 1203760297",
       "book": "Trainline",
       "status": "booked"
     },
