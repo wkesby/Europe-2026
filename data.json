@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-18T13:44:47.973314Z",
+    "lastUpdated": "2026-06-18T15:32:55.322539Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it."
   },
   "flights": {
@@ -796,18 +796,18 @@
       "to": "Lake Como",
       "date": "Thu 8 Oct",
       "mode": "Train",
-      "detail": "Venice → Milan → Varenna-Esino (~3h45 total, change at Milan Centrale)",
+      "detail": "BOOKED · Frecciarossa FR 9724 Venezia S.Lucia 10:48 → Milano Centrale 13:15 (seats 8A/9A/9B, PNR GKUEWN) · then Trenord regional RE 2828 Milano 14:20 → Varenna-Esino 15:24 (PNR 2867511560)",
       "book": "Trenitalia",
-      "status": "todo"
+      "status": "booked"
     },
     {
       "from": "Lake Como",
       "to": "Milan",
       "date": "Sat 10 Oct",
       "mode": "Train",
-      "detail": "Varenna-Esino → Milan Centrale (~1h)",
+      "detail": "BOOKED · Trenord regional RE 2823 · Varenna-Esino 11:35 → Milano Centrale 12:40 (Sat 10 Oct, PNR 2867511602) · then 5-min walk to Starhotels Echo",
       "book": "Trenitalia",
-      "status": "todo"
+      "status": "booked"
     }
   ],
   "actions": [
