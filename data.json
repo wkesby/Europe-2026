@@ -3,7 +3,14 @@
     "title": "Kesby Europe 2026",
     "version": 1,
     "lastUpdated": "2026-06-21T06:48:38.170239Z",
-    "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it."
+    "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it.",
+    "spendSoFar": 39540,
+    "spendBreakdown": {
+      "transport": 13578.61,
+      "accommodation": 22846.69,
+      "activities": 2229,
+      "insurance": 885.21
+    }
   },
   "flights": {
     "ref": "DWKH96",
@@ -912,6 +919,200 @@
       "meta": "Policy 18473939 · Wayne, Kelly, Lauren · France & Italy · 5 Sep–11 Oct · AUD $885.21 paid · Emergency +61 2 9191 1180",
       "cat": "admin",
       "when": "2026-06-21"
+    }
+  ],
+  "legs": [
+    {
+      "date": "2026-09-09",
+      "from": "Paris (Gare de Lyon)",
+      "to": "Avignon TGV",
+      "mode": "Train (TGV)",
+      "operator": "SNCF (Trainline) TGV INOUI 6101",
+      "dep": "06:38",
+      "arr": "09:17",
+      "ref": "TVQUHJ",
+      "cost": 401.39,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-09",
+      "from": "Avignon TGV",
+      "to": "Saint-Rémy-de-Provence",
+      "mode": "Private transfer",
+      "operator": "Alpilles Luberon Provence Transport",
+      "dep": "",
+      "arr": "09:17",
+      "ref": "",
+      "cost": 91.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-11",
+      "from": "Provence hire car",
+      "to": "Avignon (Europcar)",
+      "mode": "Rental car pickup",
+      "operator": "Europcar",
+      "dep": "09:30",
+      "arr": "",
+      "ref": "1203760297",
+      "cost": 180.15,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-13",
+      "from": "Avignon TGV",
+      "to": "Nice Ville",
+      "mode": "Train (TGV)",
+      "operator": "SNCF (Trainline) TGV INOUI 6805",
+      "dep": "09:28",
+      "arr": "13:04",
+      "ref": "T32FXW",
+      "cost": 255.22,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-17",
+      "from": "Nice (NCE)",
+      "to": "Rome (FCO)",
+      "mode": "Flight (AZ 343)",
+      "operator": "ITA Airways",
+      "dep": "11:20",
+      "arr": "12:30",
+      "ref": "YFAZOK",
+      "cost": 781.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-17",
+      "from": "Rome FCO (Fiumicino)",
+      "to": "Roma Termini",
+      "mode": "Train (regional)",
+      "operator": "Trenitalia RV 4621",
+      "dep": "13:23",
+      "arr": "13:55",
+      "ref": "2869812743",
+      "cost": 75.87,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-22",
+      "from": "Roma Termini",
+      "to": "Naples Centrale",
+      "mode": "Train (Frecciarossa/Italo)",
+      "operator": "Trenitalia Frecciarossa FR 9405",
+      "dep": "11:35",
+      "arr": "12:48",
+      "ref": "FWW495",
+      "cost": 157.19,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-22",
+      "from": "Naples Centrale",
+      "to": "Praiano",
+      "mode": "Private transfer",
+      "operator": "Sorrento Limo (Booking 28930)",
+      "dep": "13:15",
+      "arr": "",
+      "ref": "28930",
+      "cost": 826.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-27",
+      "from": "Praiano",
+      "to": "Naples Centrale",
+      "mode": "Private transfer",
+      "operator": "Sorrento Limo (Booking 28930)",
+      "dep": "08:30",
+      "arr": "",
+      "ref": "28930",
+      "cost": 0.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-27",
+      "from": "Naples Centrale",
+      "to": "Firenze SMN",
+      "mode": "Train (Frecciarossa)",
+      "operator": "Italo 9932",
+      "dep": "11:20",
+      "arr": "14:17",
+      "ref": "JDYH6M",
+      "cost": 336.68,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-27",
+      "from": "Tuscany hire car",
+      "to": "Florence SMN (SIXT)",
+      "mode": "Rental car pickup",
+      "operator": "SIXT (Booking 9735523439)",
+      "dep": "14:30",
+      "arr": "",
+      "ref": "9735523439",
+      "cost": 1050.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-10-05",
+      "from": "Firenze SMN",
+      "to": "Venezia S. Lucia",
+      "mode": "Train (Frecciarossa)",
+      "operator": "Italo 8908",
+      "dep": "11:39",
+      "arr": "13:55",
+      "ref": "LHRC2N",
+      "cost": 226.4,
+      "status": "booked"
+    },
+    {
+      "date": "2026-10-08",
+      "from": "Venezia S. Lucia",
+      "to": "Milano Centrale",
+      "mode": "Train (Frecciarossa)",
+      "operator": "Trenitalia Frecciarossa FR 9724",
+      "dep": "10:48",
+      "arr": "13:15",
+      "ref": "GKUEWN",
+      "cost": 189.43,
+      "status": "booked"
+    },
+    {
+      "date": "2026-10-08",
+      "from": "Milano Centrale",
+      "to": "Varenna-Esino",
+      "mode": "Train (regional)",
+      "operator": "Trenord RE 2828 (regional)",
+      "dep": "14:20",
+      "arr": "15:24",
+      "ref": "2867511560",
+      "cost": 59.54,
+      "status": "booked"
+    },
+    {
+      "date": "2026-10-10",
+      "from": "Varenna-Esino",
+      "to": "Milano Centrale",
+      "mode": "Train (regional)",
+      "operator": "Trenord RE 2823 (regional)",
+      "dep": "11:35",
+      "arr": "12:40",
+      "ref": "2867511602",
+      "cost": 59.54,
+      "status": "booked"
+    },
+    {
+      "date": "2026-10-11",
+      "from": "Milano Centrale",
+      "to": "Milan Malpensa (MXP)",
+      "mode": "Train (regional)",
+      "operator": "Trenord RE 2932",
+      "dep": "09:25",
+      "arr": "10:18",
+      "ref": "2868828305",
+      "cost": 81.3,
+      "status": "booked"
     }
   ]
 }
