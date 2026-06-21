@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-21T06:48:38.170239Z",
+    "lastUpdated": "2026-06-21T07:53:46.789061Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it.",
     "spendSoFar": 39540,
     "spendBreakdown": {
@@ -865,58 +865,86 @@
   ],
   "actions": [
     {
-      "id": "car",
-      "title": "Confirm Tuscany car hire",
-      "meta": "27 Sep–2 Oct · Florence SMN or airport · automatic, book early",
-      "cat": "Transport",
-      "when": "2026-09-27"
+      "id": "eiffel",
+      "title": "Book Eiffel Tower",
+      "meta": "Paris · toureiffel.paris",
+      "cat": "Ticket",
+      "when": "2026-09-06"
     },
     {
-      "id": "vatican",
-      "title": "Book Vatican & Sistine Chapel",
-      "meta": "Fri 19 Sep · small-group skip-the-line",
+      "id": "colosseum",
+      "title": "Book Colosseum + Forum + Palatine",
+      "meta": "Rome · coopculture.it",
       "cat": "Ticket",
       "when": "2026-09-19"
     },
     {
-      "id": "lastsupper",
-      "title": "Book The Last Supper",
-      "meta": "Milan · sells out months ahead",
-      "cat": "Ticket",
-      "when": "2026-10-10"
-    },
-    {
-      "id": "uffizi",
-      "title": "Book Uffizi & Accademia",
-      "meta": "Sat 3 Oct · St Francis Day Sun = busy",
-      "cat": "Ticket",
-      "when": "2026-10-03"
-    },
-    {
-      "id": "colosseum",
-      "title": "Book Colosseum & Forum",
-      "meta": "Thu 18 Sep · timed entry",
-      "cat": "Ticket",
-      "when": "2026-09-18"
-    },
-    {
       "id": "borghese",
       "title": "Book Borghese Gallery",
-      "meta": "Rome · strict timed entry, limited slots",
+      "meta": "Rome · galleriaborghese.it",
       "cat": "Ticket",
       "when": "2026-09-20"
     },
     {
-      "id": "trains",
-      "title": "Book remaining Frecciarossa legs",
-      "meta": "French TGVs done ✓ · Italian inter-city legs still to book",
-      "cat": "Transport",
-      "when": "2026-09-22"
+      "id": "capri",
+      "title": "Book Capri day trip + ferry",
+      "meta": "Amalfi Coast",
+      "cat": "Ticket",
+      "when": "2026-09-23"
+    },
+    {
+      "id": "pompeii",
+      "title": "Book Pompeii or Herculaneum",
+      "meta": "Amalfi Coast · pompeiisites.org",
+      "cat": "Ticket",
+      "when": "2026-09-24"
+    },
+    {
+      "id": "uffizi",
+      "title": "Book Uffizi Gallery",
+      "meta": "Florence · uffizi.it",
+      "cat": "Ticket",
+      "when": "2026-10-03"
+    },
+    {
+      "id": "accademia",
+      "title": "Book Accademia (David)",
+      "meta": "Florence · galleriaaccademiafirenze.it",
+      "cat": "Ticket",
+      "when": "2026-10-03"
+    },
+    {
+      "id": "duomo",
+      "title": "Book Duomo climb / Brunelleschi dome",
+      "meta": "Florence · duomo.firenze.it",
+      "cat": "Ticket",
+      "when": "2026-10-04"
+    },
+    {
+      "id": "st",
+      "title": "Book St Mark's Basilica + Doge's Palace",
+      "meta": "Venice · veneziaunica.it",
+      "cat": "Ticket",
+      "when": "2026-10-06"
+    },
+    {
+      "id": "venice",
+      "title": "Book Venice Biennale (Giardini/Arsenale)",
+      "meta": "Venice · labiennale.org",
+      "cat": "Ticket",
+      "when": "2026-10-07"
+    },
+    {
+      "id": "the",
+      "title": "Book The Last Supper",
+      "meta": "Milan · vivaticket.it",
+      "cat": "Ticket",
+      "when": "2026-10-10"
     },
     {
       "id": "ins-scti",
       "title": "Travel insurance — SCTI (booked)",
-      "meta": "Policy 18473939 · Wayne, Kelly, Lauren · France & Italy · 5 Sep–11 Oct · AUD $885.21 paid · Emergency +61 2 9191 1180",
+      "meta": "Policy 18473939 · Wayne, Kelly, Lauren · 5 Sep–11 Oct · AUD $885.21 paid · Emergency +61 2 9191 1180",
       "cat": "admin",
       "when": "2026-06-21"
     }
