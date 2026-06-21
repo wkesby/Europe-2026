@@ -1560,7 +1560,7 @@
   </div>
 
   <!-- ===== ACTIVITIES & TIMED ENTRIES TRACKER ===== -->
-  <details class="tracker">
+  <details class="tracker" id="activities">
     <summary class="leg-summary">
       <span class="leg-num">🎟</span>
       <div class="leg-content">
@@ -3147,6 +3147,8 @@ updatePredepCount();
   }
 
   // ---- 1. Collect auto items from existing trackers (todo + pending only) ----
+  let all = [];
+  function recollect() {
   const collected = [];
   document.querySelectorAll('.tracker .tracker-item').forEach(item => {
     const statusEl = item.querySelector('.tracker-status');
@@ -3167,7 +3169,7 @@ updatePredepCount();
   // Milan accommodation and Tuscany car hire are now BOOKED — no outstanding specials.
   const specials = [];
 
-  const all = collected.concat(specials);
+  all = collected.concat(specials);
 
   // ---- 3. Compute deadline + urgency for each ----
   const today = new Date(); today.setHours(0,0,0,0);
@@ -3193,6 +3195,7 @@ updatePredepCount();
     if (a.done !== b.done) return a.done ? 1 : -1;
     return a.daysToDeadline - b.daysToDeadline;
   });
+  } // end recollect()
 
   function fmtDeadline(it) {
     if (!it.deadlineDate) return 'Flexible';
@@ -3266,7 +3269,7 @@ updatePredepCount();
     foot.innerHTML = `${all.length} items tracked · auto-collected from your trackers + accommodation + decisions · deadlines are recommended booking-by dates`;
   }
 
-  // filter buttons
+  // filter buttons (bound once)
   document.querySelectorAll('#actionFilters .action-filter').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('#actionFilters .action-filter').forEach(b => b.classList.remove('active'));
@@ -3276,6 +3279,10 @@ updatePredepCount();
     });
   });
 
+  // Expose a refresh hook so liveData() can recount after it flips tracker items to booked
+  window.refreshActionDash = function(){ recollect(); render(); };
+
+  recollect();
   render();
 })();
 
@@ -4094,6 +4101,44 @@ if (typeof L !== 'undefined') {
     block.appendChild(frag);
   }
 
+  // ---- 5. Activities tracker (status sync from activities[], preserving curated notes) ----
+  function syncActivities(activities){
+    if(!activities) return;
+    const booked = activities.filter(a=>a.status==='booked');
+    if(!booked.length) return;
+    const items=[...document.querySelectorAll('#activities .tracker-item')];
+    items.forEach(item=>{
+      const titleEl=item.querySelector('.tracker-title');
+      const statusEl=item.querySelector('.tracker-status');
+      const metaEl=item.querySelector('.tracker-meta');
+      if(!titleEl||!statusEl) return;
+      const tnorm=norm(titleEl.textContent);
+      // Match a booked activity whose key words appear in the tracker title
+      let match=null;
+      for(const a of booked){
+        const an=norm(a.name);
+        // token overlap: require the distinctive first word of the activity to be in the title
+        const firstWord=an.split(' ')[0];
+        if(tnorm.includes(firstWord) && firstWord.length>3){ match=a; break; }
+      }
+      if(!match) return;
+      if(!statusEl.classList.contains('booked')){
+        statusEl.classList.remove('todo','pending'); statusEl.classList.add('booked');
+        if(!/^✓/.test(titleEl.textContent)) titleEl.textContent='✓ '+titleEl.textContent;
+        // Replace the "book ahead" warning meta with confirmed info
+        if(metaEl){
+          const bits=[];
+          const dt=match.date?new Date(match.date+'T00:00:00'):null;
+          if(dt&&!isNaN(dt)) bits.push('<span class="when">'+dt.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'})+(match.slot?' '+esc(match.slot):'')+'</span>');
+          bits.push('BOOKED');
+          if(match.ref) bits.push('ref '+esc(match.ref));
+          if(match.cost&&match.cost>0) bits.push(money(match.cost));
+          metaEl.innerHTML=bits.join(' · ');
+        }
+      }
+    });
+  }
+
   function syncStops(stops){
     if(!stops || typeof TRIP_STOPS==='undefined') return;
     const byLeg={}; stops.forEach(s=>{ if(s.id) byLeg[s.id]=s; });
@@ -4124,7 +4169,10 @@ if (typeof L !== 'undefined') {
       try{ renderTracker(d.legs); }catch(e){ console.warn('renderTracker',e); }
       try{ renderSpend(d._meta); }catch(e){ console.warn('renderSpend',e); }
       try{ renderFlags(d.stops); }catch(e){ console.warn('renderFlags',e); }
+      try{ syncActivities(d.activities); }catch(e){ console.warn('syncActivities',e); }
       try{ syncStops(d.stops); }catch(e){ console.warn('syncStops',e); }
+      // Dashboard counts from the trackers — re-run it now that statuses are updated
+      try{ if(typeof window.refreshActionDash==='function') window.refreshActionDash(); }catch(e){ console.warn('refreshActionDash',e); }
       stamp(d._meta);
       if(typeof runCinematic==='function'){ try{ runCinematic(); }catch(e){} }
     })
