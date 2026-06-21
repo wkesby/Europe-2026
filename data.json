@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-21T06:05:30.338635Z",
+    "lastUpdated": "2026-06-21T06:48:38.170239Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it."
   },
   "flights": {
@@ -758,6 +758,18 @@
           "s",
           "Saffron risotto — naturally GF Milanese classic"
         ]
+      ],
+      "bookings": [
+        {
+          "name": "Malpensa Express — Milan → MXP",
+          "plat": "Booked",
+          "when": "Sun 11 Oct · 09:25→10:18",
+          "cost": "A$81.30",
+          "addr": "Milano Centrale → Milano Malpensa Aeroporto",
+          "phone": "",
+          "note": "Trenord RE 2932 · PNR 2868828305 · 3× Ordinaria (no seats) · auto-activates at departure · connects to SQ377 (MXP 13:15). Leave hotel ~08:45.",
+          "url": ""
+        }
       ]
     }
   ],
@@ -785,7 +797,7 @@
       "to": "Rome",
       "date": "Thu 17 Sep",
       "mode": "Flight",
-      "detail": "BOOKED · ITA Airways AZ343 · NCE T1 11:20 → FCO T1 12:30 (1h10) · A220-300 Economy · seats 06F/06D/06E · code YFAZOK · 1× checked 23kg each · then Leonardo Express to Termini",
+      "detail": "BOOKED · ITA Airways AZ343 · NCE T1 11:20 → FCO T1 12:30 (1h10) · A220-300 Economy · seats 06F/06D/06E · code YFAZOK · 1× checked 23kg each · then Leonardo Express to Termini · then FCO→Roma Termini regional train RV 4621 BOOKED (13:23→13:55, PNR 2869812743, A$75.87)",
       "book": "ITA Airways",
       "status": "booked"
     },
