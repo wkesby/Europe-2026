@@ -1410,7 +1410,7 @@
     <summary class="leg-summary">
       <span class="leg-num">🚆</span>
       <div class="leg-content">
-        <div class="leg-place">Trains & transfers <span class="count-mark">16 legs</span></div>
+        <div class="leg-place">Trains & transfers <span class="count-mark">16 legs · all booked</span></div>
         <div class="leg-when">Inter-city travel between stops</div>
       </div>
       <span class="leg-chevron">▾</span>
@@ -1452,17 +1452,17 @@
         <span class="tracker-status booked"></span>
         <div class="tracker-content">
           <div class="tracker-title">✓ Flight Nice → Rome</div>
-          <div class="tracker-meta"><span class="when">Thu 17 Sep</span> · BOOKED · ITA AZ343 · NCE 11:20 → FCO 12:30 · seats 06F/06D/06E · code YFAZOK · then Leonardo Express to Termini</div>
+          <div class="tracker-meta"><span class="when">Thu 17 Sep</span> · BOOKED · ITA AZ343 · NCE 11:20 → FCO 12:30 · seats 06F/06D/06E · code YFAZOK · then RV 4621 train to Termini</div>
         </div>
         <div class="tracker-cost"><span class="label">Paid</span>€470</div>
       </div>
       <div class="tracker-item">
-        <span class="tracker-status todo"></span>
+        <span class="tracker-status booked"></span>
         <div class="tracker-content">
-          <div class="tracker-title">Leonardo Express FCO → Termini</div>
-          <div class="tracker-meta"><span class="when">Thu 17 Sep</span> · 32 min · €14 each · buy at station (turn-up-and-go)</div>
+          <div class="tracker-title">✓ FCO → Roma Termini (regional)</div>
+          <div class="tracker-meta"><span class="when">Thu 17 Sep</span> · BOOKED · Trenitalia RV 4621 · Fiumicino 13:23 → Roma Termini 13:55 · PNR 2869812743 · non-refundable (airport origin) · connects from AZ343</div>
         </div>
-        <div class="tracker-cost"><span class="label">Pay</span>€42</div>
+        <div class="tracker-cost"><span class="label">Paid</span>A$76</div>
       </div>
       <div class="tracker-item">
         <span class="tracker-status booked"></span>
@@ -1537,12 +1537,12 @@
         <div class="tracker-cost"><span class="label">Paid</span>A$60</div>
       </div>
       <div class="tracker-item">
-        <span class="tracker-status todo"></span>
+        <span class="tracker-status booked"></span>
         <div class="tracker-content">
-          <div class="tracker-title">Malpensa Express Milan → MXP</div>
-          <div class="tracker-meta"><span class="when">Sun 11 Oct AM</span> · Centrale or Cadorna ~50min · €13 each · LEAVE BY 09:30</div>
+          <div class="tracker-title">✓ Malpensa Express Milan → MXP</div>
+          <div class="tracker-meta"><span class="when">Sun 11 Oct</span> · BOOKED · Trenord RE 2932 · Milano Centrale 09:25 → Malpensa 10:18 · PNR 2868828305 · 3× Ordinaria · connects to SQ377 (MXP 13:15)</div>
         </div>
-        <div class="tracker-cost"><span class="label">Pay</span>€39</div>
+        <div class="tracker-cost"><span class="label">Paid</span>A$81</div>
       </div>
       <div class="alert">
         <strong>Tip:</strong> Italian high-speed (Frecciarossa, Italo) cheapest 2–3 months ahead. Trenitalia app or italotreno.it. Regional trains: just buy at station — no advance discount.
@@ -2965,7 +2965,7 @@
   </div>
 
   <div class="flags-block" id="booked-summary">
-    <div class="eyebrow">Spend so far · ~$30,840 AUD</div>
+    <div class="eyebrow">Spend so far · ~$39,540 AUD</div>
     <h2>What's booked</h2>
     <div class="flag-item">
       <strong>Flights · Singapore Airlines</strong>
@@ -4006,40 +4006,98 @@ if (typeof L !== 'undefined') {
 (function liveData(){
   // Normalise a string for loose matching (lowercase, strip accents/punctuation)
   function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim(); }
+  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function money(n){ return (n==null||isNaN(n))?'':('A$'+Math.round(n).toLocaleString('en-AU')); }
 
-  function syncTransfers(transfers){
-    if(!transfers) return;
-    // Build lookup by "from→to"
-    const byKey = {};
-    transfers.forEach(t=>{ byKey[norm(t.from)+'>'+norm(t.to)] = t; });
-    document.querySelectorAll('.tracker .tracker-item').forEach(item=>{
-      const titleEl = item.querySelector('.tracker-title');
-      const statusEl = item.querySelector('.tracker-status');
-      if(!titleEl || !statusEl) return;
-      const title = norm(titleEl.textContent);
-      // Match a transfer whose from & to both appear in this tracker title
-      let match=null;
-      for(const t of transfers){
-        const f=norm(t.from), to=norm(t.to);
-        if(title.includes(f) && title.includes(to)){ match=t; break; }
-      }
-      if(!match) return;
-      // Reconcile status class
-      if(match.status==='booked' && !statusEl.classList.contains('booked')){
-        statusEl.classList.remove('todo','pending'); statusEl.classList.add('booked');
-        if(!/^✓/.test(titleEl.textContent)) titleEl.textContent = '✓ ' + titleEl.textContent;
-      }
+  // ---- 1. NAV jump-to checkmarks (per-stop, from stop.booked) ----
+  function syncNav(stops){
+    if(!stops) return;
+    const byLeg={}; stops.forEach(s=>{ if(s.id) byLeg[s.id]=s; });
+    document.querySelectorAll('.quicknav a[href^="#leg-"]').forEach(a=>{
+      const id=a.getAttribute('href').slice(1);
+      const s=byLeg[id]; if(!s) return;
+      const span=a.querySelector('span'); if(!span) return;
+      const base=span.textContent.replace(/\s*✓\s*$/,'').trim();
+      span.textContent = s.booked ? (base+' ✓') : base;
     });
+  }
+
+  // ---- 2. Trains & Transfers tracker (rebuilt from legs[]) ----
+  function renderTracker(legs){
+    if(!legs || !legs.length) return;
+    const body=document.querySelector('#transfers .leg-body');
+    if(!body) return;
+    const alert=body.querySelector('.alert');
+    // Remove existing tracker items (keep the tip alert)
+    body.querySelectorAll('.tracker-item').forEach(n=>n.remove());
+    const frag=document.createDocumentFragment();
+    let booked=0;
+    legs.forEach(l=>{
+      if(l.status==='booked') booked++;
+      const item=document.createElement('div'); item.className='tracker-item';
+      const st=document.createElement('span');
+      st.className='tracker-status '+(l.status==='booked'?'booked':'todo');
+      const content=document.createElement('div'); content.className='tracker-content';
+      const title=document.createElement('div'); title.className='tracker-title';
+      title.textContent=(l.status==='booked'?'✓ ':'')+l.from+' → '+l.to;
+      const meta=document.createElement('div'); meta.className='tracker-meta';
+      const bits=[];
+      if(l.date){ const dt=new Date(l.date+'T00:00:00'); if(!isNaN(dt)) bits.push('<span class="when">'+dt.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'})+'</span>'); }
+      if(l.status==='booked') bits.push('BOOKED');
+      if(l.operator) bits.push(esc(l.operator));
+      if(l.dep && l.arr) bits.push(esc(l.dep)+'→'+esc(l.arr));
+      if(l.ref) bits.push('PNR '+esc(l.ref));
+      meta.innerHTML=bits.join(' · ');
+      content.appendChild(title); content.appendChild(meta);
+      const cost=document.createElement('div'); cost.className='tracker-cost';
+      if(l.cost && l.cost>0){ cost.innerHTML='<span class="label">'+(l.status==='booked'?'Paid':'Est')+'</span>'+money(l.cost); }
+      else if(l.status==='booked'){ cost.innerHTML='<span class="label">Incl</span>✓'; }
+      item.appendChild(st); item.appendChild(content); item.appendChild(cost);
+      frag.appendChild(item);
+    });
+    if(alert) body.insertBefore(frag, alert); else body.appendChild(frag);
+    // Update count-mark
+    const cm=document.querySelector('#transfers .count-mark');
+    if(cm) cm.textContent = legs.length+' legs'+(booked===legs.length?' · all booked':' · '+booked+'/'+legs.length+' booked');
+  }
+
+  // ---- 3. Spend so far (from _meta.spendSoFar) ----
+  function renderSpend(meta){
+    if(!meta || meta.spendSoFar==null) return;
+    const el=document.querySelector('#booked-summary .eyebrow');
+    if(el) el.textContent='Spend so far · ~'+money(meta.spendSoFar)+' AUD';
+  }
+
+  // ---- 4. Accommodation flags list (rebuilt from stops[].booking) ----
+  function renderFlags(stops){
+    if(!stops) return;
+    const block=document.getElementById('booked-summary');
+    if(!block) return;
+    // Remove existing flag-items, keep eyebrow + h2
+    block.querySelectorAll('.flag-item').forEach(n=>n.remove());
+    const frag=document.createDocumentFragment();
+    // Flights first (static lead) — pull from stops[0] context if present, else keep generic
+    const flights=document.createElement('div'); flights.className='flag-item';
+    flights.innerHTML='<strong>Flights · Singapore Airlines</strong> DWKH96 · MEL ↔ Europe via SIN · $8,807.90 AUD (3 pax)';
+    frag.appendChild(flights);
+    stops.forEach(s=>{
+      const b=s.booking; if(!b) return;
+      const div=document.createElement('div'); div.className='flag-item';
+      const head=esc(s.city)+(b.plat?' · '+esc(b.plat):'');
+      let line=esc(b.name||'');
+      if(b.cost) line+=' · '+esc(b.cost);
+      if(b.pay) line+=' · '+esc(b.pay);
+      else if(b.ref) line+=' · '+esc(b.ref);
+      div.innerHTML='<strong>'+head+'</strong> '+line;
+      frag.appendChild(div);
+    });
+    block.appendChild(frag);
   }
 
   function syncStops(stops){
     if(!stops || typeof TRIP_STOPS==='undefined') return;
-    const byLeg = {};
-    stops.forEach(s=>{ if(s.id) byLeg[s.id]=s; });
-    TRIP_STOPS.forEach(ts=>{
-      const s = byLeg[ts.legId];
-      if(s && typeof s.booked!=='undefined') ts.confirmed = !!s.booked;
-    });
+    const byLeg={}; stops.forEach(s=>{ if(s.id) byLeg[s.id]=s; });
+    TRIP_STOPS.forEach(ts=>{ const s=byLeg[ts.legId]; if(s && typeof s.booked!=='undefined') ts.confirmed=!!s.booked; });
   }
 
   function stamp(meta){
@@ -4061,10 +4119,13 @@ if (typeof L !== 'undefined') {
   fetch('data.json?v='+Date.now(), { cache:'no-store' })
     .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(d=>{
-      syncTransfers(d.transfers);
-      syncStops(d.stops);
+      // Each render guarded independently so one failure can't blank the others
+      try{ syncNav(d.stops); }catch(e){ console.warn('syncNav',e); }
+      try{ renderTracker(d.legs); }catch(e){ console.warn('renderTracker',e); }
+      try{ renderSpend(d._meta); }catch(e){ console.warn('renderSpend',e); }
+      try{ renderFlags(d.stops); }catch(e){ console.warn('renderFlags',e); }
+      try{ syncStops(d.stops); }catch(e){ console.warn('syncStops',e); }
       stamp(d._meta);
-      // Re-run map markers so confirmed-state changes show
       if(typeof runCinematic==='function'){ try{ runCinematic(); }catch(e){} }
     })
     .catch(e=>{ console.warn('data.json not loaded, using built-in cards:', e.message); stamp({fallback:true}); });
