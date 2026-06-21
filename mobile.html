@@ -1117,13 +1117,18 @@ function buildCoeliac(){
 
 /* ---------- ACTION ---------- */
 let ACTIONS=[
-  {id:'car',title:'Confirm Tuscany car hire',meta:'27 Sep–2 Oct · Florence SMN or airport · automatic, book early',cat:'Transport',when:new Date(2026,8,27)},
-  {id:'vatican',title:'Book Vatican & Sistine Chapel',meta:'Fri 19 Sep · small-group skip-the-line',cat:'Ticket',when:new Date(2026,8,19)},
-  {id:'lastsupper',title:'Book The Last Supper',meta:'Milan · sells out months ahead',cat:'Ticket',when:new Date(2026,9,10)},
-  {id:'uffizi',title:'Book Uffizi & Accademia',meta:'Sat 3 Oct · St Francis Day Sun = busy',cat:'Ticket',when:new Date(2026,9,3)},
-  {id:'colosseum',title:'Book Colosseum & Forum',meta:'Thu 18 Sep · timed entry',cat:'Ticket',when:new Date(2026,8,18)},
-  {id:'borghese',title:'Book Borghese Gallery',meta:'Rome · strict timed entry, limited slots',cat:'Ticket',when:new Date(2026,8,20)},
-  {id:'trains',title:'Book remaining Frecciarossa legs',meta:'French TGVs done ✓ · Italian inter-city legs still to book',cat:'Transport',when:new Date(2026,8,22)},
+  {id:'eiffel',title:'Book Eiffel Tower',meta:'Paris · toureiffel.paris',cat:'Ticket',when:new Date(2026,8,6)},
+  {id:'colosseum',title:'Book Colosseum + Forum + Palatine',meta:'Rome · coopculture.it',cat:'Ticket',when:new Date(2026,8,19)},
+  {id:'borghese',title:'Book Borghese Gallery',meta:'Rome · galleriaborghese.it',cat:'Ticket',when:new Date(2026,8,20)},
+  {id:'capri',title:'Book Capri day trip + ferry',meta:'Amalfi Coast',cat:'Ticket',when:new Date(2026,8,23)},
+  {id:'pompeii',title:'Book Pompeii or Herculaneum',meta:'Amalfi Coast · pompeiisites.org',cat:'Ticket',when:new Date(2026,8,24)},
+  {id:'uffizi',title:'Book Uffizi Gallery',meta:'Florence · uffizi.it',cat:'Ticket',when:new Date(2026,9,3)},
+  {id:'accademia',title:'Book Accademia (David)',meta:'Florence · galleriaaccademiafirenze.it',cat:'Ticket',when:new Date(2026,9,3)},
+  {id:'duomo',title:'Book Duomo climb / Brunelleschi dome',meta:'Florence · duomo.firenze.it',cat:'Ticket',when:new Date(2026,9,4)},
+  {id:'st',title:'Book St Mark\'s Basilica + Doge\'s Palace',meta:'Venice · veneziaunica.it',cat:'Ticket',when:new Date(2026,9,6)},
+  {id:'venice',title:'Book Venice Biennale (Giardini/Arsenale)',meta:'Venice · labiennale.org',cat:'Ticket',when:new Date(2026,9,7)},
+  {id:'the',title:'Book The Last Supper',meta:'Milan · vivaticket.it',cat:'Ticket',when:new Date(2026,9,10)},
+  {id:'ins-scti',title:'Travel insurance — SCTI (booked)',meta:'Policy 18473939 · Wayne, Kelly, Lauren · 5 Sep–11 Oct · AUD $885.21 paid · Emergency +61 2 9191 1180',cat:'admin',when:new Date(2026,5,21)},
 ];
 function buildAction(){
   const v=document.createElement('div'); v.className='view'; v.id='action';
