@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-18T21:32:59.178825Z",
+    "lastUpdated": "2026-06-21T06:05:30.338635Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it."
   },
   "flights": {
@@ -123,6 +123,28 @@
           "a",
           "Classic bistro; tell them coeliac — many mains naturally GF"
         ]
+      ],
+      "bookings": [
+        {
+          "name": "Louvre Museum",
+          "plat": "Booked",
+          "when": "Mon 7 Sep · 09:00",
+          "cost": "€82 (~$136 AUD)",
+          "addr": "Rue de Rivoli, 75001 Paris",
+          "phone": "",
+          "note": "Order C261720001611 · 09:00 entry, Pyramid/Carrousel · 3 tickets + audio guides · €82 paid · photo ID required",
+          "url": ""
+        },
+        {
+          "name": "Palace of Versailles",
+          "plat": "Booked",
+          "when": "Tue 8 Sep · 09:00",
+          "cost": "€106 (~$176 AUD)",
+          "addr": "Place d'Armes, 78000 Versailles",
+          "phone": "",
+          "note": "Passeport + 'Lumière de la liberté' skip-line · 2 adult + 1 youth · Order 198268267",
+          "url": ""
+        }
       ]
     },
     {
@@ -341,6 +363,18 @@
           "s",
           "Historic gelato — most flavours GF"
         ]
+      ],
+      "bookings": [
+        {
+          "name": "Vatican — Pristine Sistine Early Entrance Tour",
+          "plat": "Booked",
+          "when": "Fri 18 Sep · 07:45–11:45",
+          "cost": "AUD $918",
+          "addr": "Meet: Antico Café Candia, Via Candia 153, Roma",
+          "phone": "",
+          "note": "Walks/Take Walks small-group, early entry before crowds · 3 guests · booking C97EWKFH · arrive 07:30",
+          "url": ""
+        }
       ]
     },
     {
@@ -859,6 +893,13 @@
       "meta": "French TGVs done ✓ · Italian inter-city legs still to book",
       "cat": "Transport",
       "when": "2026-09-22"
+    },
+    {
+      "id": "ins-scti",
+      "title": "Travel insurance — SCTI (booked)",
+      "meta": "Policy 18473939 · Wayne, Kelly, Lauren · France & Italy · 5 Sep–11 Oct · AUD $885.21 paid · Emergency +61 2 9191 1180",
+      "cat": "admin",
+      "when": "2026-06-21"
     }
   ]
 }
