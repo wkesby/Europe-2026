@@ -946,6 +946,26 @@ function initLeaflet(){
 }
 
 /* ---------- TODAY ---------- */
+function esc2(s){ return (s==null?'':String(s)).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+// Parse a transfer's display date ("Wed 9 Sep" / "9 Sep") into a 2026 Date
+const _MON={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+function parseLegDate(str){
+  if(!str) return null;
+  const m=String(str).match(/(\d{1,2})\s+([A-Z][a-z]{2})/);
+  if(!m) return null;
+  const mon=_MON[m[2]]; if(mon===undefined) return null;
+  return new Date(2026, mon, parseInt(m[1],10));
+}
+// Find the soonest transfer whose date is today or later
+function upcomingLeg(t){
+  if(!Array.isArray(TRANSFERS)) return null;
+  let best=null;
+  TRANSFERS.forEach(tr=>{
+    const d=parseLegDate(tr.date); if(!d) return;
+    if(d>=t && (!best || d<best._date)){ best=Object.assign({_date:d}, tr); }
+  });
+  return best;
+}
 function buildToday(){
   const v=document.createElement('div'); v.className='view'; v.id='today';
   const t=today0();
@@ -962,6 +982,14 @@ function buildToday(){
   } else if(cur){
     const co=new Date(cur.out+'T00:00:00'); const nl=dd(t,co);
     hero=`<div class="th-day">Day ${dd(TRIP_START,t)+1} of ${TOTAL_NIGHTS}</div><div class="th-where serif">You're in <em>${cur.city}</em></div><div class="th-sub">${nl===0?'Last night here':nl+' night'+(nl>1?'s':'')+' to go'}</div>`;
+    // Next leg: the soonest upcoming transfer on or after today
+    const nextLeg = upcomingLeg(t);
+    if(nextLeg){
+      const when = nextLeg._date ? nextLeg._date.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'}) : (nextLeg.date||'');
+      const dep = (nextLeg.detail||'').match(/\b(\d{1,2}:\d{2})\b/);
+      const isToday = nextLeg._date && dd(t,nextLeg._date)===0;
+      rows+=`<div class="info-row"><span class="ico">${isToday?'🚨':'🧳'}</span><div><div class="ir-l">${isToday?'TRAVEL TODAY':'Next leg'} · ${esc2(when)}</div><div class="ir-v">${esc2(nextLeg.from)} → ${esc2(nextLeg.to)}${dep?' · departs '+dep[1]:''} · ${esc2(nextLeg.mode||'')}</div></div></div>`;
+    }
     if(cur.dining[0]) rows+=`<div class="info-row"><span class="ico">🍽️</span><div><div class="ir-l">Coeliac-safe nearby</div><div class="ir-v">${cur.dining[0][0]} — ${cur.dining[0][2]}</div></div></div>`;
     if(cur.booking&&cur.booking.phone) rows+=`<div class="info-row"><span class="ico">☎️</span><div><div class="ir-l">Your host</div><div class="ir-v"><a href="tel:${cur.booking.phone}" style="color:var(--gold)">${cur.booking.phone}</a></div></div></div>`;
   }
@@ -1184,6 +1212,7 @@ function buildAll(){
 
 async function loadData(opts){
   opts = opts || {};
+  let usedCache = false;
   try{
     // Cache-bust so Home Screen icons never show a stale snapshot
     const res = await fetch('data.json?v=' + Date.now(), { cache: 'no-store' });
@@ -1194,14 +1223,29 @@ async function loadData(opts){
     if(d.transfers) TRANSFERS = d.transfers;
     if(d.actions)   ACTIONS   = d.actions.map(a=>({ ...a, when: a.when ? new Date(a.when) : a.when }));
     window.__dataMeta = d._meta || null;
+    // Stash the last-good copy so the itinerary works with no signal
+    try{ localStorage.setItem('europe2026_data', JSON.stringify(d)); }catch(e){}
   }catch(e){
-    // Fall back silently to the built-in data baked into this file
-    console.warn('Using built-in data (data.json not loaded):', e.message);
-    window.__dataMeta = { fallback:true };
+    // No signal / fetch failed — try the last-good cached copy before the baked-in fallback
+    let cached = null;
+    try{ const raw = localStorage.getItem('europe2026_data'); if(raw) cached = JSON.parse(raw); }catch(e2){}
+    if(cached){
+      if(cached.stops)     STOPS     = cached.stops;
+      if(cached.flights)   FLIGHTS   = cached.flights;
+      if(cached.transfers) TRANSFERS = cached.transfers;
+      if(cached.actions)   ACTIONS   = cached.actions.map(a=>({ ...a, when: a.when ? new Date(a.when) : a.when }));
+      window.__dataMeta = Object.assign({}, cached._meta || {}, { cached:true });
+      usedCache = true;
+      console.warn('Offline — using cached data from last sync');
+    }else{
+      // No cache yet either — fall back to the data baked into this file
+      console.warn('Using built-in data (data.json & cache not available):', e.message);
+      window.__dataMeta = { fallback:true };
+    }
   }
   buildAll();
   showUpdatedStamp();
-  if(opts.toast) toast('Updated ✓');
+  if(opts.toast) toast(usedCache ? 'Offline — showing last sync' : 'Updated ✓');
 }
 
 function showUpdatedStamp(){
@@ -1214,7 +1258,10 @@ function showUpdatedStamp(){
     document.body.appendChild(el);
   }
   let label = '↻ Refresh';
-  if(m && m.lastUpdated){
+  if(m && m.cached){
+    const dt = m.lastUpdated ? new Date(m.lastUpdated) : null;
+    label = dt ? ('⚠ Offline · synced ' + dt.toLocaleString('en-AU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})) : '⚠ Offline · cached copy';
+  } else if(m && m.lastUpdated){
     const dt = new Date(m.lastUpdated);
     const opts = { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' };
     label = '↻ Updated ' + dt.toLocaleString('en-AU', opts);

@@ -712,6 +712,24 @@
     font-family: 'Manrope', sans-serif; }
 
   /* ===== ACTION DASHBOARD ===== */
+  #todayBanner {
+    background: linear-gradient(160deg, var(--accent), #6e1f18);
+    color: #fff;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 18px;
+    box-shadow: 0 6px 22px rgba(139, 40, 32, 0.22);
+  }
+  #todayBanner .tb-eyebrow { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.8; margin-bottom: 4px; }
+  #todayBanner .tb-where { font-size: 22px; font-weight: 600; line-height: 1.15; }
+  #todayBanner .tb-where em { font-style: italic; }
+  #todayBanner .tb-sub { font-size: 13px; opacity: 0.85; margin-top: 3px; }
+  #todayBanner .tb-leg { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.22); }
+  #todayBanner .tb-leg-ico { font-size: 18px; line-height: 1.2; }
+  #todayBanner .tb-leg-l { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.85; }
+  #todayBanner .tb-leg-v { font-size: 14px; margin-top: 2px; }
+  #todayBanner .tb-leg.today .tb-leg-l { color: #ffd9a0; font-weight: 700; opacity: 1; }
+
   .action-dash {
     background: linear-gradient(160deg, var(--bg-card), var(--bg-elevated));
     border: 1px solid var(--rule);
@@ -1276,6 +1294,9 @@
       <a href="#offlineCard"><span>⌘ Coeliac card</span><span>offline</span></a>
     </div>
   </nav>
+
+  <!-- ===== TODAY / NEXT LEG BANNER (populated from data.json) ===== -->
+  <section id="todayBanner" style="display:none"></section>
 
   <!-- ===== ACTION NEEDED DASHBOARD ===== -->
   <section class="action-dash" id="actionDash">
@@ -4139,6 +4160,44 @@ if (typeof L !== 'undefined') {
     });
   }
 
+  // ---- 6. Today / next-leg banner ----
+  const _MON={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+  function parseLegDate(s){ if(!s) return null; const m=String(s).match(/(\d{1,2})\s+([A-Z][a-z]{2})/); if(!m) return null; const mo=_MON[m[2]]; if(mo===undefined) return null; return new Date(2026,mo,parseInt(m[1],10)); }
+  function renderToday(d){
+    const el=document.getElementById('todayBanner'); if(!el) return;
+    const stops=d.stops||[]; const legs=d.legs||[];
+    const TS=new Date('2026-09-05T00:00:00'), TE=new Date('2026-10-11T23:59:59');
+    const t=new Date(); t.setHours(0,0,0,0);
+    const day=(a,b)=>Math.round((b-a)/86400000);
+    let html='';
+    if(t<TS){
+      const n=day(t,TS);
+      html='<div class="tb-eyebrow">Countdown</div><div class="tb-where">'+n+' day'+(n>1?'s':'')+' until <em>Paris</em></div><div class="tb-sub">Departs 5 Sep · 36 nights ahead</div>';
+    } else if(t>TE){
+      html='<div class="tb-eyebrow">Homecoming</div><div class="tb-where">Journey <em>complete</em></div><div class="tb-sub">36 nights · 10 stops · safely home</div>';
+    } else {
+      let cur=null; stops.forEach(s=>{ const ci=new Date(s.in+'T00:00:00'),co=new Date(s.out+'T00:00:00'); if(t>=ci&&t<co) cur=s; });
+      const dn=day(TS,t)+1;
+      if(cur){
+        const co=new Date(cur.out+'T00:00:00'); const nl=day(t,co);
+        html='<div class="tb-eyebrow">Day '+dn+' of 36</div><div class="tb-where">You\u2019re in <em>'+esc(cur.city)+'</em></div><div class="tb-sub">'+(nl===0?'Last night here':nl+' night'+(nl>1?'s':'')+' to go')+'</div>';
+      } else {
+        html='<div class="tb-eyebrow">Day '+dn+' of 36</div><div class="tb-where">On the move</div>';
+      }
+      // Next leg from legs[] (date is ISO yyyy-mm-dd)
+      let best=null;
+      legs.forEach(l=>{ if(!l.date) return; const ld=new Date(l.date+'T00:00:00'); if(ld>=t && (!best||ld<best._d)) best=Object.assign({_d:ld},l); });
+      if(best){
+        const isToday=day(t,best._d)===0;
+        const when=best._d.toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'short'});
+        const dep=best.dep?(' · departs '+esc(best.dep)):'';
+        html+='<div class="tb-leg '+(isToday?'today':'')+'"><span class="tb-leg-ico">'+(isToday?'\uD83D\uDEA8':'\uD83E\uDDF3')+'</span><div><div class="tb-leg-l">'+(isToday?'TRAVEL TODAY':'Next leg')+' · '+esc(when)+'</div><div class="tb-leg-v">'+esc(best.from)+' \u2192 '+esc(best.to)+dep+(best.operator?' · '+esc(best.operator):'')+(best.ref?' · '+esc(best.ref):'')+'</div></div></div>';
+      }
+    }
+    el.innerHTML=html;
+    el.style.display='block';
+  }
+
   function syncStops(stops){
     if(!stops || typeof TRIP_STOPS==='undefined') return;
     const byLeg={}; stops.forEach(s=>{ if(s.id) byLeg[s.id]=s; });
@@ -4154,7 +4213,10 @@ if (typeof L !== 'undefined') {
       document.body.appendChild(el);
     }
     let label='↻ Refresh';
-    if(meta && meta.lastUpdated){
+    if(meta && meta.cached){
+      const dt=meta.lastUpdated?new Date(meta.lastUpdated):null;
+      label= dt ? ('⚠ Offline · synced '+dt.toLocaleString('en-AU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})) : '⚠ Offline · cached copy';
+    } else if(meta && meta.lastUpdated){
       const dt=new Date(meta.lastUpdated);
       label='↻ Updated '+dt.toLocaleString('en-AU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
     } else if(meta && meta.fallback){ label='↻ Refresh (offline copy)'; }
@@ -4164,19 +4226,35 @@ if (typeof L !== 'undefined') {
   fetch('data.json?v='+Date.now(), { cache:'no-store' })
     .then(r=>{ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(d=>{
-      // Each render guarded independently so one failure can't blank the others
-      try{ syncNav(d.stops); }catch(e){ console.warn('syncNav',e); }
-      try{ renderTracker(d.legs); }catch(e){ console.warn('renderTracker',e); }
-      try{ renderSpend(d._meta); }catch(e){ console.warn('renderSpend',e); }
-      try{ renderFlags(d.stops); }catch(e){ console.warn('renderFlags',e); }
-      try{ syncActivities(d.activities); }catch(e){ console.warn('syncActivities',e); }
-      try{ syncStops(d.stops); }catch(e){ console.warn('syncStops',e); }
-      // Dashboard counts from the trackers — re-run it now that statuses are updated
-      try{ if(typeof window.refreshActionDash==='function') window.refreshActionDash(); }catch(e){ console.warn('refreshActionDash',e); }
-      stamp(d._meta);
-      if(typeof runCinematic==='function'){ try{ runCinematic(); }catch(e){} }
+      try{ localStorage.setItem('europe2026_data', JSON.stringify(d)); }catch(e){}
+      applyData(d);
     })
-    .catch(e=>{ console.warn('data.json not loaded, using built-in cards:', e.message); stamp({fallback:true}); });
+    .catch(e=>{
+      // No signal — try last-good cached copy before falling back to static HTML
+      let cached=null;
+      try{ const raw=localStorage.getItem('europe2026_data'); if(raw) cached=JSON.parse(raw); }catch(e2){}
+      if(cached){
+        console.warn('Offline — using cached data from last sync');
+        cached._meta = Object.assign({}, cached._meta||{}, { cached:true });
+        applyData(cached);
+      }else{
+        console.warn('data.json not loaded, using built-in cards:', e.message);
+        stamp({fallback:true});
+      }
+    });
+
+  function applyData(d){
+    try{ syncNav(d.stops); }catch(e){ console.warn('syncNav',e); }
+    try{ renderTracker(d.legs); }catch(e){ console.warn('renderTracker',e); }
+    try{ renderSpend(d._meta); }catch(e){ console.warn('renderSpend',e); }
+    try{ renderFlags(d.stops); }catch(e){ console.warn('renderFlags',e); }
+    try{ syncActivities(d.activities); }catch(e){ console.warn('syncActivities',e); }
+    try{ renderToday(d); }catch(e){ console.warn('renderToday',e); }
+    try{ syncStops(d.stops); }catch(e){ console.warn('syncStops',e); }
+    try{ if(typeof window.refreshActionDash==='function') window.refreshActionDash(); }catch(e){ console.warn('refreshActionDash',e); }
+    stamp(d._meta);
+    if(typeof runCinematic==='function'){ try{ runCinematic(); }catch(e){} }
+  }
 })();
 </script>
 </body>
