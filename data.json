@@ -1114,5 +1114,287 @@
       "cost": 81.3,
       "status": "booked"
     }
+  ],
+  "activities": [
+    {
+      "date": "2026-09-06",
+      "name": "Eiffel Tower",
+      "loc": "Paris",
+      "slot": "",
+      "site": "toureiffel.paris",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "Louvre",
+      "loc": "Paris",
+      "slot": "09:00 entry",
+      "site": "ticketlouvre.fr",
+      "ref": "C261720001611",
+      "cost": 136.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-08",
+      "name": "Versailles day trip",
+      "loc": "Paris",
+      "slot": "AM",
+      "site": "chateauversailles.fr",
+      "ref": "198268267",
+      "cost": 176.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-10",
+      "name": "Glanum Roman ruins + Saint-Paul-de-Mausole",
+      "loc": "Saint-Rémy",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-12",
+      "name": "Provence self-drive loop + Candlelight concert (Orange)",
+      "loc": "Provence (day trip)",
+      "slot": "Full day",
+      "site": "Fever (feverup.com)",
+      "ref": "115606611",
+      "cost": 157.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-14",
+      "name": "Èze + Monaco day trip",
+      "loc": "Nice / Riviera",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "Vatican Museums + Sistine Chapel",
+      "loc": "Rome",
+      "slot": "08:00 slot",
+      "site": "takewalks.com",
+      "ref": "C97EWKFH",
+      "cost": 918.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-19",
+      "name": "Colosseum + Forum + Palatine",
+      "loc": "Rome",
+      "slot": "",
+      "site": "coopculture.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Borghese Gallery",
+      "loc": "Rome",
+      "slot": "",
+      "site": "galleriaborghese.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "Ostia Antica or Trastevere day",
+      "loc": "Rome",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-23",
+      "name": "Capri day trip + ferry",
+      "loc": "Amalfi Coast",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-24",
+      "name": "Pompeii or Herculaneum",
+      "loc": "Amalfi Coast",
+      "slot": "",
+      "site": "pompeiisites.org",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "Ravello + Villa Cimbrone",
+      "loc": "Amalfi Coast",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Da Adolfo lunch (Positano) + Positano/Amalfi",
+      "loc": "Amalfi Coast",
+      "slot": "13:00 lunch",
+      "site": "prenota-web.it (daadolfo.com)",
+      "ref": "Prenota Web",
+      "cost": 0.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-09-28",
+      "name": "Bagno Vignoni hot springs",
+      "loc": "Val d'Orcia",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-29",
+      "name": "Brunello tasting (Montalcino)",
+      "loc": "Val d'Orcia",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-30",
+      "name": "Pienza + San Quirico",
+      "loc": "Val d'Orcia",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-01",
+      "name": "Vino Nobile tasting in Montepulciano",
+      "loc": "Val d'Orcia",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-03",
+      "name": "Uffizi Gallery",
+      "loc": "Florence",
+      "slot": "AM",
+      "site": "uffizi.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-03",
+      "name": "Accademia (David)",
+      "loc": "Florence",
+      "slot": "PM",
+      "site": "galleriaaccademiafirenze.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-03",
+      "name": "MaMa Florence — Gluten-Free Cooking Class",
+      "loc": "Florence",
+      "slot": "10:00 AM",
+      "site": "mamaflorence.com",
+      "ref": "38873",
+      "cost": 842.0,
+      "status": "booked"
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Duomo climb / Brunelleschi dome",
+      "loc": "Florence",
+      "slot": "",
+      "site": "duomo.firenze.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-06",
+      "name": "St Mark's Basilica + Doge's Palace",
+      "loc": "Venice",
+      "slot": "",
+      "site": "veneziaunica.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-07",
+      "name": "Murano + Burano islands",
+      "loc": "Venice",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-07",
+      "name": "Venice Biennale (Giardini/Arsenale)",
+      "loc": "Venice",
+      "slot": "",
+      "site": "labiennale.org",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-09",
+      "name": "Bellagio + ferry hop",
+      "loc": "Lake Como",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-10",
+      "name": "The Last Supper",
+      "loc": "Milan",
+      "slot": "PM slot",
+      "site": "vivaticket.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-10",
+      "name": "Duomo + rooftop",
+      "loc": "Milan",
+      "slot": "",
+      "site": "duomomilano.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    }
   ]
 }
