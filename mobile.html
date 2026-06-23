@@ -876,7 +876,8 @@ function openSheet(i){
         ${bk.cost?`<div class="kv"><span class="k">Cost</span><span class="v">${bk.cost}</span></div>`:''}
         ${bk.note?`<div class="kv"><span class="k">Note</span><span class="v">${bk.note}</span></div>`:''}
         <div class="btn-row">
-          ${bk.url?`<a class="mini-btn solid" href="${bk.url}" target="_blank" rel="noopener">↗ View details</a>`:''}
+          ${bk.url?`<a class="mini-btn solid" href="${bk.url}" target="_blank" rel="noopener">↗ View booking</a>`:''}
+          ${bk.pdf?`<a class="mini-btn" href="${bk.pdf}" target="_blank" rel="noopener">📄 Ticket PDF</a>`:''}
           ${bk.phone?`<a class="mini-btn" href="tel:${bk.phone}">☎ Call</a>`:''}
           ${bk.addr?`<a class="mini-btn" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(bk.addr)}" target="_blank" rel="noopener">📍 Map</a>`:''}
         </div>
@@ -1027,7 +1028,8 @@ function buildTravel(){
     <div class="kv"><span class="k">When</span><span class="v">${t.date}</span></div>
     <div class="kv"><span class="k">${t.status==='booked'?'Details':'How'}</span><span class="v">${t.detail}</span></div>
     ${t.status==='booked'
-      ? `<div class="kv"><span class="k">Booked via</span><span class="v">${t.book} ✓</span></div>`
+      ? `<div class="kv"><span class="k">Booked via</span><span class="v">${t.book} ✓</span></div>
+    ${t.link?`<div class="btn-row"><a class="mini-btn solid" href="${t.link}" target="_blank" rel="noopener">↗ View booking</a></div>`:''}`
       : `<div class="kv"><span class="k">Book via</span><span class="v">${t.book}</span></div>
     <div class="btn-row">
       <a class="mini-btn solid" href="${bookUrl(t.book)}" target="_blank" rel="noopener">↗ Book on ${t.book}</a>

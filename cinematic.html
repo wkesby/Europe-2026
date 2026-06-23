@@ -702,6 +702,14 @@
     line-height: 1.45;
   }
   .tracker-meta .when { color: var(--ink-soft); font-weight: 600; }
+  .tracker-link {
+    display: inline-block; margin-top: 6px; margin-right: 12px;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid rgba(139,40,32,0.3);
+    padding-bottom: 1px;
+  }
+  .tracker-link:active { opacity: 0.6; }
   .tracker-cost {
     text-align: right; flex-shrink: 0;
     font-family: 'Cormorant Garamond', serif;
@@ -4077,6 +4085,12 @@ if (typeof L !== 'undefined') {
       if(l.ref) bits.push('PNR '+esc(l.ref));
       meta.innerHTML=bits.join(' · ');
       content.appendChild(title); content.appendChild(meta);
+      if(l.link){
+        const a=document.createElement('a');
+        a.href=l.link; a.target='_blank'; a.rel='noopener';
+        a.className='tracker-link'; a.textContent='View booking ↗';
+        content.appendChild(a);
+      }
       const cost=document.createElement('div'); cost.className='tracker-cost';
       if(l.cost && l.cost>0){ cost.innerHTML='<span class="label">'+(l.status==='booked'?'Paid':'Est')+'</span>'+money(l.cost); }
       else if(l.status==='booked'){ cost.innerHTML='<span class="label">Incl</span>✓'; }
@@ -4155,6 +4169,22 @@ if (typeof L !== 'undefined') {
           if(match.ref) bits.push('ref '+esc(match.ref));
           if(match.cost&&match.cost>0) bits.push(money(match.cost));
           metaEl.innerHTML=bits.join(' · ');
+        }
+        // Append booking + PDF links if present
+        const content=item.querySelector('.tracker-content')||metaEl&&metaEl.parentNode;
+        if(content && !content.querySelector('.tracker-link')){
+          if(match.link){
+            const a=document.createElement('a');
+            a.href=match.link; a.target='_blank'; a.rel='noopener';
+            a.className='tracker-link'; a.textContent='View booking ↗';
+            content.appendChild(a);
+          }
+          if(match.pdf){
+            const p=document.createElement('a');
+            p.href=match.pdf; p.target='_blank'; p.rel='noopener';
+            p.className='tracker-link'; p.textContent='Ticket PDF ↗';
+            content.appendChild(p);
+          }
         }
       }
     });
