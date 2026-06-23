@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-23T05:50:30.333311Z",
+    "lastUpdated": "2026-06-23T06:16:03.611158Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it.",
     "spendSoFar": 39789,
     "spendBreakdown": {
@@ -140,8 +140,7 @@
           "addr": "Rue de Rivoli, 75001 Paris",
           "phone": "",
           "note": "Order C261720001611 · 09:00 entry, Pyramid/Carrousel · 3 tickets + audio guides · €82 paid · photo ID required",
-          "url": "https://www.ticketlouvre.fr/",
-          "pdf": "file:///b!7TXBDMpn50e5GzqwvkLOc1SLRN9iQsZGqUJ9WiK7d-vOnuk4QJvzRIAq4Ye5OLYm/01EISSPFX347FEC5J3WJELAMGRH7KVDEUD"
+          "url": "https://www.ticketlouvre.fr/"
         },
         {
           "name": "Palace of Versailles",
@@ -151,8 +150,7 @@
           "addr": "Place d'Armes, 78000 Versailles",
           "phone": "",
           "note": "Passeport + 'Lumière de la liberté' skip-line · 2 adult + 1 youth · Order 198268267",
-          "url": "https://www.chateauversailles.fr/",
-          "pdf": "file:///b!7TXBDMpn50e5GzqwvkLOc1SLRN9iQsZGqUJ9WiK7d-vOnuk4QJvzRIAq4Ye5OLYm/01EISSPFVMD2STV3A2FBB36HMKHXDWYTQJ"
+          "url": "https://www.chateauversailles.fr/"
         }
       ]
     },
@@ -957,8 +955,8 @@
     },
     {
       "id": "ins-scti",
-      "title": "Travel insurance — SCTI (booked)",
-      "meta": "Policy 18473939 · Wayne, Kelly, Lauren · 5 Sep–11 Oct · AUD $885.21 paid · Emergency +61 2 9191 1180",
+      "title": "Travel insurance — SCTI (booked & recorded)",
+      "meta": "Policy 18473939 · Wayne, Kelly, Lauren · 5 Sep–11 Oct · AUD $885.21 paid · now on Activities sheet row 34 · Emergency +61 2 9191 1180",
       "cat": "admin",
       "when": "2026-06-21"
     }
@@ -1193,8 +1191,7 @@
       "ref": "C261720001611",
       "cost": 136.0,
       "status": "booked",
-      "link": "https://www.ticketlouvre.fr/",
-      "pdf": "file:///b!7TXBDMpn50e5GzqwvkLOc1SLRN9iQsZGqUJ9WiK7d-vOnuk4QJvzRIAq4Ye5OLYm/01EISSPFX347FEC5J3WJELAMGRH7KVDEUD"
+      "link": "https://www.ticketlouvre.fr/"
     },
     {
       "date": "2026-09-08",
@@ -1205,8 +1202,7 @@
       "ref": "198268267",
       "cost": 176.0,
       "status": "booked",
-      "link": "https://www.chateauversailles.fr/",
-      "pdf": "file:///b!7TXBDMpn50e5GzqwvkLOc1SLRN9iQsZGqUJ9WiK7d-vOnuk4QJvzRIAq4Ye5OLYm/01EISSPFVMD2STV3A2FBB36HMKHXDWYTQJ"
+      "link": "https://www.chateauversailles.fr/"
     },
     {
       "date": "2026-09-10",
