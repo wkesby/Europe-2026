@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-23T10:19:32.361648Z",
+    "lastUpdated": "2026-06-23T11:03:15.143692Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it.",
     "spendSoFar": 39789,
     "spendBreakdown": {
@@ -844,7 +844,7 @@
     {
       "from": "Rome",
       "to": "Praiano",
-      "date": "Mon 22 Sep",
+      "date": "Tue 22 Sep",
       "mode": "Train + transfer",
       "detail": "BOOKED Rome→Naples · Frecciarossa FR 9405 · Roma Termini 11:35 → Napoli Centrale 12:48 · Carriage 2, seats 5A/6A/6B · PNR FWW495 · then private transfer to Praiano · Naples→Praiano private transfer BOOKED: Sorrento Limo (Mercedes V-Class, booking 28930, €498 round-trip incl 2h Pompeii stop, dep Napoli Centrale 13:15)",
       "book": "Trenitalia",
