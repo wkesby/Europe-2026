@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-23T07:48:23.404858Z",
+    "lastUpdated": "2026-06-23T10:07:09.820927Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it.",
     "spendSoFar": 39789,
     "spendBreakdown": {
@@ -153,7 +153,7 @@
           "url": "https://www.chateauversailles.fr/"
         }
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg/1000px-Tour_Eiffel_Wikimedia_Commons.jpg",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg",
       "photoAlt": "Eiffel Tower"
     },
     {
@@ -231,7 +231,7 @@
           "url": "https://maps.app.goo.gl/D4hYBnL3gMhhbvRp8"
         }
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Saint-R%C3%A9my._Roman_triumphal_arch_and_monument_%283485966431%29.jpg/1000px-Saint-R%C3%A9my._Roman_triumphal_arch_and_monument_%283485966431%29.jpg",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/a/af/Saint-R%C3%A9my._Roman_triumphal_arch_and_monument_%283485966431%29.jpg",
       "photoAlt": "Les Antiques, Glanum"
     },
     {
@@ -302,7 +302,7 @@
           "Tiny, book in person; many Niçois dishes naturally GF"
         ]
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Baie_des_Anges_from_Castle_Hill%2C_Nice%2C_France.jpg/1000px-Baie_des_Anges_from_Castle_Hill%2C_Nice%2C_France.jpg",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/7/7c/Baie_des_Anges_from_Castle_Hill%2C_Nice%2C_France.jpg",
       "photoAlt": "Baie des Anges, Nice"
     },
     {
@@ -389,7 +389,7 @@
           "url": "https://www.takewalks.com/"
         }
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1000px-Colosseo_2020.jpg",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/d/de/Colosseo_2020.jpg",
       "photoAlt": "Colosseum"
     },
     {
@@ -481,7 +481,7 @@
           "Cliffside; grilled fish & salads naturally GF"
         ]
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Positano-Amalfi_Coast-Italy.jpg/1000px-Positano-Amalfi_Coast-Italy.jpg",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Positano-Amalfi_Coast-Italy.jpg",
       "photoAlt": "Positano, Amalfi"
     },
     {
@@ -551,7 +551,7 @@
           "Pienza cheese — naturally GF tastings"
         ]
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Val_d%27Orcia_grossetana.JPG/1000px-Val_d%27Orcia_grossetana.JPG",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Val_d%27Orcia_grossetana.JPG",
       "photoAlt": "Val d'Orcia"
     },
     {
@@ -625,7 +625,7 @@
           "Historic; tell them coeliac — the butter chicken is GF"
         ]
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Florence_Duomo_from_Michelangelo_hill.jpg/1000px-Florence_Duomo_from_Michelangelo_hill.jpg",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/7/77/Florence_Duomo_from_Michelangelo_hill.jpg",
       "photoAlt": "Florence Duomo"
     },
     {
@@ -687,7 +687,7 @@
           "Gelato — most flavours GF"
         ]
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Venice%28Grand_Canal%29.JPG/1000px-Venice%28Grand_Canal%29.JPG",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Venice%28Grand_Canal%29.JPG",
       "photoAlt": "Grand Canal, Venice"
     },
     {
@@ -745,7 +745,7 @@
           "Lakefront aperitivo; grilled options safe"
         ]
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Varenna_-_Lago_di_Como.jpg/1000px-Varenna_-_Lago_di_Como.jpg",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Varenna_-_Lago_di_Como.jpg",
       "photoAlt": "Varenna, Lake Como"
     },
     {
@@ -806,7 +806,7 @@
           "url": ""
         }
       ],
-      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Milan_Cathedral_from_Piazza_del_Duomo.jpg/1000px-Milan_Cathedral_from_Piazza_del_Duomo.jpg",
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/7/70/Milan_Cathedral_from_Piazza_del_Duomo.jpg",
       "photoAlt": "Milan Cathedral"
     }
   ],
