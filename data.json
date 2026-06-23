@@ -2,7 +2,7 @@
   "_meta": {
     "title": "Kesby Europe 2026",
     "version": 1,
-    "lastUpdated": "2026-06-23T07:14:01.741764Z",
+    "lastUpdated": "2026-06-23T07:48:23.404858Z",
     "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it.",
     "spendSoFar": 39789,
     "spendBreakdown": {
@@ -152,7 +152,9 @@
           "note": "Passeport + 'Lumière de la liberté' skip-line · 2 adult + 1 youth · Order 198268267",
           "url": "https://www.chateauversailles.fr/"
         }
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg/1000px-Tour_Eiffel_Wikimedia_Commons.jpg",
+      "photoAlt": "Eiffel Tower"
     },
     {
       "id": "leg-2",
@@ -228,7 +230,9 @@
           "note": "\"Candlelight Plein Air: Tribute to ABBA and More\" · 3× Zone B · Order #115606611 · arrive ≥45min early, no late entry. End of the self-drive day-trip loop (Pont du Gard → Uzès → Châteauneuf-du-Pape → Orange) from Saint-Rémy in the hire car.",
           "url": "https://maps.app.goo.gl/D4hYBnL3gMhhbvRp8"
         }
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Saint-R%C3%A9my._Roman_triumphal_arch_and_monument_%283485966431%29.jpg/1000px-Saint-R%C3%A9my._Roman_triumphal_arch_and_monument_%283485966431%29.jpg",
+      "photoAlt": "Les Antiques, Glanum"
     },
     {
       "id": "leg-3",
@@ -297,7 +301,9 @@
           "a",
           "Tiny, book in person; many Niçois dishes naturally GF"
         ]
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Baie_des_Anges_from_Castle_Hill%2C_Nice%2C_France.jpg/1000px-Baie_des_Anges_from_Castle_Hill%2C_Nice%2C_France.jpg",
+      "photoAlt": "Baie des Anges, Nice"
     },
     {
       "id": "leg-4",
@@ -382,7 +388,9 @@
           "note": "Walks/Take Walks small-group, early entry before crowds · 3 guests · booking C97EWKFH · arrive 07:30",
           "url": "https://www.takewalks.com/"
         }
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1000px-Colosseo_2020.jpg",
+      "photoAlt": "Colosseum"
     },
     {
       "id": "leg-5",
@@ -472,7 +480,9 @@
           "a",
           "Cliffside; grilled fish & salads naturally GF"
         ]
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Positano-Amalfi_Coast-Italy.jpg/1000px-Positano-Amalfi_Coast-Italy.jpg",
+      "photoAlt": "Positano, Amalfi"
     },
     {
       "id": "leg-6",
@@ -540,7 +550,9 @@
           "s",
           "Pienza cheese — naturally GF tastings"
         ]
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Val_d%27Orcia_grossetana.JPG/1000px-Val_d%27Orcia_grossetana.JPG",
+      "photoAlt": "Val d'Orcia"
     },
     {
       "id": "leg-7",
@@ -612,7 +624,9 @@
           "a",
           "Historic; tell them coeliac — the butter chicken is GF"
         ]
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Florence_Duomo_from_Michelangelo_hill.jpg/1000px-Florence_Duomo_from_Michelangelo_hill.jpg",
+      "photoAlt": "Florence Duomo"
     },
     {
       "id": "leg-8",
@@ -672,7 +686,9 @@
           "s",
           "Gelato — most flavours GF"
         ]
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Venice%28Grand_Canal%29.JPG/1000px-Venice%28Grand_Canal%29.JPG",
+      "photoAlt": "Grand Canal, Venice"
     },
     {
       "id": "leg-9",
@@ -728,7 +744,9 @@
           "a",
           "Lakefront aperitivo; grilled options safe"
         ]
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Varenna_-_Lago_di_Como.jpg/1000px-Varenna_-_Lago_di_Como.jpg",
+      "photoAlt": "Varenna, Lake Como"
     },
     {
       "id": "leg-10",
@@ -787,7 +805,9 @@
           "note": "Trenord RE 2932 · PNR 2868828305 · 3× Ordinaria (no seats) · auto-activates at departure · connects to SQ377 (MXP 13:15). Leave hotel ~08:45.",
           "url": ""
         }
-      ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Milan_Cathedral_from_Piazza_del_Duomo.jpg/1000px-Milan_Cathedral_from_Piazza_del_Duomo.jpg",
+      "photoAlt": "Milan Cathedral"
     }
   ],
   "transfers": [
