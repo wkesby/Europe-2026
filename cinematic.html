@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Europe 2026 · Itinerary</title>
+<style>
+  html,body{margin:0;height:100%;background:#0c0a14;color:#f5efe6;font-family:Inter,-apple-system,sans-serif;
+    display:flex;align-items:center;justify-content:center}
+  .gate-card{width:min(320px,86vw);text-align:center;padding:36px 28px;border:1px solid rgba(245,239,230,.12);
+    border-radius:18px;background:rgba(255,255,255,.02)}
+  .gate-logo{font-size:34px;margin-bottom:10px}
+  .gate-title{font-size:22px;letter-spacing:.4px;margin-bottom:4px;font-weight:700}
+  .gate-sub{font-size:12.5px;color:rgba(245,239,230,.55);margin-bottom:22px}
+  input{width:100%;box-sizing:border-box;padding:13px 14px;border-radius:11px;border:1px solid rgba(245,239,230,.18);
+    background:rgba(255,255,255,.04);color:#f5efe6;font-size:16px;outline:none;text-align:center}
+  input:focus{border-color:#e8b974}
+  .gate-err{display:none;color:#e8836f;font-size:12px;margin-top:10px}
+  .gate-btn{width:100%;margin-top:14px;padding:13px;border:none;border-radius:11px;background:#e8b974;color:#0c0a14;
+    font-size:15px;font-weight:700;cursor:pointer}
+  .gate-btn:disabled{opacity:.6}
+</style>
+</head>
+<body>
+<div class="gate-card">
+  <div class="gate-logo">&#128274;</div>
+  <div class="gate-title">Europe 2026</div>
+  <div class="gate-sub">Enter the trip passphrase to unlock</div>
+  <input type="password" autocomplete="current-password" placeholder="Passphrase" aria-label="Trip passphrase">
+  <div class="gate-err">Wrong passphrase &mdash; try again</div>
+  <button class="gate-btn">Unlock</button>
+</div>
+<script>
+function e26b(s){const b=atob(s),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a;}
+async function e26Decrypt(blob, pass){
+  const km=await crypto.subtle.importKey('raw', new TextEncoder().encode(pass), 'PBKDF2', false, ['deriveKey']);
+  const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt:e26b(blob.salt),iterations:250000,hash:'SHA-256'},km,{name:'AES-GCM',length:256},false,['decrypt']);
+  const pt=await crypto.subtle.decrypt({name:'AES-GCM',iv:e26b(blob.iv)},key,e26b(blob.ct));
+  return new TextDecoder().decode(pt);
+}
+async function fetchBlob(){
+  const res=await fetch('cinematic.enc?v='+Date.now(),{cache:'no-store'}).catch(()=>null);
+  if(res&&res.ok) return res.json();
+  const res2=await fetch('cinematic.enc'); // service-worker cache fallback when offline
+  return res2.json();
+}
+(async()=>{
+  const inp=document.querySelector('input'), btn=document.querySelector('.gate-btn'), err=document.querySelector('.gate-err');
+  let blob=null; try{ blob=await fetchBlob(); }catch(_){ err.textContent='Couldn\u2019t load the itinerary \u2014 check your connection'; err.style.display='block'; return; }
+  async function show(html){ document.open(); document.write(html); document.close(); }
+  try{
+    const p=localStorage.getItem('e26_pass');
+    if(p){ const html=await e26Decrypt(blob,p); show(html); return; }
+  }catch(_){}
+  const go=async()=>{
+    const p=inp.value.trim(); if(!p) return;
+    btn.disabled=true; btn.textContent='Unlocking\u2026'; err.style.display='none';
+    try{
+      const html=await e26Decrypt(blob,p);
+      try{ localStorage.setItem('e26_pass',p); }catch(_){}
+      show(html);
+    }catch(_){
+      err.textContent='Wrong passphrase \u2014 try again';
+      err.style.display='block'; btn.disabled=false; btn.textContent='Unlock'; inp.select();
+    }
+  };
+  btn.onclick=go; inp.onkeydown=e=>{ if(e.key==='Enter') go(); };
+  setTimeout(()=>inp.focus(),80);
+})();
+</script>
+</body>
+</html>

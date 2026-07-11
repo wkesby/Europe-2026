@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kesby Europe 2026</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="theme-color" content="#0c0a14">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<style>
+  :root{ --bg:#0c0a14; --gold:#e8b974; --ink:#ece9f3; --faint:#9a93ab; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    background:var(--bg);color:var(--ink);min-height:100vh;display:flex;
+    flex-direction:column;align-items:center;justify-content:center;padding:32px;gap:14px}
+  h1{font-size:26px;font-weight:700;letter-spacing:-.01em}
+  .sub{color:var(--faint);font-size:14px;margin-bottom:18px}
+  a.card{display:block;width:100%;max-width:380px;padding:18px 20px;border-radius:16px;
+    text-decoration:none;color:var(--ink);border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.04);transition:transform .15s,border-color .15s}
+  a.card:active{transform:scale(.98)}
+  a.card .t{font-size:17px;font-weight:600;color:var(--gold)}
+  a.card .d{font-size:13px;color:var(--faint);margin-top:3px}
+  .stamp{margin-top:10px;font-size:11px;color:var(--faint)}
+</style>
+</head>
+<body>
+  <h1>Europe 2026</h1>
+  <div class="sub">Wayne, Kelly &amp; Lauren · 5 Sep – 11 Oct</div>
+  <a class="card" href="./mobile.html"><div class="t">📱 Mobile itinerary</div><div class="d">Day-by-day, bookings, coeliac guide, to-do</div></a>
+  <a class="card" href="./cinematic.html"><div class="t">✨ Full itinerary</div><div class="d">Rich detail, map, every booking card</div></a>
+  <div class="stamp" id="stamp">Loading…</div>
+<script>
+fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{
+  if(d._meta&&d._meta.lastUpdated){
+    const dt=new Date(d._meta.lastUpdated);
+    document.getElementById('stamp').textContent='↻ Updated '+dt.toLocaleString('en-AU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+  }
+}).catch(()=>{document.getElementById('stamp').textContent='';});
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').catch(() => {}); });
+}
+</script>
+</body>
+</html>

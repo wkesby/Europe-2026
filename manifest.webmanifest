@@ -1,0 +1,15 @@
+{
+  "name": "Europe 2026 — Kesby Family Itinerary",
+  "short_name": "Europe 2026",
+  "description": "36 nights, 10 stops · France & Italy · offline itinerary, bookings and coeliac guide",
+  "start_url": "./mobile.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0c0a14",
+  "theme_color": "#0c0a14",
+  "icons": [
+    { "src": "./icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "./icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
