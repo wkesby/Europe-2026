@@ -1,0 +1,1483 @@
+{
+  "_meta": {
+    "title": "Kesby Europe 2026",
+    "version": 1,
+    "lastUpdated": "2026-06-23T11:03:15.143692Z",
+    "note": "Single source of truth for both itinerary views. Edit this file; the HTML reads from it.",
+    "spendSoFar": 39789,
+    "spendBreakdown": {
+      "transport": 13578.61,
+      "accommodation": 22846.69,
+      "activities": 2478,
+      "insurance": 885.21
+    }
+  },
+  "flights": {
+    "ref": "DWKH96",
+    "pax": 3,
+    "cost": "$8,807.90 AUD",
+    "cabin": "Economy · 30kg each",
+    "out": [
+      {
+        "num": "SQ 248",
+        "from": "Melbourne (MEL)",
+        "to": "Singapore (SIN)",
+        "dep": "Sat 5 Sep · 05:55",
+        "arr": "11:45",
+        "term": "T2",
+        "ac": "A350-900",
+        "seats": "48K / 48J / 48H"
+      },
+      {
+        "num": "SQ 338",
+        "from": "Singapore (SIN)",
+        "to": "Paris (CDG)",
+        "dep": "Sat 5 Sep · 13:35",
+        "arr": "21:15",
+        "term": "T3 → T1",
+        "ac": "A350-900",
+        "seats": "48A / 48B / 48C"
+      }
+    ],
+    "ret": [
+      {
+        "num": "SQ 377",
+        "from": "Milan (MXP)",
+        "to": "Singapore (SIN)",
+        "dep": "Sun 11 Oct · 13:15",
+        "arr": "12 Oct 07:40",
+        "term": "T1",
+        "ac": "A350-900",
+        "seats": "54C / 54B / 54A"
+      },
+      {
+        "num": "SQ 217",
+        "from": "Singapore (SIN)",
+        "to": "Melbourne (MEL)",
+        "dep": "Mon 12 Oct · 11:10",
+        "arr": "21:35",
+        "term": "T3 → T2",
+        "ac": "A350-900",
+        "seats": "62C / 62B / 62A"
+      }
+    ]
+  },
+  "stops": [
+    {
+      "id": "leg-1",
+      "num": "I",
+      "city": "Paris",
+      "region": "Latin Quarter, France",
+      "flag": "🇫🇷",
+      "in": "2026-09-05",
+      "out": "2026-09-09",
+      "nights": 4,
+      "lat": 48.8566,
+      "lon": 2.3522,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#1a2a52 0%,#33406e 38%,#9a6a8c 72%,#e8a877 100%)",
+      "accent": "#e8b974",
+      "booking": {
+        "name": "Lavie Maison · A/C & Jacuzzi",
+        "plat": "Airbnb",
+        "ref": "HMSHYC4ZRP",
+        "addr": "6 Rue Cochin, 75005",
+        "phone": "+33745896669",
+        "cost": "$3,226 AUD",
+        "pay": "$1,613 paid · $1,613 due 29 Jun",
+        "note": "Self check-in via key safe"
+      },
+      "days": [
+        [
+          "Fri 5",
+          "Arrive CDG 21:15, transfer to Latin Quarter, settle in"
+        ],
+        [
+          "Sat 6",
+          "Louvre morning, Tuileries, Seine walk to Notre-Dame"
+        ],
+        [
+          "Sun 7",
+          "Montmartre & Sacré-Cœur, artists' square"
+        ],
+        [
+          "Mon 8",
+          "Eiffel Tower, Champ de Mars picnic, Seine cruise"
+        ],
+        [
+          "Tue 9",
+          "Morning TGV south to Avignon → Saint-Rémy"
+        ]
+      ],
+      "dining": [
+        [
+          "Noglu",
+          "s",
+          "100% gluten-free restaurant & bakery — fully safe, a coeliac haven in the Marais"
+        ],
+        [
+          "Helmut Newcake",
+          "s",
+          "100% GF patisserie — éclairs, tarts, all safe"
+        ],
+        [
+          "Market picnics",
+          "s",
+          "Rue Mouffetard market — cheese, charcuterie, fruit; naturally GF"
+        ],
+        [
+          "L'AOC",
+          "a",
+          "Classic bistro; tell them coeliac — many mains naturally GF"
+        ]
+      ],
+      "bookings": [
+        {
+          "name": "Louvre Museum",
+          "plat": "Booked",
+          "when": "Mon 7 Sep · 09:00",
+          "cost": "€82 (~$136 AUD)",
+          "addr": "Rue de Rivoli, 75001 Paris",
+          "phone": "",
+          "note": "Order C261720001611 · 09:00 entry, Pyramid/Carrousel · 3 tickets + audio guides · €82 paid · photo ID required",
+          "url": "https://www.ticketlouvre.fr/"
+        },
+        {
+          "name": "Palace of Versailles",
+          "plat": "Booked",
+          "when": "Tue 8 Sep · 09:00",
+          "cost": "€106 (~$176 AUD)",
+          "addr": "Place d'Armes, 78000 Versailles",
+          "phone": "",
+          "note": "Passeport + 'Lumière de la liberté' skip-line · 2 adult + 1 youth · Order 198268267",
+          "url": "https://www.chateauversailles.fr/"
+        }
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Tour_Eiffel_Wikimedia_Commons.jpg",
+      "photoAlt": "Eiffel Tower"
+    },
+    {
+      "id": "leg-2",
+      "num": "II",
+      "city": "Saint-Rémy",
+      "region": "Provence, France",
+      "flag": "🇫🇷",
+      "in": "2026-09-09",
+      "out": "2026-09-13",
+      "nights": 4,
+      "lat": 43.7891,
+      "lon": 4.8329,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#3a4a78 0%,#8a7fae 40%,#c9a0a8 68%,#f0d9a8 100%)",
+      "accent": "#c9a89a",
+      "booking": {
+        "name": "Loft 120m² · 2ch 2sdb hyper-centre",
+        "plat": "Airbnb",
+        "ref": "HMY52TMW4M",
+        "addr": "2 Rue Michelet, 13210",
+        "phone": "+33650695686",
+        "cost": "$1,303 AUD",
+        "pay": "Paid in full",
+        "note": "Check-in after 15:00 · host Christelle"
+      },
+      "days": [
+        [
+          "Wed 9",
+          "Arrive Saint-Rémy, settle into the loft, evening in the old town"
+        ],
+        [
+          "Thu 10",
+          "Glanum Roman ruins & Van Gogh's asylum (Saint-Paul)"
+        ],
+        [
+          "Fri 11",
+          "Les Baux-de-Provence & Carrières des Lumières"
+        ],
+        [
+          "Sat 12",
+          "Self-drive: Pont du Gard, Uzès, Châteauneuf-du-Pape, Orange — concert at the Théâtre Antique that night"
+        ],
+        [
+          "Sun 13",
+          "TGV connection south to Nice"
+        ]
+      ],
+      "dining": [
+        [
+          "Bistrot Découverte",
+          "a",
+          "Coeliac-aware, will adapt; Provençal cooking is largely naturally GF"
+        ],
+        [
+          "Wednesday market",
+          "s",
+          "Saint-Rémy's famous market — DIY picnic, naturally safe"
+        ],
+        [
+          "La Maison Drouot",
+          "a",
+          "Ask for GF; grilled & vegetable dishes work well"
+        ]
+      ],
+      "bookings": [
+        {
+          "name": "Candlelight: Tribute to ABBA · Théâtre Antique d'Orange",
+          "plat": "Booked",
+          "when": "Sat 12 Sep · 21:30",
+          "cost": "€94.50 (~$157 AUD)",
+          "addr": "Théâtre Antique d'Orange, Rue Madeleine Roch, 84100 Orange",
+          "phone": "",
+          "note": "\"Candlelight Plein Air: Tribute to ABBA and More\" · 3× Zone B · Order #115606611 · arrive ≥45min early, no late entry. End of the self-drive day-trip loop (Pont du Gard → Uzès → Châteauneuf-du-Pape → Orange) from Saint-Rémy in the hire car.",
+          "url": "https://maps.app.goo.gl/D4hYBnL3gMhhbvRp8"
+        }
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/a/af/Saint-R%C3%A9my._Roman_triumphal_arch_and_monument_%283485966431%29.jpg",
+      "photoAlt": "Les Antiques, Glanum"
+    },
+    {
+      "id": "leg-3",
+      "num": "III",
+      "city": "Nice",
+      "region": "Côte d'Azur, France",
+      "flag": "🇫🇷",
+      "in": "2026-09-13",
+      "out": "2026-09-17",
+      "nights": 4,
+      "lat": 43.6952,
+      "lon": 7.2538,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#0a4f7a 0%,#1a85b0 40%,#6fc4d4 70%,#f0e2a8 100%)",
+      "accent": "#3fb8d4",
+      "booking": {
+        "name": "Casa Giacometti · Vue Mer",
+        "plat": "Booking.com",
+        "ref": "6646914354 · PIN 5700",
+        "addr": "52 Promenade des Anglais, 06000",
+        "phone": "+33601406049",
+        "cost": "€1,414 (~$2,350 AUD)",
+        "pay": "Paid in full · non-refundable",
+        "note": "Check-in 16:00–19:00 ONLY · host meets you"
+      },
+      "days": [
+        [
+          "Sun 13",
+          "Arrive Nice, sunset walk on the Promenade right outside"
+        ],
+        [
+          "Mon 14",
+          "Èze village & Monaco coastal day (train + bus 100)"
+        ],
+        [
+          "Tue 15",
+          "Villefranche-sur-Mer beach day (7 min train)"
+        ],
+        [
+          "Wed 16",
+          "Antibes — Picasso Museum, ramparts, Cap d'Antibes"
+        ],
+        [
+          "Thu 17",
+          "Morning flight Nice → Rome FCO"
+        ]
+      ],
+      "dining": [
+        [
+          "Chez Pipo",
+          "s",
+          "Socca = chickpea flour, naturally GF; dedicated socca house"
+        ],
+        [
+          "Salade Niçoise",
+          "s",
+          "True Niçoise has no croutons — naturally GF lunch staple"
+        ],
+        [
+          "Fenocchio",
+          "s",
+          "Beloved gelateria — sorbets & most gelati safe (skip biscuit flavours)"
+        ],
+        [
+          "La Merenda",
+          "a",
+          "Tiny, book in person; many Niçois dishes naturally GF"
+        ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/b/bc/Nizza-Baie_des_Anges-4070920.jpg",
+      "photoAlt": "Baie des Anges, Nice"
+    },
+    {
+      "id": "leg-4",
+      "num": "IV",
+      "city": "Rome",
+      "region": "Lazio, Italy",
+      "flag": "🇮🇹",
+      "in": "2026-09-17",
+      "out": "2026-09-22",
+      "nights": 5,
+      "lat": 41.8967,
+      "lon": 12.4822,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#2a1e3a 0%,#6e3f54 38%,#c47a5a 70%,#f0c878 100%)",
+      "accent": "#e8956a",
+      "booking": {
+        "name": "Corso37 by Maurizio",
+        "plat": "Airbnb",
+        "ref": "HMSMX48WCK",
+        "addr": "Via del Corso 37, 00187 Rome",
+        "phone": "+393200230057",
+        "cost": "$3,034 AUD",
+        "pay": "$1,635 paid · $1,399 pending",
+        "note": "Near Spanish Steps · host Maurizio · self check-in with building staff"
+      },
+      "days": [
+        [
+          "Wed 17",
+          "Arrive Rome, evening passeggiata, gelato"
+        ],
+        [
+          "Thu 18",
+          "Colosseum, Roman Forum, Palatine Hill"
+        ],
+        [
+          "Fri 19",
+          "Vatican Museums, Sistine Chapel, St Peter's"
+        ],
+        [
+          "Sat 20",
+          "Pantheon, Trevi, Spanish Steps, Piazza Navona"
+        ],
+        [
+          "Sun 21",
+          "Panoramic e-bike tour (TopBike, booked) + Trastevere"
+        ],
+        [
+          "Mon 22",
+          "Train south to the Amalfi Coast"
+        ]
+      ],
+      "dining": [
+        [
+          "Mama Eat Roma",
+          "s",
+          "AIC-certified gluten-free — pizza, fritti, pasta all safe"
+        ],
+        [
+          "Voglia di Pizza",
+          "s",
+          "AIC-certified GF pizzeria"
+        ],
+        [
+          "Roscioli",
+          "a",
+          "GF carbonara on request; iconic Roman cooking"
+        ],
+        [
+          "Giolitti",
+          "s",
+          "Historic gelato — most flavours GF"
+        ]
+      ],
+      "bookings": [
+        {
+          "name": "Vatican — Pristine Sistine Early Entrance Tour",
+          "plat": "Booked",
+          "when": "Fri 18 Sep · 07:45–11:45",
+          "cost": "AUD $918",
+          "addr": "Meet: Antico Café Candia, Via Candia 153, Roma",
+          "phone": "",
+          "note": "Walks/Take Walks small-group, early entry before crowds · 3 guests · booking C97EWKFH · arrive 07:30",
+          "url": "https://www.takewalks.com/"
+        }
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/d/de/Colosseo_2020.jpg",
+      "photoAlt": "Colosseum"
+    },
+    {
+      "id": "leg-5",
+      "num": "V",
+      "city": "Praiano",
+      "region": "Amalfi Coast, Italy",
+      "flag": "🇮🇹",
+      "in": "2026-09-22",
+      "out": "2026-09-27",
+      "nights": 5,
+      "lat": 40.6109,
+      "lon": 14.5375,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#06436e 0%,#1378a0 38%,#46b0c0 66%,#f4d89a 100%)",
+      "accent": "#2f9fc0",
+      "booking": {
+        "name": "Villa Il Frantoio · sea view",
+        "plat": "Booking.com",
+        "ref": "6291401679 · PIN 9801",
+        "addr": "Via F. Russo 36",
+        "phone": "+390892594146",
+        "cost": "€2,694 (~$4,475 AUD)",
+        "pay": "Breakfast included",
+        "note": "2-bed sea-view villa"
+      },
+      "bookings": [
+        {
+          "name": "Da Adolfo lunch · Positano",
+          "plat": "Prenota Web",
+          "when": "Sat 26 Sep · 13:00",
+          "cost": "€30pp hold (refunded)",
+          "addr": "Via Laurito 40, Positano",
+          "phone": "+39089875022",
+          "note": "3 guests (2 adults + 1 child) · 1 coeliac noted. FREE ferry shuttle from Positano main dock every 30 min 10:00–13:00, returns 16:00–18:00. No outside wine. Table held 15 min.",
+          "url": "https://daadolfo.com"
+        },
+        {
+          "name": "Pompeii — licensed private guide",
+          "plat": "Booked",
+          "when": "Tue 22 Sep · en route (2h stop)",
+          "cost": "€150 (~$249 AUD) pay-on-day",
+          "addr": "Pompeii Archaeological Park",
+          "phone": "+39 346 092 8343",
+          "note": "Via Sorrento Limo res 28930 · 2hr private guide · tickets NOT incl — buy at pompeii.vivaticket.it · pay locally cash/card(+5%)",
+          "url": "https://pompeii.vivaticket.it/en/tour/pompei/4661"
+        }
+      ],
+      "days": [
+        [
+          "Tue 22",
+          "Arrive Praiano, settle into the villa, sunset over the sea"
+        ],
+        [
+          "Wed 23",
+          "Positano day — beach, boutiques, Spiaggia Grande"
+        ],
+        [
+          "Thu 24",
+          "Path of the Gods coastal hike"
+        ],
+        [
+          "Fri 25",
+          "Amalfi & Ravello — Villa Rufolo gardens"
+        ],
+        [
+          "Sat 26",
+          "Da Adolfo lunch (shuttle boat from Positano)"
+        ],
+        [
+          "Sun 27",
+          "Drive north to Montepulciano, Tuscany"
+        ]
+      ],
+      "dining": [
+        [
+          "Da Adolfo",
+          "s",
+          "Naturally GF — grilled fish, mozzarella al limone; no pasta kitchen"
+        ],
+        [
+          "Lo Scoglio",
+          "a",
+          "Famous seafood; tell them coeliac, much is naturally GF"
+        ],
+        [
+          "Il Pirata",
+          "a",
+          "Cliffside; grilled fish & salads naturally GF"
+        ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Positano-Amalfi_Coast-Italy.jpg",
+      "photoAlt": "Positano, Amalfi"
+    },
+    {
+      "id": "leg-6",
+      "num": "VI",
+      "city": "Montepulciano",
+      "region": "Val d'Orcia, Tuscany",
+      "flag": "🇮🇹",
+      "in": "2026-09-27",
+      "out": "2026-10-02",
+      "nights": 5,
+      "lat": 43.0937,
+      "lon": 11.7821,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#3a3550 0%,#7a6a72 38%,#be9a78 68%,#e8d098 100%)",
+      "accent": "#c9a868",
+      "booking": {
+        "name": "Vicolo delle Mura · Betty & Silvia",
+        "plat": "Airbnb",
+        "ref": "HMFQDRDPB4",
+        "addr": "Vicolo delle Mura 1",
+        "phone": "+393358428554",
+        "cost": "$2,046 AUD",
+        "pay": "",
+        "note": "In the historic walls"
+      },
+      "days": [
+        [
+          "Sun 27",
+          "Arrive Montepulciano (car hire from Florence), wine-town evening"
+        ],
+        [
+          "Mon 28",
+          "Bagno Vignoni hot springs (~25 min)"
+        ],
+        [
+          "Tue 29",
+          "Pienza (pecorino) & Montalcino (Brunello)"
+        ],
+        [
+          "Wed 30",
+          "Pienza + San Quirico d'Orcia, e-bike Val d'Orcia"
+        ],
+        [
+          "Thu 1",
+          "Vino Nobile cellar tasting in Montepulciano"
+        ],
+        [
+          "Fri 2",
+          "Drive to Florence, drop car at SMN"
+        ]
+      ],
+      "dining": [
+        [
+          "Osteria Acquacheta",
+          "s",
+          "Bistecca alla Fiorentina = naturally GF; legendary steak"
+        ],
+        [
+          "La Porta, Monticchiello",
+          "a",
+          "AIC-aware; Tuscan classics adaptable"
+        ],
+        [
+          "Pecorino farms",
+          "s",
+          "Pienza cheese — naturally GF tastings"
+        ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Val_d%27Orcia_grossetana.JPG",
+      "photoAlt": "Val d'Orcia"
+    },
+    {
+      "id": "leg-7",
+      "num": "VII",
+      "city": "Florence",
+      "region": "Tuscany, Italy",
+      "flag": "🇮🇹",
+      "in": "2026-10-02",
+      "out": "2026-10-05",
+      "nights": 3,
+      "lat": 43.7696,
+      "lon": 11.2558,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#2e2440 0%,#6e4a5a 40%,#c98a6a 70%,#f0d090 100%)",
+      "accent": "#d99a6a",
+      "booking": {
+        "name": "Apartment by Alessandro",
+        "plat": "Stayz",
+        "ref": "HA-FY2RV8 · #1550770",
+        "addr": "Central Florence",
+        "phone": "",
+        "cost": "€1,342 (~$2,229 AUD)",
+        "pay": "",
+        "note": ""
+      },
+      "bookings": [
+        {
+          "name": "MaMa Florence · Gluten-Free Cooking Class",
+          "plat": "MaMa Florence",
+          "when": "Sat 3 Oct · 10:00 AM",
+          "cost": "€507 paid in full (~$842 AUD)",
+          "addr": "Viale Francesco Petrarca 12, Firenze",
+          "phone": "+39055221138",
+          "note": "Reservation #38873 · 3 adults · dedicated GF class. Doors open 5 min before — latecomers not admitted. Bring confirmation on the day. Emergencies +39 333 242 2763 (WhatsApp).",
+          "url": "https://www.mamaflorence.com/gluten-free-cooking-class-florence"
+        }
+      ],
+      "days": [
+        [
+          "Fri 2",
+          "Arrive Florence, Ponte Vecchio at golden hour"
+        ],
+        [
+          "Sat 3",
+          "MaMa Florence GF cooking class 10:00; Uffizi/Accademia after (book ahead)"
+        ],
+        [
+          "Sun 4",
+          "Duomo climb, Oltrarno, Boboli Gardens"
+        ],
+        [
+          "Mon 5",
+          "Morning train to Venice"
+        ]
+      ],
+      "dining": [
+        [
+          "Quinoa",
+          "s",
+          "100% gluten-free restaurant — fully safe"
+        ],
+        [
+          "Ciro & Sons",
+          "s",
+          "AIC-certified GF pizza & pasta"
+        ],
+        [
+          "Trattoria Sostanza",
+          "a",
+          "Historic; tell them coeliac — the butter chicken is GF"
+        ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/7/77/Florence_Duomo_from_Michelangelo_hill.jpg",
+      "photoAlt": "Florence Duomo"
+    },
+    {
+      "id": "leg-8",
+      "num": "VIII",
+      "city": "Venice",
+      "region": "Dorsoduro, Italy",
+      "flag": "🇮🇹",
+      "in": "2026-10-05",
+      "out": "2026-10-08",
+      "nights": 3,
+      "lat": 45.434,
+      "lon": 12.338,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#163a5e 0%,#3f7a96 40%,#9ab8b0 70%,#f0d8a0 100%)",
+      "accent": "#5a9aa8",
+      "booking": {
+        "name": "San Vio Palace Luxury Apt",
+        "plat": "Stayz",
+        "ref": "73431742248029",
+        "addr": "739 Dorsoduro, 30123",
+        "phone": "",
+        "cost": "$1,962 AUD",
+        "pay": "",
+        "note": "Quiet Dorsoduro canal side"
+      },
+      "days": [
+        [
+          "Mon 5",
+          "Arrive Venice, vaporetto down the Grand Canal, San Marco at dusk"
+        ],
+        [
+          "Tue 6",
+          "Doge's Palace, St Mark's Basilica, Rialto"
+        ],
+        [
+          "Wed 7",
+          "Murano & Burano islands by vaporetto"
+        ],
+        [
+          "Thu 8",
+          "Morning train to Varenna, Lake Como"
+        ]
+      ],
+      "dining": [
+        [
+          "Le Spighe",
+          "s",
+          "100% gluten-free deli — fully safe"
+        ],
+        [
+          "La Zucca",
+          "a",
+          "Veg-forward; tell them coeliac, much is naturally GF"
+        ],
+        [
+          "Suso",
+          "s",
+          "Gelato — most flavours GF"
+        ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Venice%28Grand_Canal%29.JPG",
+      "photoAlt": "Grand Canal, Venice"
+    },
+    {
+      "id": "leg-9",
+      "num": "IX",
+      "city": "Lake Como",
+      "region": "Varenna, Italy",
+      "flag": "🇮🇹",
+      "in": "2026-10-08",
+      "out": "2026-10-10",
+      "nights": 2,
+      "lat": 46.0107,
+      "lon": 9.2848,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#1e3550 0%,#3f6a82 40%,#7ba0a0 68%,#e0d4a8 100%)",
+      "accent": "#5a8a96",
+      "booking": {
+        "name": "Villa Monti · Apt. Primrose",
+        "plat": "VisitVarenna",
+        "ref": "#31056",
+        "addr": "Via Roma 11, Varenna",
+        "phone": "+393355397774",
+        "cost": "€849 (~$1,410 AUD)",
+        "pay": "Charged 27 Aug · free cancel until then",
+        "note": "Lake-view · check-in 14:00–18:00"
+      },
+      "days": [
+        [
+          "Thu 8",
+          "Arrive Varenna, lakeside evening, Vecchia Varenna dinner"
+        ],
+        [
+          "Fri 9",
+          "Bellagio & Villa Carlotta by ferry; guided fishing charter option"
+        ],
+        [
+          "Sat 10",
+          "Morning train to Milan"
+        ]
+      ],
+      "dining": [
+        [
+          "Vecchia Varenna",
+          "s",
+          "Perch risotto naturally GF; lakeside setting"
+        ],
+        [
+          "Il Cavatappi",
+          "a",
+          "Tiny; tell them coeliac, will adapt"
+        ],
+        [
+          "Nilus Bar",
+          "a",
+          "Lakefront aperitivo; grilled options safe"
+        ]
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Varenna_-_Lago_di_Como.jpg",
+      "photoAlt": "Varenna, Lake Como"
+    },
+    {
+      "id": "leg-10",
+      "num": "X",
+      "city": "Milan",
+      "region": "Lombardy, Italy",
+      "flag": "🇮🇹",
+      "in": "2026-10-10",
+      "out": "2026-10-11",
+      "nights": 1,
+      "lat": 45.4642,
+      "lon": 9.19,
+      "booked": true,
+      "sky": "linear-gradient(180deg,#241f38 0%,#5a4a66 40%,#a06a72 70%,#e8b888 100%)",
+      "accent": "#c98a8a",
+      "booking": {
+        "name": "Starhotels Echo",
+        "plat": "Booking.com",
+        "ref": "5847018018 · PIN 3715",
+        "addr": "Viale Andrea Doria 4, 20124 Milan",
+        "phone": "+390267891",
+        "cost": "€508.80 (~$845 AUD)",
+        "pay": "€478.80 paid · non-refundable · +€30 city tax",
+        "note": "Two Connecting Double Rooms · check-in 15:00 · 5 min walk to Milano Centrale"
+      },
+      "days": [
+        [
+          "Sat 10",
+          "Arrive Milan, Duomo & Galleria, last Italian dinner"
+        ],
+        [
+          "Sun 11",
+          "Malpensa Express to MXP, flight home 13:15"
+        ]
+      ],
+      "dining": [
+        [
+          "Pizza AM",
+          "s",
+          "AIC-certified GF pizza"
+        ],
+        [
+          "Risotto alla milanese",
+          "s",
+          "Saffron risotto — naturally GF Milanese classic"
+        ]
+      ],
+      "bookings": [
+        {
+          "name": "Malpensa Express — Milan → MXP",
+          "plat": "Booked",
+          "when": "Sun 11 Oct · 09:25→10:18",
+          "cost": "A$81.30",
+          "addr": "Milano Centrale → Milano Malpensa Aeroporto",
+          "phone": "",
+          "note": "Trenord RE 2932 · PNR 2868828305 · 3× Ordinaria (no seats) · auto-activates at departure · connects to SQ377 (MXP 13:15). Leave hotel ~08:45.",
+          "url": ""
+        }
+      ],
+      "photo": "https://upload.wikimedia.org/wikipedia/commons/7/70/Milan_Cathedral_from_Piazza_del_Duomo.jpg",
+      "photoAlt": "Milan Cathedral"
+    }
+  ],
+  "transfers": [
+    {
+      "from": "Paris",
+      "to": "Saint-Rémy",
+      "date": "Wed 9 Sep",
+      "mode": "TGV + transfer",
+      "detail": "BOOKED · TGV INOUI 6101 · Paris Gare de Lyon 06:38 → Avignon TGV 09:17 · Carriage 3, seats 367/368/369 (1st class) · PNR TVQUHJ · A$401.39 · then car/transfer to Saint-Rémy · Avignon TGV → Saint-Rémy: private sedan transfer arranged (Alpilles Luberon Provence Transport, €55, Christophe +33 614 81 34 85) — BOOKED 18 Jun — €55 cash, meet at \"KESBY\" sign by Miniso shop · Provence hire car: Europcar Jeep Avenger (automatic), pickup Avignon TGV Fri 11 Sep 9:30, return Sun 13 Sep 8:30, resv 1203760297",
+      "book": "Trainline",
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "from": "Saint-Rémy",
+      "to": "Nice",
+      "date": "Sun 13 Sep",
+      "mode": "TGV",
+      "detail": "BOOKED · TGV INOUI 6805 · Avignon TGV 09:28 → Nice Ville 13:04 · Carriage 1, seats 146/147/148 (1st class) · PNR T32FXW · A$255.22 · into Casa Giacometti from 16:00",
+      "book": "Trainline",
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "from": "Nice",
+      "to": "Rome",
+      "date": "Thu 17 Sep",
+      "mode": "Flight",
+      "detail": "BOOKED · ITA Airways AZ343 · NCE T1 11:20 → FCO T1 12:30 (1h10) · A220-300 Economy · seats 06F/06D/06E · code YFAZOK · 1× checked 23kg each · then RV 4621 regional train to Termini · then FCO→Roma Termini regional train RV 4621 BOOKED (13:23→13:55, PNR 2869812743, A$75.87)",
+      "book": "ITA Airways",
+      "status": "booked",
+      "link": "https://www.ita-airways.com/en_en/manage-booking.html"
+    },
+    {
+      "from": "Rome",
+      "to": "Praiano",
+      "date": "Tue 22 Sep",
+      "mode": "Train + transfer",
+      "detail": "BOOKED Rome→Naples · Frecciarossa FR 9405 · Roma Termini 11:35 → Napoli Centrale 12:48 · Carriage 2, seats 5A/6A/6B · PNR FWW495 · then private transfer to Praiano · Naples→Praiano private transfer BOOKED: Sorrento Limo (Mercedes V-Class, booking 28930, €498 round-trip incl 2h Pompeii stop, dep Napoli Centrale 13:15)",
+      "book": "Trenitalia",
+      "status": "booked",
+      "link": "https://www.sorrentolimo.com/"
+    },
+    {
+      "from": "Praiano",
+      "to": "Montepulciano",
+      "date": "Sun 27 Sep",
+      "mode": "Transfer + train + car",
+      "detail": "Praiano→Naples return transfer (Sorrento Limo booking 28930, dep 08:30) · then Italo 9932 Napoli Centrale 11:20 → Firenze SMN 14:17 (PNR JDYH6M) · then SIXT hire car from Florence SMN 14:30 (Mercedes CLA electric, booking 9735523439) → Montepulciano (~1h20)",
+      "book": "Mixed",
+      "status": "booked",
+      "link": "https://www.sixt.com/php/reservation/booking?bookingNumber=9735523439"
+    },
+    {
+      "from": "Montepulciano",
+      "to": "Florence",
+      "date": "Fri 2 Oct",
+      "mode": "Drive",
+      "detail": "Drive Montepulciano → Florence in SIXT hire car (booking 9735523439); drop at Florence SMN Fri 2 Oct 14:00 (avoid ZTL). Drive ~1h45 to Florence, drop hire car at SMN (mind the ZTL)",
+      "book": "Self-drive",
+      "status": "booked",
+      "link": "https://www.sixt.com/php/reservation/booking?bookingNumber=9735523439"
+    },
+    {
+      "from": "Florence",
+      "to": "Venice",
+      "date": "Mon 5 Oct",
+      "mode": "Frecciarossa",
+      "detail": "BOOKED · Italo 8908 · Firenze SMN 11:39 → Venezia S.Lucia 13:55 · Carriage 1, seats 32/33/34 · PNR LHRC2N",
+      "book": "Trenitalia",
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "from": "Venice",
+      "to": "Lake Como",
+      "date": "Thu 8 Oct",
+      "mode": "Train",
+      "detail": "BOOKED · Frecciarossa FR 9724 Venezia S.Lucia 10:48 → Milano Centrale 13:15 (seats 8A/9A/9B, PNR GKUEWN) · then Trenord regional RE 2828 Milano 14:20 → Varenna-Esino 15:24 (PNR 2867511560)",
+      "book": "Trenitalia",
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "from": "Lake Como",
+      "to": "Milan",
+      "date": "Sat 10 Oct",
+      "mode": "Train",
+      "detail": "BOOKED · Trenord regional RE 2823 · Varenna-Esino 11:35 → Milano Centrale 12:40 (Sat 10 Oct, PNR 2867511602) · then 5-min walk to Starhotels Echo",
+      "book": "Trenitalia",
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    }
+  ],
+  "actions": [
+    {
+      "id": "eiffel",
+      "title": "Book Eiffel Tower",
+      "meta": "Paris · toureiffel.paris",
+      "cat": "Ticket",
+      "when": "2026-09-06"
+    },
+    {
+      "id": "colosseum",
+      "title": "Book Colosseum + Forum + Palatine",
+      "meta": "Rome · coopculture.it",
+      "cat": "Ticket",
+      "when": "2026-09-19"
+    },
+    {
+      "id": "borghese",
+      "title": "Book Borghese Gallery",
+      "meta": "Rome · galleriaborghese.it",
+      "cat": "Ticket",
+      "when": "2026-09-20"
+    },
+    {
+      "id": "capri",
+      "title": "Book Capri day trip + ferry",
+      "meta": "Amalfi Coast",
+      "cat": "Ticket",
+      "when": "2026-09-23"
+    },
+    {
+      "id": "uffizi",
+      "title": "Book Uffizi Gallery",
+      "meta": "Florence · uffizi.it",
+      "cat": "Ticket",
+      "when": "2026-10-03"
+    },
+    {
+      "id": "accademia",
+      "title": "Book Accademia (David)",
+      "meta": "Florence · galleriaaccademiafirenze.it",
+      "cat": "Ticket",
+      "when": "2026-10-03"
+    },
+    {
+      "id": "duomo",
+      "title": "Book Duomo climb / Brunelleschi dome",
+      "meta": "Florence · duomo.firenze.it",
+      "cat": "Ticket",
+      "when": "2026-10-04"
+    },
+    {
+      "id": "st",
+      "title": "Book St Mark's Basilica + Doge's Palace",
+      "meta": "Venice · veneziaunica.it",
+      "cat": "Ticket",
+      "when": "2026-10-06"
+    },
+    {
+      "id": "venice",
+      "title": "Book Venice Biennale (Giardini/Arsenale)",
+      "meta": "Venice · labiennale.org",
+      "cat": "Ticket",
+      "when": "2026-10-07"
+    },
+    {
+      "id": "the",
+      "title": "Book The Last Supper",
+      "meta": "Milan · vivaticket.it",
+      "cat": "Ticket",
+      "when": "2026-10-10"
+    },
+    {
+      "id": "ins-scti",
+      "title": "Travel insurance — SCTI (booked & recorded)",
+      "meta": "Policy 18473939 · Wayne, Kelly, Lauren · 5 Sep–11 Oct · AUD $885.21 paid · now on Activities sheet row 34 · Emergency +61 2 9191 1180",
+      "cat": "admin",
+      "when": "2026-06-21"
+    }
+  ],
+  "legs": [
+    {
+      "date": "2026-09-09",
+      "from": "Paris (Gare de Lyon)",
+      "to": "Avignon TGV",
+      "mode": "Train (TGV)",
+      "operator": "SNCF (Trainline) TGV INOUI 6101",
+      "dep": "06:38",
+      "arr": "09:17",
+      "ref": "TVQUHJ",
+      "cost": 401.39,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "date": "2026-09-09",
+      "from": "Avignon TGV",
+      "to": "Saint-Rémy-de-Provence",
+      "mode": "Private transfer",
+      "operator": "Alpilles Luberon Provence Transport",
+      "dep": "",
+      "arr": "09:17",
+      "ref": "",
+      "cost": 91.0,
+      "status": "booked",
+      "link": "https://www.allprovencetransport.com/"
+    },
+    {
+      "date": "2026-09-11",
+      "from": "Provence hire car",
+      "to": "Avignon (Europcar)",
+      "mode": "Rental car pickup",
+      "operator": "Europcar",
+      "dep": "09:30",
+      "arr": "",
+      "ref": "1203760297",
+      "cost": 180.15,
+      "status": "booked",
+      "link": "https://www.europcar.com/en-au/account/bookings"
+    },
+    {
+      "date": "2026-09-13",
+      "from": "Avignon TGV",
+      "to": "Nice Ville",
+      "mode": "Train (TGV)",
+      "operator": "SNCF (Trainline) TGV INOUI 6805",
+      "dep": "09:28",
+      "arr": "13:04",
+      "ref": "T32FXW",
+      "cost": 255.22,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "date": "2026-09-17",
+      "from": "Nice (NCE)",
+      "to": "Rome (FCO)",
+      "mode": "Flight (AZ 343)",
+      "operator": "ITA Airways",
+      "dep": "11:20",
+      "arr": "12:30",
+      "ref": "YFAZOK",
+      "cost": 781.0,
+      "status": "booked",
+      "link": "https://www.ita-airways.com/en_en/manage-booking.html"
+    },
+    {
+      "date": "2026-09-17",
+      "from": "Rome FCO (Fiumicino)",
+      "to": "Roma Termini",
+      "mode": "Train (regional)",
+      "operator": "Trenitalia RV 4621",
+      "dep": "13:23",
+      "arr": "13:55",
+      "ref": "2869812743",
+      "cost": 75.87,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "date": "2026-09-22",
+      "from": "Roma Termini",
+      "to": "Naples Centrale",
+      "mode": "Train (Frecciarossa/Italo)",
+      "operator": "Trenitalia Frecciarossa FR 9405",
+      "dep": "11:35",
+      "arr": "12:48",
+      "ref": "FWW495",
+      "cost": 157.19,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "date": "2026-09-22",
+      "from": "Naples Centrale",
+      "to": "Praiano",
+      "mode": "Private transfer",
+      "operator": "Sorrento Limo (Booking 28930)",
+      "dep": "13:15",
+      "arr": "",
+      "ref": "28930",
+      "cost": 826.0,
+      "status": "booked",
+      "link": "https://www.sorrentolimo.com/"
+    },
+    {
+      "date": "2026-09-27",
+      "from": "Praiano",
+      "to": "Naples Centrale",
+      "mode": "Private transfer",
+      "operator": "Sorrento Limo (Booking 28930)",
+      "dep": "08:30",
+      "arr": "",
+      "ref": "28930",
+      "cost": 0.0,
+      "status": "booked",
+      "link": "https://www.sorrentolimo.com/"
+    },
+    {
+      "date": "2026-09-27",
+      "from": "Naples Centrale",
+      "to": "Firenze SMN",
+      "mode": "Train (Frecciarossa)",
+      "operator": "Italo 9932",
+      "dep": "11:20",
+      "arr": "14:17",
+      "ref": "JDYH6M",
+      "cost": 336.68,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "date": "2026-09-27",
+      "from": "Tuscany hire car",
+      "to": "Florence SMN (SIXT)",
+      "mode": "Rental car pickup",
+      "operator": "SIXT (Booking 9735523439)",
+      "dep": "14:30",
+      "arr": "",
+      "ref": "9735523439",
+      "cost": 1050.0,
+      "status": "booked",
+      "link": "https://www.sixt.com/php/reservation/booking?bookingNumber=9735523439"
+    },
+    {
+      "date": "2026-10-05",
+      "from": "Firenze SMN",
+      "to": "Venezia S. Lucia",
+      "mode": "Train (Frecciarossa)",
+      "operator": "Italo 8908",
+      "dep": "11:39",
+      "arr": "13:55",
+      "ref": "LHRC2N",
+      "cost": 226.4,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "date": "2026-10-08",
+      "from": "Venezia S. Lucia",
+      "to": "Milano Centrale",
+      "mode": "Train (Frecciarossa)",
+      "operator": "Trenitalia Frecciarossa FR 9724",
+      "dep": "10:48",
+      "arr": "13:15",
+      "ref": "GKUEWN",
+      "cost": 189.43,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "date": "2026-10-08",
+      "from": "Milano Centrale",
+      "to": "Varenna-Esino",
+      "mode": "Train (regional)",
+      "operator": "Trenord RE 2828 (regional)",
+      "dep": "14:20",
+      "arr": "15:24",
+      "ref": "2867511560",
+      "cost": 59.54,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "date": "2026-10-10",
+      "from": "Varenna-Esino",
+      "to": "Milano Centrale",
+      "mode": "Train (regional)",
+      "operator": "Trenord RE 2823 (regional)",
+      "dep": "11:35",
+      "arr": "12:40",
+      "ref": "2867511602",
+      "cost": 59.54,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    },
+    {
+      "date": "2026-10-11",
+      "from": "Milano Centrale",
+      "to": "Milan Malpensa (MXP)",
+      "mode": "Train (regional)",
+      "operator": "Trenord RE 2932",
+      "dep": "09:25",
+      "arr": "10:18",
+      "ref": "2868828305",
+      "cost": 81.3,
+      "status": "booked",
+      "link": "https://www.thetrainline.com/my-account/bookings"
+    }
+  ],
+  "activities": [
+    {
+      "date": "2026-09-06",
+      "name": "Eiffel Tower",
+      "loc": "Paris",
+      "slot": "",
+      "site": "toureiffel.paris",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-07",
+      "name": "Louvre",
+      "loc": "Paris",
+      "slot": "09:00 entry",
+      "site": "ticketlouvre.fr",
+      "ref": "C261720001611",
+      "cost": 136.0,
+      "status": "booked",
+      "link": "https://www.ticketlouvre.fr/"
+    },
+    {
+      "date": "2026-09-08",
+      "name": "Versailles day trip",
+      "loc": "Paris",
+      "slot": "AM",
+      "site": "chateauversailles.fr",
+      "ref": "198268267",
+      "cost": 176.0,
+      "status": "booked",
+      "link": "https://www.chateauversailles.fr/"
+    },
+    {
+      "date": "2026-09-10",
+      "name": "Glanum Roman ruins + Saint-Paul-de-Mausole",
+      "loc": "Saint-Rémy",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-12",
+      "name": "Provence self-drive loop + Candlelight concert (Orange)",
+      "loc": "Provence (day trip)",
+      "slot": "Full day",
+      "site": "Fever (feverup.com)",
+      "ref": "115606611",
+      "cost": 157.0,
+      "status": "booked",
+      "link": "https://feverup.com/m/115606611"
+    },
+    {
+      "date": "2026-09-14",
+      "name": "Èze + Monaco day trip",
+      "loc": "Nice / Riviera",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-18",
+      "name": "Vatican Museums + Sistine Chapel",
+      "loc": "Rome",
+      "slot": "08:00 slot",
+      "site": "takewalks.com",
+      "ref": "C97EWKFH",
+      "cost": 918.0,
+      "status": "booked",
+      "link": "https://www.takewalks.com/"
+    },
+    {
+      "date": "2026-09-19",
+      "name": "Colosseum + Forum + Palatine",
+      "loc": "Rome",
+      "slot": "",
+      "site": "coopculture.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-20",
+      "name": "Borghese Gallery",
+      "loc": "Rome",
+      "slot": "",
+      "site": "galleriaborghese.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-21",
+      "name": "Ostia Antica or Trastevere day",
+      "loc": "Rome",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-23",
+      "name": "Capri day trip + ferry",
+      "loc": "Amalfi Coast",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-24",
+      "name": "Pompeii or Herculaneum",
+      "loc": "Amalfi Coast",
+      "slot": "",
+      "site": "Sorrento Limo (res 28930) / vivaticket.it",
+      "ref": "28930 (guide)",
+      "cost": 249.0,
+      "status": "booked",
+      "link": "https://pompeii.vivaticket.it/en/tour/pompei/4661"
+    },
+    {
+      "date": "2026-09-25",
+      "name": "Ravello + Villa Cimbrone",
+      "loc": "Amalfi Coast",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-26",
+      "name": "Da Adolfo lunch (Positano) + Positano/Amalfi",
+      "loc": "Amalfi Coast",
+      "slot": "13:00 lunch",
+      "site": "prenota-web.it (daadolfo.com)",
+      "ref": "Prenota Web",
+      "cost": 0.0,
+      "status": "booked",
+      "link": "https://www.daadolfo.com/"
+    },
+    {
+      "date": "2026-09-28",
+      "name": "Bagno Vignoni hot springs",
+      "loc": "Val d'Orcia",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-29",
+      "name": "Brunello tasting (Montalcino)",
+      "loc": "Val d'Orcia",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-09-30",
+      "name": "Pienza + San Quirico",
+      "loc": "Val d'Orcia",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-01",
+      "name": "Vino Nobile tasting in Montepulciano",
+      "loc": "Val d'Orcia",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-03",
+      "name": "Uffizi Gallery",
+      "loc": "Florence",
+      "slot": "AM",
+      "site": "uffizi.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-03",
+      "name": "Accademia (David)",
+      "loc": "Florence",
+      "slot": "PM",
+      "site": "galleriaaccademiafirenze.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-03",
+      "name": "MaMa Florence — Gluten-Free Cooking Class",
+      "loc": "Florence",
+      "slot": "10:00 AM",
+      "site": "mamaflorence.com",
+      "ref": "38873",
+      "cost": 842.0,
+      "status": "booked",
+      "link": "https://www.mamaflorence.com/"
+    },
+    {
+      "date": "2026-10-04",
+      "name": "Duomo climb / Brunelleschi dome",
+      "loc": "Florence",
+      "slot": "",
+      "site": "duomo.firenze.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-06",
+      "name": "St Mark's Basilica + Doge's Palace",
+      "loc": "Venice",
+      "slot": "",
+      "site": "veneziaunica.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-07",
+      "name": "Murano + Burano islands",
+      "loc": "Venice",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-07",
+      "name": "Venice Biennale (Giardini/Arsenale)",
+      "loc": "Venice",
+      "slot": "",
+      "site": "labiennale.org",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-09",
+      "name": "Bellagio + ferry hop",
+      "loc": "Lake Como",
+      "slot": "",
+      "site": "",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-10",
+      "name": "The Last Supper",
+      "loc": "Milan",
+      "slot": "PM slot",
+      "site": "vivaticket.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    },
+    {
+      "date": "2026-10-10",
+      "name": "Duomo + rooftop",
+      "loc": "Milan",
+      "slot": "",
+      "site": "duomomilano.it",
+      "ref": "",
+      "cost": 0.0,
+      "status": "todo"
+    }
+  ]
+}
