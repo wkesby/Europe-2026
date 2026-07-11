@@ -4,13 +4,14 @@
    - Wikimedia photos : cache-first (never change; saves mobile data)
    - other same-origin: stale-while-revalidate
    Bump VERSION to force-refresh all caches after big changes. */
-const VERSION = 'europe2026-v9';
+const VERSION = 'europe2026-v10';
 const CORE = [
   './',
   './index.html',
   './mobile.html',
   './cinematic.html',
   './data.enc',
+  './stamp.json',
   './cinematic.enc',
   './tickets/louvre.enc',
   './tickets/versailles.enc',
@@ -26,6 +27,10 @@ const CORE = [
   './tickets/ita.enc',
   './tickets/sq.enc',
   './tickets/villamonti.enc',
+  './tickets/alpilles.enc',
+  './tickets/europcar.enc',
+  './tickets/sixt.enc',
+  './tickets/insurance.enc',
   './manifest.webmanifest',
   './icon-192.png',
   './icon-512.png',

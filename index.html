@@ -33,7 +33,7 @@
   <a class="card" href="./cinematic.html"><div class="t">✨ Full itinerary</div><div class="d">Rich detail, map, every booking card</div></a>
   <div class="stamp" id="stamp">Loading…</div>
 <script>
-fetch('data.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{
+fetch('stamp.json?v='+Date.now(),{cache:'no-store'}).then(r=>r.json()).then(d=>{
   if(d._meta&&d._meta.lastUpdated){
     const dt=new Date(d._meta.lastUpdated);
     document.getElementById('stamp').textContent='↻ Updated '+dt.toLocaleString('en-AU',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
