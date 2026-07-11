@@ -563,7 +563,7 @@ function fallbackCopy(txt, cb){
   document.body.removeChild(ta); if(cb) cb();
 }
 let toastTimer;
-const BUILD='11 Jul 2026 · 21:12 AEST';
+const BUILD='11 Jul 2026 · 21:31 AEST';
 function toast(msg){
   let t=document.getElementById('toast');
   if(!t){ t=document.createElement('div'); t.id='toast'; document.body.appendChild(t); }
@@ -1511,6 +1511,64 @@ async function openTicket(e, path, title){
   }
   return false;
 }
+async function downloadTicketPdf(path, filename){
+  try{
+    let res=null; try{ res=await fetch(path+'?v='+Date.now(),{cache:'no-store'}); }catch(_){}
+    if(!res || !res.ok) res=await fetch(path);
+    const blob=await res.json();
+    const bytes=await e26DecryptRaw(blob, E26PASS||localStorage.getItem('e26_pass'));
+    const u=URL.createObjectURL(new Blob([bytes],{type:blob.mime||'application/pdf'}));
+    const a=document.createElement('a'); a.href=u; a.download=filename||'ticket.pdf';
+    document.body.appendChild(a); a.click(); setTimeout(()=>a.remove(),500);
+  }catch(e){ toast("Couldn't fetch the PDF — check connection"); }
+}
+const TK_ZOOM=`<script>/* pinch + double-tap zoom (self-contained; works inside iframes) */
+(function(){
+  const B=document.body;
+  const wrap=document.createElement('div'); wrap.id='zw';
+  while(B.firstChild) wrap.appendChild(B.firstChild);
+  B.appendChild(wrap); B.style.overflow='hidden'; B.style.height='100vh';
+  wrap.style.cssText='transform-origin:0 0;width:100%;min-height:100vh;overflow-y:auto;height:100vh;-webkit-overflow-scrolling:touch;padding:0';
+  let sc=1,tx=0,ty=0,p0=null,pan=null;
+  const apply=()=>{wrap.style.transform=\`translate(\${tx}px,\${ty}px) scale(\${sc})\`;
+    wrap.style.height=sc>1?'auto':'100vh'; B.style.touchAction=sc>1?'none':'auto';};
+  const clamp=()=>{const w=innerWidth,h=innerHeight;
+    tx=Math.min(0,Math.max(w-w*sc,tx)); ty=Math.min(0,Math.max(h-h*sc,ty));};
+  const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+  const mid=t=>({x:(t[0].clientX+t[1].clientX)/2,y:(t[0].clientY+t[1].clientY)/2});
+  B.addEventListener('touchstart',e=>{
+    if(e.touches.length===2){e.preventDefault();p0={d:dist(e.touches),m:mid(e.touches),sc,tx,ty};}
+    else if(e.touches.length===1&&sc>1){pan={x:e.touches[0].clientX,y:e.touches[0].clientY,tx,ty};}
+  },{passive:false});
+  B.addEventListener('touchmove',e=>{
+    if(e.touches.length===2&&p0){e.preventDefault();
+      const k=dist(e.touches)/p0.d, m=mid(e.touches);
+      sc=Math.min(5,Math.max(1,p0.sc*k));
+      tx=m.x-(p0.m.x-p0.tx)*(sc/p0.sc); ty=m.y-(p0.m.y-p0.ty)*(sc/p0.sc);
+      clamp(); apply();
+    }else if(e.touches.length===1&&pan&&sc>1){e.preventDefault();
+      tx=pan.tx+(e.touches[0].clientX-pan.x); ty=pan.ty+(e.touches[0].clientY-pan.y);
+      clamp(); apply();
+    }
+  },{passive:false});
+  B.addEventListener('touchend',()=>{p0=null;pan=null; if(sc<1.02){sc=1;tx=0;ty=0;apply();}});
+  let lastTap=0;
+  B.addEventListener('touchend',e=>{
+    const now=Date.now();
+    if(now-lastTap<300&&e.changedTouches.length===1){
+      const t=e.changedTouches[0];
+      if(sc>1){sc=1;tx=0;ty=0;}
+      else{sc=2.5;tx=t.clientX-(t.clientX)*sc;ty=t.clientY-(t.clientY)*sc;clamp();}
+      apply();
+    }
+    lastTap=now;
+  });
+  B.addEventListener('dblclick',e=>{ if(sc>1){sc=1;tx=0;ty=0;}else{sc=2.5;tx=e.clientX*(1-sc);ty=e.clientY*(1-sc);clamp();} apply(); });
+  B.addEventListener('wheel',e=>{ if(!e.ctrlKey)return; e.preventDefault();
+    sc=Math.min(5,Math.max(1,sc*(e.deltaY<0?1.12:0.9))); if(sc===1){tx=0;ty=0;} clamp(); apply();
+  },{passive:false});
+})();
+<\/script>`;
 const TK_REG=[];
 function confRow(k,v){ return v?('<div class="kv"><span class="k">'+k+'</span><span class="v">'+v+'</span></div>'):''; }
 function openTicketData(e, idx){
@@ -1547,7 +1605,7 @@ function openTicketData(e, idx){
     +'.kv{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid rgba(245,239,230,.07);font-size:14px}.kv:last-child{border-bottom:none}'
     +'.k{color:rgba(245,239,230,.5);flex-shrink:0}.v{text-align:right}'
     +'.note{font-size:13px;line-height:1.55;color:rgba(245,239,230,.75);margin-top:14px}</style></head>'
-    +'<body><h1>'+esc(r.title)+'</h1><div class="card">'+rows+'</div>'+(note?'<div class="note">'+note+'</div>':'')+qr+'</body></html>';
+    +'<body><h1>'+esc(r.title)+'</h1><div class="card">'+rows+'</div>'+(note?'<div class="note">'+note+'</div>':'')+qr+TK_ZOOM+'</body></html>';
   const frame=ticketOverlay(r.title);
   frame.srcdoc=doc;
   return false;
