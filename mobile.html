@@ -571,7 +571,7 @@ function fallbackCopy(txt, cb){
   document.body.removeChild(ta); if(cb) cb();
 }
 let toastTimer;
-const BUILD='18 Jul 2026 · 16:34 AEST';
+const BUILD='18 Jul 2026 · 17:19 AEST';
 function toast(msg){
   let t=document.getElementById('toast');
   if(!t){ t=document.createElement('div'); t.id='toast'; document.body.appendChild(t); }
@@ -1069,8 +1069,42 @@ const PAYDAY={
   '2026-09-09':'€55 cash — Christophe, Avignon → Saint-Rémy transfer',
   '2026-09-22':'€398.40 Sorrento Limo balance · €150 Pompeii guide (cash/card +5%)',
   '2026-09-27':'€45 Praiano city tax at checkout · €300 SIXT deposit hold at pickup',
-  '2026-10-11':'€30 Milan city tax at check-in',
+  '2026-10-11':'€30 Milan city tax at checkout',
 };
+
+/* ---------- Connection guardian + daily brief data ---------- */
+const CLIMATE={'Paris':'~21°/12° — light jacket for evenings','Saint-Rémy':'~27°/14° — warm days, mistral possible','Nice':'~25°/17° — beach-warm','Rome':'~27°/16° — full sun, hats','Praiano':'~26°/19° — swim weather','Montepulciano':'~23°/11° — cool mornings','Florence':'~23°/12°','Venice':'~20°/12° — chance of rain, layers','Lake Como':'~18°/10° — pack layers','Milan':'~18°/10°'};
+const GUARD={
+ '2026-09-09':[{n:'Alpilles pickup ← TGV 6101 (arr 09:17)',flex:1,fb:'Driver waits at the MINISO sign — call Christophe if more than ~20 min behind.',tel:'+33614813485'}],
+ '2026-09-13':[{n:'TGV 6805 dep 09:28 ← car return 08:30',slack:58,fb:'If missed: SNCF desk at Avignon TGV — next Nice TGV ~2h later; T32FXW is seat-bound so a same-day change fee applies.'}],
+ '2026-09-17':[{n:'Leonardo Express ← AZ343 (arr 12:30)',flex:1,fb:'Trains every 15 min and your tickets are valid on ANY departure today — zero stress.'}],
+ '2026-09-22':[{n:'Sorrento Limo ← FR 9405 (arr 12:48)',flex:1,fb:'Driver meets & waits at the track-24 fountain — WhatsApp him if the train is late.',tel:'+393460928343'}],
+ '2026-09-27':[{n:'Italo 9932 dep 11:20 ← limo (arr ~10:30)',slack:50,fb:'FrecciaFRIENDS fare: NO changes. If missed, buy the next Naples→Florence seat on the spot (Italo/Frecciarossa, roughly hourly), then collect the car late.',tel:'+390294757979'},{n:'SIXT pickup 14:30 ← Italo (arr 14:17)',flex:1,fb:'Desk holds the booking all day — collect whenever you land.'}],
+ '2026-10-08':[{n:'Trenord 2828 dep 14:20 ← FR 9724 (arr 13:15)',slack:65,fb:'Trenord is unreserved & route-flexible — next Varenna train ~15:20, same tickets valid.'}],
+ '2026-10-11':[{n:'SQ 377 dep 13:15 ← Malpensa Exp (arr 10:18)',slack:177,fb:'Backup trains every ~15 min. If rail chaos: taxi to MXP ~50 min / ~€95 — the flight is the one immovable object.'}]};
+let GDELAY=0;
+function guardSet(m){ GDELAY=m; guardRender(); }
+function guardRender(){
+  const el=document.getElementById('guardrows'); if(!el) return;
+  const day=el.dataset.day, items=GUARD[day]||[];
+  el.innerHTML=items.map(it=>{
+    let dot='🟢', msg='On plan';
+    if(it.flex){ dot='🟢'; msg='Flexible — absorbs delay'; }
+    else{
+      const left=it.slack-GDELAY;
+      if(left>=15){ dot='🟢'; msg=left+' min slack remains'; }
+      else if(left>0){ dot='🟡'; msg='TIGHT — '+left+' min slack'; }
+      else{ dot='🔴'; msg='AT RISK — connection likely missed'; }
+    }
+    const show = (!it.flex && it.slack-GDELAY<15) || (it.flex&&GDELAY>=20) || GDELAY>0;
+    return `<div style="padding:8px 0;border-bottom:1px solid rgba(245,239,230,.07)">
+      <div style="font-size:13.5px;font-weight:700">${dot} ${it.n}</div>
+      <div style="font-size:12px;color:rgba(245,239,230,.6);margin-top:1px">${msg}</div>
+      ${show?`<div style="font-size:12.5px;color:rgba(245,239,230,.8);margin-top:4px;line-height:1.45">↳ ${it.fb}${it.tel?` <a href="tel:${it.tel}" style="color:var(--gold)">☎ call</a>`:''}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
 function buildToday(){
   const v=document.createElement('div'); v.className='view'; v.id='today';
   const t=today0();
@@ -1112,6 +1146,25 @@ function buildToday(){
       }
     }
 
+    // ── Daily brief: today's plan + timed events + climate ──
+    let todayPlan=null;
+    (cur.days||[]).forEach(dv=>{ const m=String(dv[0]).match(/\b(\d{1,2})\b/); if(m&&parseInt(m[1],10)===t.getDate()) todayPlan=dv[1]; });
+    if(todayPlan) rows+=`<div class="info-row"><span class="ico">🗓️</span><div><div class="ir-l">Today's plan</div><div class="ir-v">${esc2(todayPlan)}</div></div></div>`;
+    if(typeof TIMELINE!=='undefined'){
+      const evs=TIMELINE.filter(e=>e.dt.slice(0,10)===isoDay(t));
+      if(evs.length) rows+=`<div class="info-row"><span class="ico">⏱️</span><div><div class="ir-l">Timed today</div><div class="ir-v">${evs.map(e=>`<div style="margin:2px 0">${e.dt.slice(11,16)} — ${e.tkt?`<a href="#" onclick="return openTicket(event,'${e.tkt}','${esc2(e.title)}')" style="color:var(--gold)">${esc2(e.title)} 🎫</a>`:esc2(e.title)}</div>`).join('')}</div></div></div>`;
+      const tmISO=isoDay(new Date(t.getTime()+86400000));
+      const tf=TIMELINE.find(e=>e.dt.slice(0,10)===tmISO);
+      if(tf) rows+=`<div class="info-row"><span class="ico">⏭️</span><div><div class="ir-l">Tomorrow's first commitment</div><div class="ir-v">${tf.dt.slice(11,16)} — ${esc2(tf.title)}${tf.dt.slice(11,16)<'09:30'?' · pack tonight':''}</div></div></div>`;
+    }
+    if(CLIMATE[cur.city]) rows+=`<div class="info-row"><span class="ico">🌤️</span><div><div class="ir-l">Typical weather now</div><div class="ir-v">${esc2(CLIMATE[cur.city])}</div></div></div>`;
+    // ── Connection guardian on travel days ──
+    if(GUARD[isoDay(t)]){
+      rows+=`<div class="info-row" style="display:block"><div class="ir-l">🛟 Connection guardian — running late?</div>
+      <div style="margin:8px 0 4px">${[0,15,30,60].map(m=>`<a href="#" onclick="guardSet(${m});return false" style="display:inline-block;margin-right:8px;padding:6px 12px;border-radius:10px;font-size:13px;font-weight:700;border:1px solid rgba(232,185,116,.4);color:var(--gold);text-decoration:none">${m===0?'on time':'+'+m+' min'}</a>`).join('')}</div>
+      <div id="guardrows" data-day="${isoDay(t)}"></div></div>`;
+      setTimeout(guardRender,0);
+    }
     // Money that must change hands today
     if(PAYDAY[isoDay(t)]){
       rows+=`<div class="info-row"><span class="ico">💶</span><div><div class="ir-l">Pay today</div><div class="ir-v">${esc2(PAYDAY[isoDay(t)])}</div></div></div>`;
@@ -1128,7 +1181,9 @@ function buildToday(){
       if(tomorrow) rows+=`<div class="info-row"><span class="ico">🌙</span><div><div class="ir-l">Tomorrow</div><div class="ir-v">${esc2(tomorrow)}</div></div></div>`;
     }
 
-    if(cur.dining[0]) rows+=`<div class="info-row"><span class="ico">🍽️</span><div><div class="ir-l">Coeliac-safe nearby</div><div class="ir-v">${cur.dining[0][0]} — ${cur.dining[0][2]}</div></div></div>`;
+    { const gf=(cur.dining||[]).filter(x=>x[1]==='s').slice(0,3);
+      const gfa=gf.length?gf:(cur.dining||[]).slice(0,2);
+      if(gfa.length) rows+=`<div class="info-row"><span class="ico">🍽️</span><div><div class="ir-l">Tonight — coeliac-safe picks</div><div class="ir-v">${gfa.map(x=>`<div style="margin:2px 0"><b>${esc2(x[0])}</b> — ${esc2(x[2])}</div>`).join('')}</div></div></div>`; }
     if(cur.booking&&cur.booking.phone) rows+=`<div class="info-row"><span class="ico">☎️</span><div><div class="ir-l">Your host</div><div class="ir-v"><a href="tel:${cur.booking.phone}" style="color:var(--gold)">${cur.booking.phone}</a></div></div></div>`;
   }
 
