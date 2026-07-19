@@ -571,7 +571,7 @@ function fallbackCopy(txt, cb){
   document.body.removeChild(ta); if(cb) cb();
 }
 let toastTimer;
-const BUILD='18 Jul 2026 · 17:32 AEST';
+const BUILD='19 Jul 2026 · 16:07 AEST';
 function toast(msg){
   let t=document.getElementById('toast');
   if(!t){ t=document.createElement('div'); t.id='toast'; document.body.appendChild(t); }
@@ -1190,7 +1190,7 @@ function buildToday(){
   // Count outstanding to-do items for the badge
   let openCount = 0;
   try {
-    ACTIONS.forEach(a => { if(localStorage.getItem('act_'+a.id)!=='1' && a.cat!=='admin') openCount++; });
+    ACTIONS.forEach(a => { if(a.done!==true && localStorage.getItem('act_'+a.id)!=='1' && a.cat!=='admin') openCount++; });
   } catch(e) { openCount = ACTIONS.filter(a=>a.cat!=='admin').length; }
 
   v.innerHTML=`<div class="screen">
@@ -1444,7 +1444,7 @@ function buildAction(){
     a.deadline=new Date(a.when.getTime()-lead*86400000);
     a.days=Math.round((a.deadline-t)/86400000);
     a.urg = a.days<=21?'urgent':a.days<=60?'soon':'relaxed';
-    try{ a.done = localStorage.getItem('act_'+a.id)==='1'; }catch(e){ a.done=false; }
+    try{ a.done = (a.done===true) || localStorage.getItem('act_'+a.id)==='1'; }catch(e){ a.done=(a.done===true); }
   });
   app.appendChild(v);
   render();
