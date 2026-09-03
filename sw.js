@@ -4,7 +4,7 @@
    - Wikimedia photos : cache-first (never change; saves mobile data)
    - other same-origin: stale-while-revalidate
    Bump VERSION to force-refresh all caches after big changes. */
-const VERSION = 'europe2026-v14';
+const VERSION = 'europe2026-v15';
 const CORE = [
   './',
   './index.html',
@@ -12,20 +12,52 @@ const CORE = [
   './cinematic.html',
   './data.enc',
   './cinematic.enc',
-  './tickets/louvre.enc',
-  './tickets/versailles.enc',
-  './tickets/fever.enc',
-  './tickets/vatican.enc',
-  './tickets/borghese.enc',
-  './tickets/sorrento.enc',
+  './tickets/accademia.enc',
   './tickets/adolfo.enc',
-  './tickets/mama.enc',
-  './tickets/tvquhj.enc',
-  './tickets/t32fxw.enc',
+  './tickets/alarms.enc',
+  './tickets/alpilles.enc',
+  './tickets/borghese.enc',
+  './tickets/dericci.enc',
+  './tickets/eiffel.enc',
+  './tickets/europcar.enc',
+  './tickets/fever.enc',
   './tickets/fww495.enc',
-  './tickets/jdyh6m.enc',
+  './tickets/gf.enc',
+  './tickets/gkuewn.enc',
+  './tickets/insurance.enc',
   './tickets/ita.enc',
+  './tickets/jdyh6m.enc',
+  './tickets/leonardo.enc',
+  './tickets/lhrc2n.enc',
+  './tickets/louvre.enc',
+  './tickets/mama.enc',
+  './tickets/pack0909.enc',
+  './tickets/pack0913.enc',
+  './tickets/pack0917.enc',
+  './tickets/pack0922.enc',
+  './tickets/pack0927.enc',
+  './tickets/pack1002.enc',
+  './tickets/pack1005.enc',
+  './tickets/pack1008.enc',
+  './tickets/pack1010.enc',
+  './tickets/pack1011.enc',
+  './tickets/requadrato.enc',
+  './tickets/sixt.enc',
+  './tickets/sorrento.enc',
   './tickets/sq.enc',
+  './tickets/t2823.enc',
+  './tickets/t2828.enc',
+  './tickets/t2932.enc',
+  './tickets/t32fxw.enc',
+  './tickets/topbike.enc',
+  './tickets/topbike1.pkpass.enc',
+  './tickets/topbike2.pkpass.enc',
+  './tickets/topbike3.pkpass.enc',
+  './tickets/tvquhj.enc',
+  './tickets/uffizi.enc',
+  './tickets/vasari.enc',
+  './tickets/vatican.enc',
+  './tickets/versailles.enc',
   './tickets/villamonti.enc',
   './manifest.webmanifest',
   './icon-192.png',
@@ -77,7 +109,7 @@ self.addEventListener('fetch', (e) => {
   if (url.origin !== location.origin) return; // leave other cross-origin alone
 
   // data.json — network-first; normalise the ?v= cache-buster so offline lookups hit
-  if (url.pathname.endsWith('/data.enc') || url.pathname.endsWith('/cinematic.enc')) {
+  if (url.pathname.endsWith('/data.enc') || url.pathname.endsWith('/cinematic.enc') || url.pathname.includes('/tickets/')) {
     e.respondWith((async () => {
       const cache = await caches.open(VERSION);
       const key = new Request(url.pathname); // strip query for a stable cache key
